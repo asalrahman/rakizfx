@@ -304,7 +304,7 @@ function MobileApp() {
 
 // ─── Bonus banner ──────────────────────────────────────────────────────────
 
-function BonusBar({ onClose }) {
+function BonusBar({ onClose }: { onClose: () => void }) {
   const t = useT();
   const [tick, setTick] = useState(0);
   useEffect(() => {
@@ -315,22 +315,50 @@ function BonusBar({ onClose }) {
   const h = Math.max(0, Math.floor(total / 3600));
   const m = Math.max(0, Math.floor((total % 3600) / 60));
   const s = Math.max(0, total % 60);
-  const pad = (n) => String(n).padStart(2, "0");
+  const pad = (n: number) => String(n).padStart(2, "0");
   return (
-    <div className="bonus-bar">
-      <div className="container">
-        <span className="bonus-pill">★ {t("bonus.label")}</span>
-        <div className="bonus-text">
-          <span>{t("bonus.text")} <b>{t("bonus.amount")}</b> {t("bonus.suffix")}</span>
-          <span className="mono" style={{ marginInlineStart: 8, color: "var(--accent)" }}>
-            {pad(h)}:{pad(m)}:{pad(s)}
+    <div className="bonus-bar" role="region" aria-label="Promotional notification">
+      <span className="bonus-bar-accent" aria-hidden="true" />
+      <div className="container bonus-bar-inner">
+        <span className="bonus-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2 14.5 8.5 22 9.3l-5.5 5.3L18 22l-6-3.7L6 22l1.5-7.4L2 9.3l7.5-.8z"/>
+          </svg>
+          <span>{t("bonus.label")}</span>
+        </span>
+
+        <p className="bonus-text">
+          <span className="bonus-text-main">
+            {t("bonus.text")} <b>{t("bonus.amount")}</b> <span className="bonus-text-suffix">{t("bonus.suffix")}</span>
           </span>
-        </div>
-        <a href="#" className="bonus-cta" onClick={(e) => e.preventDefault()}>
+          <span className="bonus-countdown mono" aria-label="Countdown">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+            <span>{pad(h)}<i>h</i> {pad(m)}<i>m</i> {pad(s)}<i>s</i></span>
+          </span>
+        </p>
+
+        <a
+          href="#promotion"
+          className="bonus-cta"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.hash = "#promotion";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           {t("bonus.claim")}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+          </svg>
         </a>
-        <button className="bonus-close" onClick={onClose} aria-label="Dismiss">×</button>
+
+        <button className="bonus-close" onClick={onClose} aria-label="Dismiss notification" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
       </div>
     </div>
   );
@@ -4850,10 +4878,19 @@ export default function App() {
   }, [route]);
 
   const [bonusOpen, setBonusOpen] = useState(true);
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('rakizfx.bonus.dismissed') === '1') setBonusOpen(false);
+    } catch { /* localStorage blocked */ }
+  }, []);
+  const dismissBonus = () => {
+    setBonusOpen(false);
+    try { localStorage.setItem('rakizfx.bonus.dismissed', '1'); } catch { /* ignore */ }
+  };
 
   return (
     <>
-      {bonusOpen && <BonusBar onClose={() => setBonusOpen(false)} />}
+      {bonusOpen && <BonusBar onClose={dismissBonus} />}
       <Nav route={route} onNav={nav} />
 
       {route === "home" && (
