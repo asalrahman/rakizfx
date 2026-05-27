@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+<defs><linearGradient id="sBg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#05080a"></stop><stop offset="100%" stop-color="#0f1a23"></stop></linearGradient></defs>
+<rect width="800" height="520" fill="url(#sBg)"></rect>
+<g><rect x="60" y="40" width="680" height="50" rx="10" fill="rgba(26,209,122,.08)" stroke="#1ad17a" stroke-opacity=".3"></rect>
+  <text x="80" y="73" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">AAPL</text>
+  <text x="720" y="73" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#1ad17a">+0.62%</text></g><g><rect x="60" y="110" width="680" height="50" rx="10" fill="rgba(26,209,122,.08)" stroke="#1ad17a" stroke-opacity=".3"></rect>
+  <text x="80" y="143" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">MSFT</text>
+  <text x="720" y="143" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#1ad17a">+0.41%</text></g><g><rect x="60" y="180" width="680" height="50" rx="10" fill="rgba(26,209,122,.08)" stroke="#1ad17a" stroke-opacity=".3"></rect>
+  <text x="80" y="213" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">NVDA</text>
+  <text x="720" y="213" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#1ad17a">+2.85%</text></g><g><rect x="60" y="250" width="680" height="50" rx="10" fill="rgba(26,209,122,0)" stroke="#ef4444" stroke-opacity=".3"></rect>
+  <text x="80" y="283" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">TSLA</text>
+  <text x="720" y="283" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#ef4444">-1.22%</text></g><g><rect x="60" y="320" width="680" height="50" rx="10" fill="rgba(26,209,122,.08)" stroke="#1ad17a" stroke-opacity=".3"></rect>
+  <text x="80" y="353" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">GOOG</text>
+  <text x="720" y="353" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#1ad17a">+0.55%</text></g><g><rect x="60" y="390" width="680" height="50" rx="10" fill="rgba(26,209,122,.08)" stroke="#1ad17a" stroke-opacity=".3"></rect>
+  <text x="80" y="423" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="22" font-weight="700" fill="#fff">META</text>
+  <text x="720" y="423" text-anchor="end" font-family="monospace" font-size="18" font-weight="600" fill="#1ad17a">+0.88%</text></g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+<defs>
+<linearGradient id="eBg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0a0506"></stop><stop offset="100%" stop-color="#1a0a08"></stop></linearGradient>
+<linearGradient id="flame" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ff8a3d"></stop><stop offset="100%" stop-color="#1ad17a"></stop></linearGradient>
+</defs>
+<rect width="800" height="520" fill="url(#eBg)"></rect>
+<path d="M 100 460 Q 50 340 100 220 Q 150 320 130 380 Q 110 440 100 460 Z" fill="url(#flame)" opacity="0.4"></path><path d="M 250 460 Q 200 340 250 220 Q 300 320 280 380 Q 260 440 250 460 Z" fill="url(#flame)" opacity="0.5"></path><path d="M 400 460 Q 350 340 400 220 Q 450 320 430 380 Q 410 440 400 460 Z" fill="url(#flame)" opacity="0.6000000000000001"></path><path d="M 550 460 Q 500 340 550 220 Q 600 320 580 380 Q 560 440 550 460 Z" fill="url(#flame)" opacity="0.7000000000000001"></path><path d="M 700 460 Q 650 340 700 220 Q 750 320 730 380 Q 710 440 700 460 Z" fill="url(#flame)" opacity="0.8"></path>
+<rect x="0" y="450" width="800" height="70" fill="#000" opacity=".6"></rect>
+<text x="60" y="90" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="56" font-weight="700" fill="#fff">WTI / Brent</text>
+<text x="60" y="130" font-family="monospace" font-size="22" fill="#1ad17a">$79.21 ▲ +1.24%</text>
+</svg>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1115"></stop>
+      <stop offset="100%" stop-color="#06080b"></stop>
+    </linearGradient>
+    <linearGradient id="grn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1ad17a" stop-opacity=".55"></stop>
+      <stop offset="100%" stop-color="#1ad17a" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="780" fill="url(#bg)"></rect>
+  
+  <rect width="1200" height="46" fill="#11151a"></rect>
+  <circle cx="22" cy="23" r="6" fill="#ff5f57"></circle>
+  <circle cx="44" cy="23" r="6" fill="#febc2e"></circle>
+  <circle cx="66" cy="23" r="6" fill="#28c840"></circle>
+  <text x="100" y="28" font-family="monospace" font-size="13" fill="#9aa3a8">MetaTrader 5 — RakizFx · Account 8024156</text>
+  
+  <rect x="0" y="46" width="220" height="734" fill="#0a0e12"></rect>
+  <text x="20" y="74" font-family="sans-serif" font-size="12" font-weight="700" fill="#1ad17a">MARKET WATCH</text>
+  
+    <g>
+      <rect x="10" y="104" width="200" height="44" rx="8" fill="#152018"></rect>
+      <text x="22" y="123" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">EUR/USD</text>
+      <text x="22" y="140" font-family="monospace" font-size="11" fill="#1ad17a">+0.18%</text>
+      <text x="190" y="131" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">1.08423</text>
+    </g>
+    <g>
+      <rect x="10" y="156" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="175" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">GBP/USD</text>
+      <text x="22" y="192" font-family="monospace" font-size="11" fill="#1ad17a">+0.34%</text>
+      <text x="190" y="183" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">1.26581</text>
+    </g>
+    <g>
+      <rect x="10" y="208" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="227" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">USD/JPY</text>
+      <text x="22" y="244" font-family="monospace" font-size="11" fill="#ef4444">-0.12%</text>
+      <text x="190" y="235" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">156.832</text>
+    </g>
+    <g>
+      <rect x="10" y="260" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="279" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">AUD/USD</text>
+      <text x="22" y="296" font-family="monospace" font-size="11" fill="#1ad17a">+0.22%</text>
+      <text x="190" y="287" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">0.66124</text>
+    </g>
+    <g>
+      <rect x="10" y="312" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="331" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">XAU/USD</text>
+      <text x="22" y="348" font-family="monospace" font-size="11" fill="#1ad17a">+0.85%</text>
+      <text x="190" y="339" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">2348.42</text>
+    </g>
+    <g>
+      <rect x="10" y="364" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="383" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">BTC/USD</text>
+      <text x="22" y="400" font-family="monospace" font-size="11" fill="#1ad17a">+2.14%</text>
+      <text x="190" y="391" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">67432</text>
+    </g>
+    <g>
+      <rect x="10" y="416" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="435" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">NAS100</text>
+      <text x="22" y="452" font-family="monospace" font-size="11" fill="#1ad17a">+0.78%</text>
+      <text x="190" y="443" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">18472</text>
+    </g>
+    <g>
+      <rect x="10" y="468" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="487" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">US500</text>
+      <text x="22" y="504" font-family="monospace" font-size="11" fill="#1ad17a">+0.42%</text>
+      <text x="190" y="495" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">5278.4</text>
+    </g>
+    <g>
+      <rect x="10" y="520" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="539" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">USOIL</text>
+      <text x="22" y="556" font-family="monospace" font-size="11" fill="#1ad17a">+1.24%</text>
+      <text x="190" y="547" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">79.19</text>
+    </g>
+    <g>
+      <rect x="10" y="572" width="200" height="44" rx="8" fill="transparent"></rect>
+      <text x="22" y="591" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">GER40</text>
+      <text x="22" y="608" font-family="monospace" font-size="11" fill="#1ad17a">+0.14%</text>
+      <text x="190" y="599" text-anchor="end" font-family="monospace" font-size="13" fill="#fff">18432</text>
+    </g>
+  
+  <text x="250" y="80" font-family="sans-serif" font-size="22" font-weight="600" fill="#fff">EUR/USD</text>
+  <text x="370" y="80" font-family="monospace" font-size="13" fill="#9aa3a8">M15 · Spread 0.2 pips</text>
+  <text x="1100" y="80" text-anchor="end" font-family="monospace" font-size="28" font-weight="600" fill="#fff">1.08423</text>
+  <text x="1100" y="104" text-anchor="end" font-family="monospace" font-size="13" fill="#1ad17a">▲ +0.18% today</text>
+
+  
+  <line x1="250" y1="140" x2="1170" y2="140" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="200" x2="1170" y2="200" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="260" x2="1170" y2="260" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="320" x2="1170" y2="320" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="380" x2="1170" y2="380" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="440" x2="1170" y2="440" stroke="#1a2026" stroke-dasharray="2 6"></line><line x1="250" y1="500" x2="1170" y2="500" stroke="#1a2026" stroke-dasharray="2 6"></line>
+
+  
+  <line x1="264" y1="251.45761797793193" x2="264" y2="232.72309149295614" stroke="#1ad17a" stroke-width="1"></line><rect x="260" y="240" width="9" height="9.824913117796626" fill="#1ad17a"></rect><line x1="279" y1="263.32208953206055" x2="279" y2="248.95710141983986" stroke="#1ad17a" stroke-width="1"></line><rect x="275" y="249.82491311779663" width="9" height="9.810078538886074" fill="#1ad17a"></rect><line x1="294" y1="263.9737676770663" x2="294" y2="248.9158317542359" stroke="#ef4444" stroke-width="1"></line><rect x="290" y="254.98675322573976" width="9" height="4.648238430942939" fill="#ef4444"></rect><line x1="309" y1="266.36607651983246" x2="309" y2="253.99796400502112" stroke="#1ad17a" stroke-width="1"></line><rect x="305" y="254.98675322573976" width="9" height="7.2869556348456115" fill="#1ad17a"></rect><line x1="324" y1="279.5820582475752" x2="324" y2="257.9090060813867" stroke="#1ad17a" stroke-width="1"></line><rect x="320" y="262.2737088605854" width="9" height="10.757395518753754" fill="#1ad17a"></rect><line x1="339" y1="283.3557684031803" x2="339" y2="272.8292345095965" stroke="#1ad17a" stroke-width="1"></line><rect x="335" y="273.0311043793391" width="9" height="8.460949859140896" fill="#1ad17a"></rect><line x1="354" y1="288.70332275256027" x2="354" y2="279.8601048820301" stroke="#1ad17a" stroke-width="1"></line><rect x="350" y="281.49205423848" width="9" height="2" fill="#1ad17a"></rect><line x1="369" y1="296.6128677472398" x2="369" y2="276.6273798678481" stroke="#1ad17a" stroke-width="1"></line><rect x="365" y="281.7824056535894" width="9" height="7.696165871150072" fill="#1ad17a"></rect><line x1="384" y1="294.80895823623194" x2="384" y2="286.7699596175261" stroke="#1ad17a" stroke-width="1"></line><rect x="380" y="289.4785715247395" width="9" height="2" fill="#1ad17a"></rect><line x1="399" y1="306.7682089317012" x2="399" y2="287.30639605597577" stroke="#1ad17a" stroke-width="1"></line><rect x="395" y="291.29199087150414" width="9" height="11.967813118029369" fill="#1ad17a"></rect><line x1="414" y1="315.8075628319431" x2="414" y2="299.3055870741175" stroke="#1ad17a" stroke-width="1"></line><rect x="410" y="303.2598039895335" width="9" height="9.08890708482079" fill="#1ad17a"></rect><line x1="429" y1="320.89229689738147" x2="429" y2="308.7696654932102" stroke="#1ad17a" stroke-width="1"></line><rect x="425" y="312.3487110743543" width="9" height="4.195282705032184" fill="#1ad17a"></rect><line x1="444" y1="321.1962890775244" x2="444" y2="310.536859201368" stroke="#1ad17a" stroke-width="1"></line><rect x="440" y="316.5439937793865" width="9" height="2" fill="#1ad17a"></rect><line x1="459" y1="332.52146304291136" x2="459" y2="317.89029223748963" stroke="#1ad17a" stroke-width="1"></line><rect x="455" y="317.9654184942343" width="9" height="10.477208269316066" fill="#1ad17a"></rect><line x1="474" y1="329.3266321176364" x2="474" y2="311.4408027604563" stroke="#ef4444" stroke-width="1"></line><rect x="470" y="319.31490895649625" width="9" height="9.127717807054125" fill="#ef4444"></rect><line x1="489" y1="331.021764992764" x2="489" y2="317.6095694487731" stroke="#1ad17a" stroke-width="1"></line><rect x="485" y="319.31490895649625" width="9" height="8.86421756030552" fill="#1ad17a"></rect><line x1="504" y1="341.93490327440475" x2="504" y2="320.87768357143625" stroke="#1ad17a" stroke-width="1"></line><rect x="500" y="328.1791265168018" width="9" height="7.444197803155191" fill="#1ad17a"></rect><line x1="519" y1="350.61109999826823" x2="519" y2="329.6867572355218" stroke="#1ad17a" stroke-width="1"></line><rect x="515" y="335.62332431995696" width="9" height="11.2718786370977" fill="#1ad17a"></rect><line x1="534" y1="348.0537113389688" x2="534" y2="332.0881279609326" stroke="#ef4444" stroke-width="1"></line><rect x="530" y="337.7973809403847" width="9" height="9.097822016669966" fill="#ef4444"></rect><line x1="549" y1="354.7631676579352" x2="549" y2="335.18900269288764" stroke="#1ad17a" stroke-width="1"></line><rect x="545" y="337.7973809403847" width="9" height="9.065718484536376" fill="#1ad17a"></rect><line x1="564" y1="354.49532767944464" x2="564" y2="339.1426754716638" stroke="#1ad17a" stroke-width="1"></line><rect x="560" y="346.8630994249211" width="9" height="4.868595479968974" fill="#1ad17a"></rect><line x1="579" y1="361.6784060767264" x2="579" y2="349.5181738959936" stroke="#1ad17a" stroke-width="1"></line><rect x="575" y="351.73169490489005" width="9" height="8.577557033999597" fill="#1ad17a"></rect><line x1="594" y1="365.1046211437642" x2="594" y2="345.1687803224879" stroke="#ef4444" stroke-width="1"></line><rect x="590" y="351.79032585528387" width="9" height="8.518926083605777" fill="#ef4444"></rect><line x1="609" y1="359.5758457179696" x2="609" y2="350.17216676567784" stroke="#1ad17a" stroke-width="1"></line><rect x="605" y="351.79032585528387" width="9" height="6.486725826925408" fill="#1ad17a"></rect><line x1="624" y1="365.171645061789" x2="624" y2="357.29622639327096" stroke="#1ad17a" stroke-width="1"></line><rect x="620" y="358.2770516822093" width="9" height="3.6749716941556017" fill="#1ad17a"></rect><line x1="639" y1="366.8585510879245" x2="639" y2="357.49154751294213" stroke="#1ad17a" stroke-width="1"></line><rect x="635" y="361.9520233763649" width="9" height="3.2014322356540674" fill="#1ad17a"></rect><line x1="654" y1="372.1996094288985" x2="654" y2="357.3009535149371" stroke="#1ad17a" stroke-width="1"></line><rect x="650" y="365.15345561201894" width="9" height="4.174709350473336" fill="#1ad17a"></rect><line x1="669" y1="375.8669406012433" x2="669" y2="363.83515938274326" stroke="#1ad17a" stroke-width="1"></line><rect x="665" y="369.3281649624923" width="9" height="3.4306349461851937" fill="#1ad17a"></rect><line x1="684" y1="373.18164627922243" x2="684" y2="362.8625353586829" stroke="#ef4444" stroke-width="1"></line><rect x="680" y="367.32564286909377" width="9" height="5.433157039583705" fill="#ef4444"></rect><line x1="699" y1="379.32738041972937" x2="699" y2="367.14909416982255" stroke="#1ad17a" stroke-width="1"></line><rect x="695" y="367.32564286909377" width="9" height="7.255681823977284" fill="#1ad17a"></rect><line x1="714" y1="381.1408338171827" x2="714" y2="368.33815730874625" stroke="#ef4444" stroke-width="1"></line><rect x="710" y="374.170722902385" width="9" height="2" fill="#ef4444"></rect><line x1="729" y1="381.8481579946744" x2="729" y2="366.6098299989669" stroke="#1ad17a" stroke-width="1"></line><rect x="725" y="374.170722902385" width="9" height="2.403028345311327" fill="#1ad17a"></rect><line x1="744" y1="378.9742116081883" x2="744" y2="364.8046744367694" stroke="#ef4444" stroke-width="1"></line><rect x="740" y="369.5331293385346" width="9" height="7.040621909161757" fill="#ef4444"></rect><line x1="759" y1="377.52678114462555" x2="759" y2="353.27230566758834" stroke="#ef4444" stroke-width="1"></line><rect x="755" y="360.21046094403056" width="9" height="9.322668394504035" fill="#ef4444"></rect><line x1="774" y1="374.44830148234377" x2="774" y2="356.8026590183623" stroke="#1ad17a" stroke-width="1"></line><rect x="770" y="360.21046094403056" width="9" height="7.138195910741274" fill="#1ad17a"></rect><line x1="789" y1="371.1304443058725" x2="789" y2="366.2205052943524" stroke="#ef4444" stroke-width="1"></line><rect x="785" y="366.9876065278185" width="9" height="2" fill="#ef4444"></rect><line x1="804" y1="374.7469877994442" x2="804" y2="353.9267675763701" stroke="#ef4444" stroke-width="1"></line><rect x="800" y="358.7143878093734" width="9" height="8.273218718445094" fill="#ef4444"></rect><line x1="819" y1="365.0761545955769" x2="819" y2="348.78840268098975" stroke="#ef4444" stroke-width="1"></line><rect x="815" y="355.43201955884257" width="9" height="3.282368250530851" fill="#ef4444"></rect><line x1="834" y1="365.85765393841973" x2="834" y2="354.13210388224735" stroke="#1ad17a" stroke-width="1"></line><rect x="830" y="355.43201955884257" width="9" height="9.311973655892928" fill="#1ad17a"></rect><line x1="849" y1="377.7235020102776" x2="849" y2="359.1758477625812" stroke="#1ad17a" stroke-width="1"></line><rect x="845" y="364.7439932147355" width="9" height="6.082891548013606" fill="#1ad17a"></rect><line x1="864" y1="372.19431028395894" x2="864" y2="365.17699463080316" stroke="#ef4444" stroke-width="1"></line><rect x="860" y="367.00529900174837" width="9" height="3.8215857610007333" fill="#ef4444"></rect><line x1="879" y1="370.811871567696" x2="879" y2="360.5213338704712" stroke="#ef4444" stroke-width="1"></line><rect x="875" y="364.0459041260343" width="9" height="2.959394875714054" fill="#ef4444"></rect><line x1="894" y1="371.1985727738123" x2="894" y2="356.5715388348765" stroke="#1ad17a" stroke-width="1"></line><rect x="890" y="364.0459041260343" width="9" height="2" fill="#1ad17a"></rect><line x1="909" y1="366.1199091435467" x2="909" y2="350.6016276272496" stroke="#ef4444" stroke-width="1"></line><rect x="905" y="358.3640868379305" width="9" height="6.223062200775587" fill="#ef4444"></rect><line x1="924" y1="364.0867892393343" x2="924" y2="348.2908922353925" stroke="#ef4444" stroke-width="1"></line><rect x="920" y="349.4451724407356" width="9" height="8.918914397194897" fill="#ef4444"></rect><line x1="939" y1="351.7403900059335" x2="939" y2="335.8325865787918" stroke="#ef4444" stroke-width="1"></line><rect x="935" y="342.6488561880832" width="9" height="6.796316252652389" fill="#ef4444"></rect><line x1="954" y1="354.26417138720404" x2="954" y2="336.5205803719779" stroke="#1ad17a" stroke-width="1"></line><rect x="950" y="342.6488561880832" width="9" height="7.644444901588258" fill="#1ad17a"></rect><line x1="969" y1="354.56369920399106" x2="969" y2="344.270735236554" stroke="#ef4444" stroke-width="1"></line><rect x="965" y="346.2195085889985" width="9" height="4.073792500672937" fill="#ef4444"></rect><line x1="984" y1="350.1184598238475" x2="984" y2="333.89987598162713" stroke="#ef4444" stroke-width="1"></line><rect x="980" y="340.13654810828854" width="9" height="6.082960480709971" fill="#ef4444"></rect><line x1="999" y1="343.7502688442108" x2="999" y2="323.2453140854348" stroke="#ef4444" stroke-width="1"></line><rect x="995" y="330.71820731648216" width="9" height="9.418340791806372" fill="#ef4444"></rect><line x1="1014" y1="340.4715587242461" x2="1014" y2="325.2127373191156" stroke="#1ad17a" stroke-width="1"></line><rect x="1010" y="330.71820731648216" width="9" height="4.617000823929175" fill="#1ad17a"></rect><line x1="1029" y1="338.3066533207371" x2="1029" y2="326.9452353268679" stroke="#ef4444" stroke-width="1"></line><rect x="1025" y="328.64488620188314" width="9" height="6.6903219385282" fill="#ef4444"></rect><line x1="1044" y1="330.59354265798106" x2="1044" y2="316.6651191706961" stroke="#ef4444" stroke-width="1"></line><rect x="1040" y="322.1224369081322" width="9" height="6.522449293750924" fill="#ef4444"></rect><line x1="1059" y1="339.82728350703803" x2="1059" y2="319.52118203349846" stroke="#1ad17a" stroke-width="1"></line><rect x="1055" y="322.1224369081322" width="9" height="10.969490913938444" fill="#1ad17a"></rect><line x1="1074" y1="334.8612592463841" x2="1074" y2="319.7000450672052" stroke="#ef4444" stroke-width="1"></line><rect x="1070" y="323.5069038316686" width="9" height="9.585023990402078" fill="#ef4444"></rect><line x1="1089" y1="325.73160211943014" x2="1089" y2="313.87129650778775" stroke="#ef4444" stroke-width="1"></line><rect x="1085" y="314.0769289360219" width="9" height="9.429974895646694" fill="#ef4444"></rect><line x1="1104" y1="321.6800850623837" x2="1104" y2="301.1333599901537" stroke="#ef4444" stroke-width="1"></line><rect x="1100" y="304.53813036972093" width="9" height="9.538798566300954" fill="#ef4444"></rect><line x1="1119" y1="306.3659777902099" x2="1119" y2="292.8470114800895" stroke="#ef4444" stroke-width="1"></line><rect x="1115" y="299.43089697119416" width="9" height="5.107233398526773" fill="#ef4444"></rect><line x1="1134" y1="307.8053015035036" x2="1134" y2="296.36359431553336" stroke="#1ad17a" stroke-width="1"></line><rect x="1130" y="299.43089697119416" width="9" height="7.543925016454352" fill="#1ad17a"></rect><line x1="1149" y1="314.8095692453802" x2="1149" y2="305.6714350865416" stroke="#1ad17a" stroke-width="1"></line><rect x="1145" y="306.9748219876485" width="9" height="2" fill="#1ad17a"></rect>
+  
+  <circle cx="1145" cy="180" r="5" fill="#1ad17a"></circle>
+  <circle cx="1145" cy="180" r="11" fill="#1ad17a" opacity=".3"></circle>
+
+  
+  <rect x="240" y="600" width="940" height="160" rx="12" fill="#10161b" stroke="#1a2026"></rect>
+  <text x="260" y="624" font-family="sans-serif" font-size="11" font-weight="700" fill="#1ad17a">ORDER TICKET</text>
+  <text x="260" y="658" font-family="sans-serif" font-size="13" fill="#9aa3a8">Volume</text>
+  <text x="340" y="658" font-family="monospace" font-size="13" fill="#fff">0.25 lots</text>
+  <text x="260" y="680" font-family="sans-serif" font-size="13" fill="#9aa3a8">Stop Loss</text>
+  <text x="340" y="680" font-family="monospace" font-size="13" fill="#fff">1.08200</text>
+  <text x="260" y="702" font-family="sans-serif" font-size="13" fill="#9aa3a8">Take Profit</text>
+  <text x="340" y="702" font-family="monospace" font-size="13" fill="#fff">1.08750</text>
+  <text x="260" y="724" font-family="sans-serif" font-size="13" fill="#9aa3a8">Margin</text>
+  <text x="340" y="724" font-family="monospace" font-size="13" fill="#1ad17a">$67.22</text>
+  <rect x="820" y="624" width="170" height="56" rx="10" fill="#1ad17a"></rect>
+  <text x="905" y="660" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#062613">BUY 1.08423</text>
+  <rect x="1000" y="624" width="170" height="56" rx="10" fill="#2a1518" stroke="#ef4444" stroke-width="1"></rect>
+  <text x="1085" y="660" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#ff8a92">SELL 1.08421</text>
+  <text x="820" y="710" font-family="sans-serif" font-size="11" fill="#6b757a">Fast execution · 28ms avg fill · No requotes</text>
+</svg>

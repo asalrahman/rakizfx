@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+<defs>
+<linearGradient id="fxBg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#06120c"></stop><stop offset="100%" stop-color="#0a2418"></stop></linearGradient>
+<linearGradient id="fxLine" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1ad17a"></stop><stop offset="100%" stop-color="#9cffd1"></stop></linearGradient>
+</defs>
+<rect width="800" height="520" fill="url(#fxBg)"></rect>
+<path d="M-20 20 Q 200 -10 400 20 T 820 0" fill="none" stroke="#1ad17a" stroke-opacity="0.05" stroke-width="1"></path><path d="M-20 48 Q 200 18 400 48 T 820 28" fill="none" stroke="#1ad17a" stroke-opacity="0.13" stroke-width="1"></path><path d="M-20 76 Q 200 46 400 76 T 820 56" fill="none" stroke="#1ad17a" stroke-opacity="0.21000000000000002" stroke-width="1"></path><path d="M-20 104 Q 200 74 400 104 T 820 84" fill="none" stroke="#1ad17a" stroke-opacity="0.29" stroke-width="1"></path><path d="M-20 132 Q 200 102 400 132 T 820 112" fill="none" stroke="#1ad17a" stroke-opacity="0.05" stroke-width="1"></path><path d="M-20 160 Q 200 130 400 160 T 820 140" fill="none" stroke="#1ad17a" stroke-opacity="0.13" stroke-width="1"></path><path d="M-20 188 Q 200 158 400 188 T 820 168" fill="none" stroke="#1ad17a" stroke-opacity="0.21000000000000002" stroke-width="1"></path><path d="M-20 216 Q 200 186 400 216 T 820 196" fill="none" stroke="#1ad17a" stroke-opacity="0.29" stroke-width="1"></path><path d="M-20 244 Q 200 214 400 244 T 820 224" fill="none" stroke="#1ad17a" stroke-opacity="0.05" stroke-width="1"></path><path d="M-20 272 Q 200 242 400 272 T 820 252" fill="none" stroke="#1ad17a" stroke-opacity="0.13" stroke-width="1"></path><path d="M-20 300 Q 200 270 400 300 T 820 280" fill="none" stroke="#1ad17a" stroke-opacity="0.21000000000000002" stroke-width="1"></path><path d="M-20 328 Q 200 298 400 328 T 820 308" fill="none" stroke="#1ad17a" stroke-opacity="0.29" stroke-width="1"></path><path d="M-20 356 Q 200 326 400 356 T 820 336" fill="none" stroke="#1ad17a" stroke-opacity="0.05" stroke-width="1"></path><path d="M-20 384 Q 200 354 400 384 T 820 364" fill="none" stroke="#1ad17a" stroke-opacity="0.13" stroke-width="1"></path><path d="M-20 412 Q 200 382 400 412 T 820 392" fill="none" stroke="#1ad17a" stroke-opacity="0.21000000000000002" stroke-width="1"></path><path d="M-20 440 Q 200 410 400 440 T 820 420" fill="none" stroke="#1ad17a" stroke-opacity="0.29" stroke-width="1"></path><path d="M-20 468 Q 200 438 400 468 T 820 448" fill="none" stroke="#1ad17a" stroke-opacity="0.05" stroke-width="1"></path><path d="M-20 496 Q 200 466 400 496 T 820 476" fill="none" stroke="#1ad17a" stroke-opacity="0.13" stroke-width="1"></path>
+<g font-family="&#39;Space Grotesk&#39;, sans-serif" fill="#fff" font-weight="700">
+<text x="60" y="190" font-size="120" opacity=".95">€</text>
+<text x="220" y="280" font-size="80" opacity=".7">$</text>
+<text x="380" y="160" font-size="70" opacity=".55">£</text>
+<text x="520" y="320" font-size="90" opacity=".8">¥</text>
+<text x="640" y="200" font-size="60" opacity=".5">₹</text>
+<text x="700" y="380" font-size="50" opacity=".4">$</text>
+</g>
+<g stroke="url(#fxLine)" stroke-width="2.5" fill="none">
+<path d="M 0 420 Q 200 380 400 360 T 800 280"></path>
+</g>
+<circle cx="800" cy="280" r="6" fill="#1ad17a"></circle>
+<circle cx="800" cy="280" r="14" fill="#1ad17a" opacity=".3"></circle>
+</svg>

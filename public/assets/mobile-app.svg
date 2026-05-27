@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 720" width="360" height="720">
+  <defs>
+    <linearGradient id="phBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"></stop>
+      <stop offset="100%" stop-color="#000"></stop>
+    </linearGradient>
+  </defs>
+  
+  <rect x="6" y="6" width="348" height="708" rx="52" fill="url(#phBg)"></rect>
+  <rect x="14" y="14" width="332" height="692" rx="44" fill="#0f1115"></rect>
+  
+  <rect x="135" y="22" width="90" height="22" rx="11" fill="#000"></rect>
+  
+  <text x="44" y="58" font-family="sans-serif" font-size="13" font-weight="700" fill="#fff">9:41</text>
+  <text x="316" y="58" text-anchor="end" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">●●● 5G ▱</text>
+  
+  <text x="40" y="100" font-family="sans-serif" font-size="22" font-weight="700" fill="#fff">Markets</text>
+  <text x="40" y="120" font-family="sans-serif" font-size="12" fill="#8a949c">10 instruments · Live</text>
+  <circle cx="320" cy="100" r="16" fill="#1a2026"></circle>
+  <text x="320" y="106" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#1ad17a">+</text>
+
+  
+  <rect x="30" y="138" width="80" height="32" rx="16" fill="#1ad17a"></rect>
+  <text x="70" y="158" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#062613">Forex</text>
+  <text x="140" y="158" font-family="sans-serif" font-size="12" font-weight="500" fill="#8a949c">Crypto</text>
+  <text x="200" y="158" font-family="sans-serif" font-size="12" font-weight="500" fill="#8a949c">Metals</text>
+  <text x="260" y="158" font-family="sans-serif" font-size="12" font-weight="500" fill="#8a949c">Indices</text>
+
+  
+  
+    <g transform="translate(30,190)">
+      <rect x="0" y="0" width="300" height="80" rx="14" fill="#171b20"></rect>
+      <text x="16" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">EUR/USD</text>
+      <text x="284" y="26" text-anchor="end" font-family="monospace" font-size="14" font-weight="600" fill="#fff">1.08423</text>
+      <polyline points="15,30 22,32.5 29,31 36,29 43,30 50,27.5 57,26 64,24 71,25 78,23" fill="none" stroke="#1ad17a" stroke-width="2" transform="translate(60,18)"></polyline>
+      <text x="16" y="64" font-family="sans-serif" font-size="11" fill="#8a949c">Spread 0.2 pips</text>
+      <text x="284" y="64" text-anchor="end" font-family="monospace" font-size="11" font-weight="600" fill="#1ad17a">▲ +0.18%</text>
+    </g>
+    <g transform="translate(30,282)">
+      <rect x="0" y="0" width="300" height="80" rx="14" fill="#171b20"></rect>
+      <text x="16" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">GBP/USD</text>
+      <text x="284" y="26" text-anchor="end" font-family="monospace" font-size="14" font-weight="600" fill="#fff">1.26581</text>
+      <polyline points="15,30 22,29 29,31 36,30 43,27.5 50,26 57,24 64,22.5 71,24 78,21" fill="none" stroke="#1ad17a" stroke-width="2" transform="translate(60,18)"></polyline>
+      <text x="16" y="64" font-family="sans-serif" font-size="11" fill="#8a949c">Spread 0.3 pips</text>
+      <text x="284" y="64" text-anchor="end" font-family="monospace" font-size="11" font-weight="600" fill="#1ad17a">▲ +0.34%</text>
+    </g>
+    <g transform="translate(30,374)">
+      <rect x="0" y="0" width="300" height="80" rx="14" fill="#171b20"></rect>
+      <text x="16" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">XAU/USD</text>
+      <text x="284" y="26" text-anchor="end" font-family="monospace" font-size="14" font-weight="600" fill="#fff">2348.42</text>
+      <polyline points="15,30 22,31 29,29 36,27.5 43,26 50,27.5 57,25 64,23.5 71,22 78,20" fill="none" stroke="#1ad17a" stroke-width="2" transform="translate(60,18)"></polyline>
+      <text x="16" y="64" font-family="sans-serif" font-size="11" fill="#8a949c">Spread 0.4 pips</text>
+      <text x="284" y="64" text-anchor="end" font-family="monospace" font-size="11" font-weight="600" fill="#1ad17a">▲ +0.85%</text>
+    </g>
+    <g transform="translate(30,466)">
+      <rect x="0" y="0" width="300" height="80" rx="14" fill="#171b20"></rect>
+      <text x="16" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">BTC/USD</text>
+      <text x="284" y="26" text-anchor="end" font-family="monospace" font-size="14" font-weight="600" fill="#fff">67432</text>
+      <polyline points="15,30 22,32.5 29,30 36,31 43,27.5 50,25 57,26 64,22.5 71,21 78,19" fill="none" stroke="#1ad17a" stroke-width="2" transform="translate(60,18)"></polyline>
+      <text x="16" y="64" font-family="sans-serif" font-size="11" fill="#8a949c">Spread 0.5 pips</text>
+      <text x="284" y="64" text-anchor="end" font-family="monospace" font-size="11" font-weight="600" fill="#1ad17a">▲ +2.14%</text>
+    </g>
+    <g transform="translate(30,558)">
+      <rect x="0" y="0" width="300" height="80" rx="14" fill="#171b20"></rect>
+      <text x="16" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">USD/JPY</text>
+      <text x="284" y="26" text-anchor="end" font-family="monospace" font-size="14" font-weight="600" fill="#fff">156.832</text>
+      <polyline points="15,20 22,22 29,24 36,25 43,26 50,27.5 57,26 64,28 71,29 78,30" fill="none" stroke="#ef4444" stroke-width="2" transform="translate(60,18)"></polyline>
+      <text x="16" y="64" font-family="sans-serif" font-size="11" fill="#8a949c">Spread 0.6 pips</text>
+      <text x="284" y="64" text-anchor="end" font-family="monospace" font-size="11" font-weight="600" fill="#ef4444">▼ -0.12%</text>
+    </g>
+  
+  <rect x="14" y="660" width="332" height="46" fill="#0a0e12"></rect>
+  <text x="60" y="685" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#1ad17a">Markets</text>
+  <circle cx="60" cy="673" r="3" fill="#1ad17a"></circle>
+  <text x="140" y="685" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8a949c">Trade</text>
+  <text x="220" y="685" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8a949c">Wallet</text>
+  <text x="300" y="685" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8a949c">More</text>
+</svg>
