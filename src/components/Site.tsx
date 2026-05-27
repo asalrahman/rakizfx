@@ -244,6 +244,7 @@ function PhoneScreen2() {
 }
 
 function MobileApp() {
+  const t = useT();
   const feats = [
     { t: "Real-time market overview",  p: "Watch 1,200+ instruments stream live — bid, ask, spread and 24-hour change at a glance.",
       i: <><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></> },
@@ -258,7 +259,7 @@ function MobileApp() {
     <section id="mobile" className="mobile-section mobile-section--no-bg">
       <div className="container mobile-grid mobile-grid--text-only" style={{ position: "relative" }}>
         <div className="reveal r-right d-200">
-          <h2 className="sec-title">Your account, <em>in your pocket</em></h2>
+          <h2 className="sec-title">{t("mobile.title")} <em>{t("mobile.title_em")}</em></h2>
           <p className="sec-sub">The RakizFx companion app gives you live market data, account balance, deposits and withdrawals on the go. For trade execution, use MetaTrader 5 — fully integrated with the same account.</p>
           <div className="mobile-features">
             {feats.map((f, i) => (
@@ -1709,6 +1710,7 @@ function Markets() {
 // ─── Why RakizFx ───────────────────────────────────────────────────────────
 
 function Why() {
+  const t = useT();
   const items = [
     {
       t: "24/7 support",
@@ -1735,8 +1737,8 @@ function Why() {
     <section id="why" className="why-section">
       <div className="container">
         <div className="why-header">
-          <h2 className="why-title">Why traders choose <em>RakizFx</em></h2>
-          <p className="why-sub">Institutional execution, human support, and conditions that scale with your strategy.</p>
+          <h2 className="why-title">{t("why.title")} <em>{t("why.title_em")}</em></h2>
+          <p className="why-sub">{t("why.sub")}</p>
         </div>
         <div className="why-grid why-grid-4">
           {items.map((it, i) => (
@@ -2210,56 +2212,108 @@ const ASSET_CLASSES = {
 };
 
 function AssetShowcase() {
-  const tabs = Object.keys(ASSET_CLASSES);
-  const [tab, setTab] = useState(tabs[0]);
-  const data = ASSET_CLASSES[tab];
-  const heroImg = {
-    Forex:              "/assets/asset-forex-v2.svg",
-    Commodities:        "/assets/asset-commodities-v2.svg",
-    Indices:            "/assets/asset-indices.svg",
-    Metals:             "/assets/asset-metals-v2.svg",
-    Energies:           "/assets/asset-energies-v2.svg",
-    Crypto:             "/assets/asset-crypto-v2.svg",
-    "Shares / Stocks":  "/assets/asset-shares-v2.svg",
-  }[tab];
+  const trans = useT();
+  const markets = [
+    {
+      id: "forex",
+      name: "Forex",
+      tagline: "60+ currency pairs",
+      detail: "EUR/USD · GBP/USD · USD/JPY",
+      icon: <><path d="M3 12h18"/><path d="M7 7l-4 5 4 5"/><path d="M17 7l4 5-4 5"/></>,
+    },
+    {
+      id: "metals",
+      name: "Metals",
+      tagline: "Gold, silver, platinum",
+      detail: "XAU/USD · XAG/USD · XPT/USD",
+      icon: <><path d="M12 2L4 7v6c0 5 3.5 9 8 9s8-4 8-9V7l-8-5z"/></>,
+    },
+    {
+      id: "indices",
+      name: "Indices",
+      tagline: "Major global indices",
+      detail: "US500 · NAS100 · GER40 · UK100",
+      icon: <><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></>,
+    },
+    {
+      id: "energies",
+      name: "Energies",
+      tagline: "Crude, brent, natural gas",
+      detail: "USOIL · UKOIL · NGAS",
+      icon: <><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></>,
+    },
+    {
+      id: "crypto",
+      name: "Crypto",
+      tagline: "Bitcoin, Ethereum & more",
+      detail: "BTC/USD · ETH/USD · SOL/USD",
+      icon: <><path d="M11.5 2v3M11.5 19v3M5 6h11a3 3 0 0 1 0 6H5zM5 12h13a3 3 0 0 1 0 6H5z"/></>,
+    },
+    {
+      id: "shares",
+      name: "Shares",
+      tagline: "100+ global stocks",
+      detail: "AAPL · MSFT · NVDA · TSLA",
+      icon: <><path d="M3 21h18M3 21V8l9-5 9 5v13M9 21V12h6v9"/></>,
+    },
+  ];
+
+  const go = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = `#market-${id}`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Duplicate for seamless vertical loop
+  const loop = [...markets, ...markets];
+
   return (
-    <section className="asset-showcase">
-      <div className="container">
-        <div className="asset-header">
-          <span className="eyebrow">Markets</span>
-          <h2 className="sec-title">Trade every <em>major asset class</em></h2>
+    <section className="asset-showcase cfd-section">
+      <div className="container cfd-split">
+        {/* LEFT — vertically scrolling card column */}
+        <div className="cfd-marquee" aria-label="Markets">
+          <ul className="cfd-marquee-track" role="list">
+            {loop.map((m, i) => (
+              <li key={`${m.id}-${i}`}>
+                <a
+                  href={`#market-${m.id}`}
+                  className="cfd-market-card"
+                  onClick={go(m.id)}
+                  aria-hidden={i >= markets.length || undefined}
+                >
+                  <span className="cfd-market-ic" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      {m.icon}
+                    </svg>
+                  </span>
+                  <div className="cfd-market-body">
+                    <h3 className="cfd-market-name">{m.name}</h3>
+                    <p className="cfd-market-tag">{m.tagline}</p>
+                    <p className="cfd-market-detail mono">{m.detail}</p>
+                  </div>
+                  <span className="cfd-market-arrow" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                      <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="asset-tabs">
-          {tabs.map(t => (
-            <button key={t} className={t === tab ? "on" : ""} onClick={() => setTab(t)}>{t}</button>
-          ))}
-        </div>
-        <div className="asset-card">
-          <div className="asset-card-head">
-            <h3>{tab}</h3>
-            <span>{data.sub}</span>
-          </div>
-          <div className="asset-card-body">
-            <div className="asset-table">
-              <div className="asset-row asset-row-head">
-                <span>Symbol</span><span>Instrument</span><span>Typical spread</span><span>24h change</span><span></span>
-              </div>
-              {data.pairs.map((p, i) => (
-                <div key={i} className="asset-row">
-                  <span className="asset-sym mono">{p.sym}</span>
-                  <span className="asset-name">{p.name}</span>
-                  <span className="asset-spread mono">{p.spread} pips</span>
-                  <span className={`asset-change mono ${p.change.startsWith("+") ? "up" : "down"}`}>{p.change}</span>
-                  <a href="#register" className="asset-trade">Trade →</a>
-                </div>
-              ))}
-            </div>
-            <div className="asset-img-frame">
-              <img src={heroImg} alt={`${tab} markets`} />
-              <div className="asset-img-cap">{tab} · LIVE</div>
-            </div>
-          </div>
-          <a href="#markets" className="asset-more">View all {tab.toLowerCase()} instruments →</a>
+
+        {/* RIGHT — static heading + description */}
+        <div className="cfd-copy">
+          <h2 className="sec-title">{trans("asset.title")} <em>{trans("asset.title_em")}</em></h2>
+          <p className="sec-sub">{trans("asset.sub")}</p>
+          <a
+            href="#markets"
+            className="btn btn-primary btn-lg cfd-copy-cta"
+            onClick={(e) => { e.preventDefault(); window.location.hash = "#markets"; window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          >
+            View all markets
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -2419,6 +2473,7 @@ function EducationTeaser() {
 // 6. Full-bleed dark CTA (replaces old CTABanner on home)
 // ─────────────────────────────────────────────────────────────
 function FullCTA() {
+  const t = useT();
   return (
     <section className="full-cta-section">
       <div className="full-cta-bg" aria-hidden="true">
@@ -2427,18 +2482,14 @@ function FullCTA() {
       </div>
       <div className="container full-cta-grid">
         <div className="full-cta-copy">
-          <span className="hero-chip">
-            <span className="hero-chip-dot" />
-            Start in 2 minutes
-          </span>
-          <h2>Markets don&rsquo;t wait<br/><em>Neither should you</em></h2>
-          <p>Open a live account in under 2 minutes. Fund from $50 via bank wire, card or crypto. Trade 1,200+ instruments from a single MetaTrader 5 login.</p>
+          <h2>{t("fullcta.title")}<br/><em>{t("fullcta.title_em")}</em></h2>
+          <p>{t("fullcta.lede")}</p>
           <div className="full-cta-actions">
             <a href="#register" className="btn btn-primary btn-lg">
-              Open live account
+              {t("cta.open_account")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
             </a>
-            <a href="#register" className="btn btn-ghost-light btn-lg">Try Free Demo</a>
+            <a href="#register" className="btn btn-ghost-light btn-lg">{t("cta.try_demo")}</a>
           </div>
           <div className="full-cta-trust">
             <span>✓ From $50</span>
@@ -2461,31 +2512,49 @@ function FullCTA() {
 // 7. Platform showcase (Pro-style large mockup)
 // ─────────────────────────────────────────────────────────────
 function PlatformShowcase() {
+  const t = useT();
   return (
     <section className="platform-showcase">
-      <div className="container platform-grid">
-        <div className="platform-copy">
-          <span className="eyebrow">Platforms</span>
-          <h2 className="sec-title">MetaTrader 5 — <em>everywhere you trade</em></h2>
-          <p className="sec-sub">Desktop, web and mobile — your account stays in sync. One-click execution, 38 built-in indicators, depth of market, expert advisors and the MQL5 marketplace.</p>
-          <ul className="platform-points">
-            <li><span className="platform-tick">⚡</span><div><b>Lightning execution</b><span>28ms average fill across all markets</span></div></li>
-            <li><span className="platform-tick">📊</span><div><b>Advanced charting</b><span>38 indicators, 21 timeframes, depth of market</span></div></li>
-            <li><span className="platform-tick">🤖</span><div><b>Algorithmic trading</b><span>Expert Advisors (EAs) + MQL5 marketplace</span></div></li>
-            <li><span className="platform-tick">📱</span><div><b>Mobile-first</b><span>Native iOS &amp; Android with biometric login</span></div></li>
-          </ul>
-          <div className="platform-ctas">
-            <a href="#register" className="btn btn-primary">Open MT5 Account</a>
-            <a href="#academy" className="btn btn-ghost">MT5 Tutorials</a>
-          </div>
+      <div className="container">
+        <div className="section-head platform-head">
+          <h2 className="sec-title">{t("mt5.title")} — <em>{t("mt5.title_em")}</em></h2>
+          <p className="sec-sub">{t("mt5.sub")}</p>
         </div>
-        <div className="platform-art">
-          <div className="mt5-devices">
-            <img
-              src="/assets/mt5-devices.jpg"
-              alt="MetaTrader 5 on laptop, iPhone and Android with Windows, macOS, Linux, iOS, Android, Chrome, Safari, Edge, Firefox and Opera"
-              loading="lazy"
-            />
+
+        <div className="platform-split">
+          <div className="platform-copy">
+            <ul className="platform-points">
+              <li>
+                <span className="platform-tick">⚡</span>
+                <div><b>{t("mt5.p1_t")}</b><span>{t("mt5.p1_b")}</span></div>
+              </li>
+              <li>
+                <span className="platform-tick">📊</span>
+                <div><b>{t("mt5.p2_t")}</b><span>{t("mt5.p2_b")}</span></div>
+              </li>
+              <li>
+                <span className="platform-tick">🤖</span>
+                <div><b>{t("mt5.p3_t")}</b><span>{t("mt5.p3_b")}</span></div>
+              </li>
+              <li>
+                <span className="platform-tick">📱</span>
+                <div><b>{t("mt5.p4_t")}</b><span>{t("mt5.p4_b")}</span></div>
+              </li>
+            </ul>
+            <div className="platform-ctas">
+              <a href="#register" className="btn btn-primary">{t("mt5.cta_open")}</a>
+              <a href="#academy" className="btn btn-ghost">{t("mt5.cta_learn")}</a>
+            </div>
+          </div>
+
+          <div className="platform-art">
+            <div className="mt5-devices">
+              <img
+                src="/assets/mt5-devices.jpg"
+                alt="MetaTrader 5 on laptop, phone and tablet"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2808,7 +2877,7 @@ function MarketsMT5Section() {
         <div className="mt5-devices">
           <img
             src="/assets/mt5-devices.jpg"
-            alt="MetaTrader 5 on laptop, iPhone and Android with Windows, macOS, Linux, iOS, Android, Chrome, Safari, Edge, Firefox and Opera"
+            alt="MetaTrader 5 on laptop, phone and tablet"
             loading="lazy"
           />
         </div>

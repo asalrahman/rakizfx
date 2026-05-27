@@ -3145,25 +3145,56 @@ textarea {
   .mobile-grid--text-only .mobile-features { grid-template-columns: 1fr; }
 }
 
-/* 2. MT5 devices image — fill the column more aggressively */
-.platform-grid {
-  grid-template-columns: 0.85fr 1.4fr !important;   /* wider image column */
+/* MT5 section: heading on top, equal-height/width 50/50 split below */
+.platform-head {
+  text-align: center;
+  margin-block-end: clamp(32px, 4vw, 56px);
+}
+.platform-head .sec-title { max-width: 22ch; }
+.platform-head .sec-sub { max-width: 64ch; margin-inline: auto; }
+
+.platform-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;            /* same width */
+  gap: clamp(28px, 4vw, 56px);
+  align-items: stretch;                       /* same height */
 }
 @media (max-width: 920px) {
-  .platform-grid { grid-template-columns: 1fr !important; }
+  .platform-split { grid-template-columns: 1fr; }
 }
-.platform-art .mt5-devices img {
-  width: 115% !important;
-  max-width: 115% !important;
-  transform: scale(1.12) translateX(2%) !important;
-  transform-origin: center right;
+
+.platform-split .platform-copy,
+.platform-split .platform-art {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-@media (max-width: 920px) {
-  .platform-art .mt5-devices img {
-    width: 100% !important;
-    max-width: 100% !important;
-    transform: none !important;
-  }
+
+.platform-split .platform-art {
+  align-items: center;
+}
+.platform-split .platform-art .mt5-devices {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+.platform-split .platform-art .mt5-devices img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  transform: none !important;
+  object-fit: contain !important;
+  /* Knock out the white background of the JPG by blending with the page bg */
+  mix-blend-mode: multiply;
+  filter: contrast(1.05) saturate(1.05);
+}
+.platform-split .platform-art .mt5-devices {
+  background: transparent;
+}
+.platform-split .platform-art .mt5-devices::before {
+  /* Hide the inner accent halo since the bg is now knocked-out */
+  display: none;
 }
 
 /* 3. Remove mobile floating CTA bar entirely */
@@ -3344,6 +3375,280 @@ section {
 .why-header .why-title + .why-sub,
 .asset-header .sec-title + .sec-sub {
   margin-block-start: 14px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Account cards: stop auto-hyphenation + give the tag breathing room for pop
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Disable hyphenation globally on body copy — prevents words like
+   "execution", "dedicated" being broken with mid-word hyphens */
+body,
+p,
+.acct-simple-summary,
+.acct-simple-tag,
+.core-feature-title,
+.core-marquee-title,
+.markets-class-card p,
+.why-card p,
+.asset-speciality-card p,
+.foot-tagline {
+  -webkit-hyphens: none !important;
+  hyphens: none !important;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Account cards — reserve right-edge space for the absolutely-positioned
+   POPULAR / VIP pill so the tag never collides with it */
+.acct-simple-grid--basic .acct-simple {
+  padding-inline-end: 32px;   /* matches the pill's 18px inset + 80px width avoid */
+}
+.acct-simple-grid--basic .acct-simple-tag {
+  padding-inline-end: 78px;   /* clear of the pill on the same row */
+  display: block;
+}
+.acct-simple-grid--basic .acct-simple-name,
+.acct-simple-grid--basic .acct-simple-summary {
+  padding-inline-end: 0;
+}
+
+/* POPULAR / VIP pill — keep small, vertical-center-align with the tag */
+.acct-simple-grid--basic .pop,
+.acct-simple-grid--basic .pop-vip {
+  top: 28px;                  /* aligns with the tag's vertical position */
+  inset-inline-end: 22px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CFD Markets card grid — Kama-style premium asset class showcase
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.cfd-section { padding-block: clamp(64px, 8vw, 104px); }
+.cfd-section .section-head { margin-bottom: clamp(32px, 4vw, 48px); }
+
+.cfd-markets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 22px);
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+/* Stagger each card from top → bottom on entrance */
+.cfd-markets-grid .cfd-market-card {
+  opacity: 0;
+  transform: translateY(36px);
+  animation: cfdCardIn .85s var(--ease-out-soft) forwards;
+}
+.cfd-markets-grid .cfd-market-card:nth-child(1) { animation-delay: .05s; }
+.cfd-markets-grid .cfd-market-card:nth-child(2) { animation-delay: .18s; }
+.cfd-markets-grid .cfd-market-card:nth-child(3) { animation-delay: .31s; }
+.cfd-markets-grid .cfd-market-card:nth-child(4) { animation-delay: .44s; }
+.cfd-markets-grid .cfd-market-card:nth-child(5) { animation-delay: .57s; }
+.cfd-markets-grid .cfd-market-card:nth-child(6) { animation-delay: .70s; }
+
+@keyframes cfdCardIn {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle continuous "breathe" effect — pulses every 6s, sequenced top→bottom */
+.cfd-markets-grid .cfd-market-ic {
+  animation: cfdIcBreathe 5s var(--ease-in-out-soft) infinite;
+}
+.cfd-markets-grid .cfd-market-card:nth-child(1) .cfd-market-ic { animation-delay: 0s; }
+.cfd-markets-grid .cfd-market-card:nth-child(2) .cfd-market-ic { animation-delay: .3s; }
+.cfd-markets-grid .cfd-market-card:nth-child(3) .cfd-market-ic { animation-delay: .6s; }
+.cfd-markets-grid .cfd-market-card:nth-child(4) .cfd-market-ic { animation-delay: .9s; }
+.cfd-markets-grid .cfd-market-card:nth-child(5) .cfd-market-ic { animation-delay: 1.2s; }
+.cfd-markets-grid .cfd-market-card:nth-child(6) .cfd-market-ic { animation-delay: 1.5s; }
+
+@keyframes cfdIcBreathe {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent, #1ad17a) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent, #1ad17a) 12%, transparent);
+  }
+}
+
+/* Card hover pauses the breathe — feels intentional */
+.cfd-market-card:hover .cfd-market-ic { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cfd-markets-grid .cfd-market-card,
+  .cfd-markets-grid .cfd-market-ic { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+@media (max-width: 920px) { .cfd-markets-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .cfd-markets-grid { grid-template-columns: 1fr; } }
+
+.cfd-market-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 60px 1fr 28px;
+  align-items: center;
+  gap: 18px;
+  padding: clamp(22px, 2.4vw, 30px);
+  background: #ffffff;
+  border: 1px solid var(--line, #eaeae6);
+  border-radius: 18px;
+  color: var(--fg, #0f1814);
+  text-decoration: none;
+  transition:
+    transform .3s var(--ease-out-soft),
+    box-shadow .35s var(--ease-out-soft),
+    border-color .25s var(--ease-out-soft),
+    background .3s var(--ease-out-soft);
+}
+.cfd-market-card:hover {
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: color-mix(in oklab, var(--accent, #1ad17a) 38%, var(--line, #eaeae6));
+  box-shadow:
+    0 22px 48px -22px color-mix(in oklab, var(--accent, #1ad17a) 28%, transparent),
+    0 4px 12px -8px rgba(10, 20, 15, .08);
+}
+
+.cfd-market-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--accent, #1ad17a) 14%, transparent);
+  color: var(--accent, #1ad17a);
+  transition:
+    background .3s var(--ease-out-soft),
+    color .3s var(--ease-out-soft),
+    transform .35s var(--ease-spring);
+}
+.cfd-market-card:hover .cfd-market-ic {
+  background: var(--accent, #1ad17a);
+  color: var(--accent-ink, #001b0e);
+  transform: scale(1.06) rotate(-3deg);
+}
+
+.cfd-market-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.cfd-market-name {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.022em !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+  color: #000 !important;
+}
+.cfd-market-tag {
+  margin: 2px 0 0;
+  font-size: 13.5px;
+  color: var(--fg-mute, #6b6b65);
+  line-height: 1.4;
+}
+.cfd-market-detail {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  color: var(--accent, #1ad17a);
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cfd-market-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-mute, #6b6b65);
+  transition: transform .25s var(--ease-spring), color .25s var(--ease-out-soft);
+}
+.cfd-market-card:hover .cfd-market-arrow {
+  color: var(--accent, #1ad17a);
+  transform: translateX(4px);
+}
+[dir="rtl"] .cfd-market-arrow svg { transform: scaleX(-1); }
+[dir="rtl"] .cfd-market-card:hover .cfd-market-arrow { transform: translateX(-4px); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CFD Markets — vertical scrolling marquee (top→bottom continuous loop)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 2-column split: marquee on left, static heading on right */
+.cfd-split {
+  display: grid !important;
+  grid-template-columns: 1.05fr 1fr !important;
+  gap: clamp(28px, 4vw, 64px) !important;
+  align-items: center !important;
+}
+@media (max-width: 920px) {
+  .cfd-split { grid-template-columns: 1fr !important; }
+}
+
+/* Right column — heading + sub + CTA */
+.cfd-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cfd-copy .sec-title { margin: 0; max-width: 18ch; }
+.cfd-copy .sec-sub { margin: 0; max-width: 48ch; }
+.cfd-copy-cta { align-self: flex-start; margin-top: 18px; }
+
+/* Vertical marquee container — fade-edged "window" showing 3-4 cards */
+.cfd-marquee {
+  position: relative;
+  height: clamp(440px, 56vh, 560px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+.cfd-marquee-track {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.4vw, 18px) !important;
+  animation: cfdScrollUp 28s linear infinite;
+  will-change: transform;
+}
+.cfd-marquee:hover .cfd-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes cfdScrollUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+/* Each <li> wrapper inside the track */
+.cfd-marquee-track > li {
+  list-style: none;
+}
+
+/* Override the earlier grid stagger / breathe — marquee handles motion */
+.cfd-marquee-track .cfd-market-card {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+.cfd-marquee-track .cfd-market-ic {
+  animation: none !important;
+}
+
+/* On mobile (stacked), shorten the marquee height a bit */
+@media (max-width: 920px) {
+  .cfd-marquee { height: clamp(380px, 70vh, 480px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cfd-marquee-track { animation: none !important; }
 }
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
