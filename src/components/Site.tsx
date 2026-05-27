@@ -2191,13 +2191,13 @@ function AssetShowcase() {
   const [tab, setTab] = useState(tabs[0]);
   const data = ASSET_CLASSES[tab];
   const heroImg = {
-    Forex:              "/assets/asset-forex.svg",
-    Commodities:        "/assets/asset-energies.svg",
+    Forex:              "/assets/asset-forex-v2.svg",
+    Commodities:        "/assets/asset-commodities-v2.svg",
     Indices:            "/assets/asset-indices.svg",
-    Metals:             "/assets/asset-metals.svg",
-    Energies:           "/assets/asset-energies.svg",
-    Crypto:             "/assets/asset-crypto.svg",
-    "Shares / Stocks":  "/assets/asset-shares.svg",
+    Metals:             "/assets/asset-metals-v2.svg",
+    Energies:           "/assets/asset-energies-v2.svg",
+    Crypto:             "/assets/asset-crypto-v2.svg",
+    "Shares / Stocks":  "/assets/asset-shares-v2.svg",
   }[tab];
   return (
     <section className="asset-showcase">

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420" role="img" aria-label="Energies — crude oil, brent, natural gas">
+  <defs>
+    <linearGradient id="en-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1612"/>
+      <stop offset="1" stop-color="#06120d"/>
+    </linearGradient>
+    <radialGradient id="en-glow" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#ff8a3c" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1ad17a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="barrel-face" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3a2117"/>
+      <stop offset=".15" stop-color="#7a3712"/>
+      <stop offset=".5" stop-color="#c25a14"/>
+      <stop offset=".85" stop-color="#6a2f0c"/>
+      <stop offset="1" stop-color="#2a1408"/>
+    </linearGradient>
+    <linearGradient id="barrel-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5a2c0c"/>
+      <stop offset=".5" stop-color="#a04e10"/>
+      <stop offset="1" stop-color="#4a2208"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff5e2a"/>
+      <stop offset=".4" stop-color="#ffaa3b"/>
+      <stop offset="1" stop-color="#fff1b0"/>
+    </linearGradient>
+    <linearGradient id="flame-core" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ffaa3b"/>
+      <stop offset="1" stop-color="#fff8d8"/>
+    </linearGradient>
+    <filter id="en-blur"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+
+  <rect width="600" height="420" fill="url(#en-bg)"/>
+  <g opacity=".5" stroke="#1ad17a" stroke-opacity=".06" stroke-dasharray="3 6">
+    <path d="M0 60H600M0 130H600M0 200H600M0 270H600M0 340H600"/>
+  </g>
+  <ellipse cx="300" cy="260" rx="280" ry="140" fill="url(#en-glow)" filter="url(#en-blur)"/>
+
+  <!-- Header chip -->
+  <g transform="translate(28 32)">
+    <rect width="118" height="22" rx="11" fill="#ff8a3c" fill-opacity=".18" stroke="#ff8a3c" stroke-opacity=".55"/>
+    <circle cx="14" cy="11" r="3" fill="#ff8a3c"/>
+    <text x="26" y="15" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#ffb37c">ENERGIES · CRUDE</text>
+  </g>
+
+  <!-- Oil barrel -->
+  <g transform="translate(110 138)">
+    <!-- Body -->
+    <ellipse cx="80" cy="14"  rx="74" ry="14" fill="#1a0e07"/>
+    <path d="M6 14 q0 -16 74 -16 q74 0 74 16 v176 q0 16 -74 16 q-74 0 -74 -16z" fill="url(#barrel-face)"/>
+    <ellipse cx="80" cy="14"  rx="74" ry="14" fill="none" stroke="#5a2c0c" stroke-width="2"/>
+    <!-- Bands -->
+    <rect x="0" y="50"  width="160" height="14" fill="url(#barrel-band)"/>
+    <rect x="0" y="140" width="160" height="14" fill="url(#barrel-band)"/>
+    <!-- Highlights -->
+    <path d="M26 30 q-12 70 0 156" stroke="#ffb98a" stroke-opacity=".35" stroke-width="3" fill="none"/>
+    <path d="M134 30 q12 70 0 156" stroke="#000" stroke-opacity=".25" stroke-width="3" fill="none"/>
+    <!-- WTI stencil -->
+    <g transform="translate(40 88)">
+      <rect width="80" height="40" fill="#0a1612" opacity=".35"/>
+      <text x="40" y="22" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#fff" opacity=".85">WTI</text>
+      <text x="40" y="34" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#fff" opacity=".7">CRUDE · BARREL</text>
+    </g>
+    <!-- Bottom shadow -->
+    <ellipse cx="80" cy="208" rx="74" ry="6" fill="#000" opacity=".45"/>
+  </g>
+
+  <!-- Flame (natural gas) -->
+  <g transform="translate(370 152)">
+    <!-- Outer glow -->
+    <ellipse cx="50" cy="100" rx="70" ry="80" fill="#ff7a2a" opacity=".18" filter="url(#en-blur)"/>
+    <!-- Outer flame -->
+    <path d="M50 -8 q-26 36 -22 70 q4 36 22 56 q18 -20 22 -56 q4 -34 -22 -70 z" fill="url(#flame)"/>
+    <!-- Inner -->
+    <path d="M50 22 q-14 24 -12 50 q2 26 12 38 q10 -12 12 -38 q2 -26 -12 -50 z" fill="url(#flame-core)"/>
+    <!-- Pilot tube -->
+    <rect x="38" y="120" width="24" height="46" fill="#23211e"/>
+    <rect x="34" y="160" width="32" height="8" fill="#3a3633"/>
+    <!-- Label -->
+    <g transform="translate(8 178)">
+      <rect width="86" height="22" rx="6" fill="#0a1612" stroke="#ff8a3c" stroke-opacity=".55"/>
+      <text x="43" y="15" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#ffb37c">NAT GAS</text>
+    </g>
+  </g>
+
+  <!-- Price tickers -->
+  <g font-family="'JetBrains Mono', monospace">
+    <g transform="translate(296 132)">
+      <rect width="80" height="22" rx="6" fill="#0a1612" stroke="#ff8a3c" stroke-opacity=".55"/>
+      <text x="14" y="15" font-size="9" font-weight="700" letter-spacing="1" fill="#ffb37c">USOIL</text>
+      <text x="44" y="15" font-size="11" font-weight="700" fill="#fff">79.21</text>
+    </g>
+    <g transform="translate(296 90)">
+      <rect width="80" height="22" rx="6" fill="#0a1612" stroke="#ff8a3c" stroke-opacity=".55"/>
+      <text x="14" y="15" font-size="9" font-weight="700" letter-spacing="1" fill="#ffb37c">UKOIL</text>
+      <text x="44" y="15" font-size="11" font-weight="700" fill="#fff">83.46</text>
+    </g>
+  </g>
+
+  <!-- Live price tag bottom-right -->
+  <g transform="translate(440 326)">
+    <rect width="138" height="60" rx="12" fill="#0a1612" stroke="#1ad17a" stroke-opacity=".4"/>
+    <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" letter-spacing="2" fill="#1ad17a">WTI/USD</text>
+    <text x="14" y="46" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="700" fill="#fff">79.21</text>
+    <text x="106" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1ad17a">▲ 1.24%</text>
+  </g>
+</svg>

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420" role="img" aria-label="Cryptocurrencies — Bitcoin, Ethereum, Solana, Ripple">
+  <defs>
+    <linearGradient id="crypto-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1612"/>
+      <stop offset="1" stop-color="#06120d"/>
+    </linearGradient>
+    <radialGradient id="crypto-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#f7931a" stop-opacity=".18"/>
+      <stop offset=".55" stop-color="#1ad17a" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#1ad17a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="btc-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffba59"/>
+      <stop offset="1" stop-color="#c46d09"/>
+    </linearGradient>
+    <linearGradient id="btc-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd590"/>
+      <stop offset="1" stop-color="#7a4406"/>
+    </linearGradient>
+    <linearGradient id="eth-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a4b2d8"/>
+      <stop offset="1" stop-color="#3c4a6e"/>
+    </linearGradient>
+    <linearGradient id="sol-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9945ff"/>
+      <stop offset="1" stop-color="#14f195"/>
+    </linearGradient>
+    <linearGradient id="xrp-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfd6dd"/>
+      <stop offset="1" stop-color="#23292f"/>
+    </linearGradient>
+    <filter id="crypto-blur"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+
+  <rect width="600" height="420" fill="url(#crypto-bg)"/>
+
+  <!-- Hex grid background -->
+  <g opacity=".22" stroke="#1ad17a" stroke-opacity=".25" fill="none">
+    <g transform="translate(30 30)">
+      <path d="M0 10 L8 0 L24 0 L32 10 L24 20 L8 20 Z" id="hexA"/>
+    </g>
+    <g fill="none">
+      <use href="#hexA" x="0"  y="0"/>
+      <use href="#hexA" x="36" y="0"/>
+      <use href="#hexA" x="72" y="0"/>
+      <use href="#hexA" x="108" y="0"/>
+      <use href="#hexA" x="144" y="0"/>
+      <use href="#hexA" x="180" y="0"/>
+      <use href="#hexA" x="216" y="0"/>
+      <use href="#hexA" x="252" y="0"/>
+      <use href="#hexA" x="288" y="0"/>
+      <use href="#hexA" x="324" y="0"/>
+      <use href="#hexA" x="360" y="0"/>
+      <use href="#hexA" x="396" y="0"/>
+      <use href="#hexA" x="432" y="0"/>
+      <use href="#hexA" x="468" y="0"/>
+      <use href="#hexA" x="504" y="0"/>
+
+      <use href="#hexA" x="18"  y="22"/>
+      <use href="#hexA" x="54"  y="22"/>
+      <use href="#hexA" x="90"  y="22"/>
+      <use href="#hexA" x="126" y="22"/>
+      <use href="#hexA" x="162" y="22"/>
+      <use href="#hexA" x="198" y="22"/>
+      <use href="#hexA" x="234" y="22"/>
+      <use href="#hexA" x="270" y="22"/>
+      <use href="#hexA" x="306" y="22"/>
+      <use href="#hexA" x="342" y="22"/>
+      <use href="#hexA" x="378" y="22"/>
+      <use href="#hexA" x="414" y="22"/>
+      <use href="#hexA" x="450" y="22"/>
+      <use href="#hexA" x="486" y="22"/>
+      <use href="#hexA" x="522" y="22"/>
+    </g>
+  </g>
+
+  <ellipse cx="300" cy="210" rx="250" ry="120" fill="url(#crypto-glow)" filter="url(#crypto-blur)"/>
+
+  <!-- Network lines -->
+  <g stroke="#1ad17a" stroke-opacity=".35" stroke-width="1" fill="none">
+    <path d="M300 210 L120 100"/>
+    <path d="M300 210 L500 90"/>
+    <path d="M300 210 L130 320"/>
+    <path d="M300 210 L490 320"/>
+  </g>
+  <g fill="#1ad17a">
+    <circle cx="120" cy="100" r="2.5"/>
+    <circle cx="500" cy="90"  r="2.5"/>
+    <circle cx="130" cy="320" r="2.5"/>
+    <circle cx="490" cy="320" r="2.5"/>
+  </g>
+
+  <!-- Smaller alt coins -->
+  <g transform="translate(110 60)">
+    <circle cx="40" cy="40" r="38" fill="url(#eth-face)" stroke="#a4b2d8" stroke-opacity=".55"/>
+    <polygon points="40,12 56,40 40,52 24,40" fill="#fff" opacity=".95"/>
+    <polygon points="40,12 56,40 40,32" fill="#fff" opacity=".6"/>
+    <polygon points="24,44 40,66 56,44 40,56" fill="#fff" opacity=".85"/>
+    <text x="40" y="92" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#1ad17a">ETH</text>
+  </g>
+
+  <g transform="translate(460 50)">
+    <circle cx="40" cy="40" r="36" fill="url(#sol-face)" stroke="#9945ff" stroke-opacity=".55"/>
+    <g transform="translate(18 22)" fill="#fff">
+      <rect x="2" y="0"  width="42" height="6" rx="2" transform="skewX(-25)"/>
+      <rect x="-2" y="14" width="42" height="6" rx="2" transform="skewX(-25)"/>
+      <rect x="2" y="28" width="42" height="6" rx="2" transform="skewX(-25)"/>
+    </g>
+    <text x="40" y="92" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#1ad17a">SOL</text>
+  </g>
+
+  <g transform="translate(108 282)">
+    <circle cx="40" cy="40" r="34" fill="url(#xrp-face)" stroke="#fff" stroke-opacity=".4"/>
+    <g transform="translate(40 40)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+      <path d="M-18 -12 q18 22 36 0"/>
+      <path d="M-18 12 q18 -22 36 0"/>
+    </g>
+    <text x="40" y="92" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#1ad17a">XRP</text>
+  </g>
+
+  <!-- Bitcoin centerpiece -->
+  <g transform="translate(300 210)">
+    <circle r="86" fill="url(#btc-face)" stroke="url(#btc-rim)" stroke-width="3"/>
+    <circle r="86" fill="none" stroke="#fff" stroke-opacity=".25"/>
+    <!-- Inner ring -->
+    <circle r="76" fill="none" stroke="#7a4406" stroke-opacity=".5"/>
+    <!-- B symbol -->
+    <g transform="translate(0 0)" fill="#fff">
+      <text x="0" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="800">₿</text>
+    </g>
+    <!-- Highlight -->
+    <ellipse cx="-28" cy="-30" rx="46" ry="18" fill="#fff" opacity=".18"/>
+  </g>
+
+  <!-- Live price -->
+  <g transform="translate(442 308)">
+    <rect width="138" height="60" rx="12" fill="#0a1612" stroke="#1ad17a" stroke-opacity=".4"/>
+    <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" letter-spacing="2" fill="#1ad17a">BTC/USD</text>
+    <text x="14" y="46" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="700" fill="#fff">67,432</text>
+    <text x="110" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1ad17a">▲ 2.14%</text>
+  </g>
+
+  <!-- Header chip -->
+  <g transform="translate(28 32)">
+    <rect width="92" height="22" rx="11" fill="#1ad17a" fill-opacity=".14" stroke="#1ad17a" stroke-opacity=".5"/>
+    <circle cx="14" cy="11" r="3" fill="#1ad17a"/>
+    <text x="26" y="15" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#1ad17a">CRYPTO · 24/7</text>
+  </g>
+</svg>

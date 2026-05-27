@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420" role="img" aria-label="Precious metals — gold, silver and platinum bars">
+  <defs>
+    <linearGradient id="metals-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1612"/>
+      <stop offset="1" stop-color="#06120d"/>
+    </linearGradient>
+    <radialGradient id="metals-glow" cx="50%" cy="60%" r="55%">
+      <stop offset="0" stop-color="#ffcf63" stop-opacity=".22"/>
+      <stop offset=".55" stop-color="#1ad17a" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#1ad17a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe69d"/>
+      <stop offset=".55" stop-color="#e0a737"/>
+      <stop offset="1" stop-color="#8c5d12"/>
+    </linearGradient>
+    <linearGradient id="gold-top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe69d"/>
+      <stop offset="1" stop-color="#bb8225"/>
+    </linearGradient>
+    <linearGradient id="gold-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a36e1a"/>
+      <stop offset="1" stop-color="#5c3c08"/>
+    </linearGradient>
+    <linearGradient id="silver-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f9fb"/>
+      <stop offset=".55" stop-color="#aab4be"/>
+      <stop offset="1" stop-color="#525d6a"/>
+    </linearGradient>
+    <linearGradient id="silver-top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f7f9fb"/>
+      <stop offset="1" stop-color="#8d97a1"/>
+    </linearGradient>
+    <linearGradient id="silver-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#727a83"/>
+      <stop offset="1" stop-color="#363b42"/>
+    </linearGradient>
+    <linearGradient id="plat-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dcebe5"/>
+      <stop offset=".55" stop-color="#8aa39b"/>
+      <stop offset="1" stop-color="#3f5048"/>
+    </linearGradient>
+    <filter id="metals-blur"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+
+  <rect width="600" height="420" fill="url(#metals-bg)"/>
+  <g opacity=".5">
+    <path d="M0 60H600M0 130H600M0 200H600M0 270H600M0 340H600" stroke="#1ad17a" stroke-opacity=".06" stroke-dasharray="3 6"/>
+  </g>
+
+  <ellipse cx="300" cy="250" rx="240" ry="120" fill="url(#metals-glow)" filter="url(#metals-blur)"/>
+
+  <!-- Header chip -->
+  <g transform="translate(28 32)">
+    <rect width="100" height="22" rx="11" fill="#ffcf63" fill-opacity=".16" stroke="#ffcf63" stroke-opacity=".55"/>
+    <circle cx="14" cy="11" r="3" fill="#ffcf63"/>
+    <text x="26" y="15" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#ffd97c">METALS · SPOT</text>
+  </g>
+
+  <!-- Bar stack -->
+  <g transform="translate(160 132)">
+    <!-- Platinum (back) -->
+    <g transform="translate(110 -10)">
+      <polygon points="0,40 60,30 240,30 280,40 280,80 240,90 60,90 0,80" fill="url(#plat-face)"/>
+      <polygon points="0,40 60,30 240,30 280,40 240,40 40,40" fill="url(#silver-top)" opacity=".6"/>
+      <text x="140" y="62" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#0a1612">XPT 999.5</text>
+      <text x="140" y="78" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0a1612" opacity=".7">Platinum · 50 oz</text>
+    </g>
+
+    <!-- Silver (middle) -->
+    <g transform="translate(40 42)">
+      <polygon points="0,40 60,30 260,30 320,40 320,90 260,100 60,100 0,90" fill="url(#silver-face)"/>
+      <polygon points="0,40 60,30 260,30 320,40 260,40 40,40" fill="url(#silver-top)"/>
+      <polygon points="320,40 320,90 260,100 260,40" fill="url(#silver-side)"/>
+      <text x="160" y="66" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="700" fill="#1a1f24">XAG 999</text>
+      <text x="160" y="84" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1a1f24" opacity=".7">SILVER · 5,000 oz</text>
+    </g>
+
+    <!-- Gold (front, hero) -->
+    <g transform="translate(0 110)">
+      <polygon points="0,40 60,30 300,30 360,40 360,110 300,120 60,120 0,110" fill="url(#gold-face)"/>
+      <polygon points="0,40 60,30 300,30 360,40 300,40 40,40" fill="url(#gold-top)"/>
+      <polygon points="360,40 360,110 300,120 300,40" fill="url(#gold-side)"/>
+      <!-- Stamp -->
+      <rect x="42" y="56" width="100" height="48" rx="3" fill="#0a1612" opacity=".22"/>
+      <text x="92" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#3a2107">XAU</text>
+      <text x="92" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#3a2107">999.9 FINE GOLD</text>
+      <text x="240" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#3a2107">$ 2,348.50</text>
+      <text x="240" y="92" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#3a2107" opacity=".8">100 oz · LBMA</text>
+      <!-- Shine streak -->
+      <polygon points="20,40 60,30 200,30 175,55" fill="#fff" opacity=".22"/>
+    </g>
+  </g>
+
+  <!-- Live price tag -->
+  <g transform="translate(440 312)">
+    <rect width="138" height="60" rx="12" fill="#0a1612" stroke="#1ad17a" stroke-opacity=".4"/>
+    <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" letter-spacing="2" fill="#1ad17a">XAU/USD</text>
+    <text x="14" y="46" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="700" fill="#fff">2348.50</text>
+    <text x="106" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1ad17a">▲ 0.85%</text>
+  </g>
+</svg>
