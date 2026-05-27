@@ -255,16 +255,10 @@ function MobileApp() {
       i: <><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></> },
   ];
   return (
-    <section id="mobile" className="mobile-section">
-      <div className="parallax-shapes"><div className="p p1"/><div className="p p2"/></div>
-      <div className="container mobile-grid" style={{ position: "relative" }}>
-        <div className="phone-stage reveal r-left">
-          <div className="mobile-real-photo">
-            <img src="/assets/mobile-app.svg" alt="RakizFx mobile trading app screenshot" />
-          </div>
-        </div>
+    <section id="mobile" className="mobile-section mobile-section--no-bg">
+      <div className="container mobile-grid mobile-grid--text-only" style={{ position: "relative" }}>
         <div className="reveal r-right d-200">
-          <h2 className="sec-title">Your account, in your pocket</h2>
+          <h2 className="sec-title">Your account, <em>in your pocket</em></h2>
           <p className="sec-sub">The RakizFx companion app gives you live market data, account balance, deposits and withdrawals on the go. For trade execution, use MetaTrader 5 — fully integrated with the same account.</p>
           <div className="mobile-features">
             {feats.map((f, i) => (
@@ -1355,6 +1349,7 @@ function HeroSingle() {
           <h1 className="hero-h1 hero-h1-industry hero-h1-oneline">
             {t("hero.title")} <em>{t("hero.title_em")}</em>
           </h1>
+          <p className="hero-lede">{t("hero.lede")}</p>
           <div className="hero-ctas-row">
             <a href="#register" className="btn btn-primary btn-lg">
               {t("cta.open_account")}
@@ -1445,7 +1440,7 @@ function HeroSlider() {
               <div className="hs-ctas">
                 <a href="#register" className="btn btn-primary btn-lg">{sl.cta}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></a>
-                <a href="#register" className="btn btn-ghost-light btn-lg">Try demo</a>
+                <a href="#register" className="btn btn-ghost-light btn-lg">Try Demo</a>
               </div>
               <div className="hs-sub">{sl.sub}</div>
             </div>
@@ -1573,7 +1568,7 @@ function Hero({ variant = "split" }) {
               Open live account
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
             </a>
-            <a href="#register" className="btn btn-ghost btn-lg">Try demo · $50,000 virtual</a>
+            <a href="#register" className="btn btn-ghost btn-lg">Try Demo · $50,000 Virtual</a>
           </div>
           <div className="hero-stats fade-up d5">
             <div><span className="n display">0.0</span><span className="l">Pips raw spread</span></div>
@@ -1692,7 +1687,7 @@ function Markets() {
             <h2 className="sec-title">1,200+ instruments — one account</h2>
             <p className="sec-sub">Tight, transparent spreads across every major asset class — with no hidden markups, no requotes.</p>
           </div>
-          <a href="#" className="btn btn-ghost">All instruments
+          <a href="#" className="btn btn-ghost">All Instruments
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
           </a>
         </div>
@@ -1740,7 +1735,7 @@ function Why() {
     <section id="why" className="why-section">
       <div className="container">
         <div className="why-header">
-          <h2 className="why-title">Why traders choose RakizFx</h2>
+          <h2 className="why-title">Why traders choose <em>RakizFx</em></h2>
           <p className="why-sub">Institutional execution, human support, and conditions that scale with your strategy.</p>
         </div>
         <div className="why-grid why-grid-4">
@@ -1950,8 +1945,8 @@ function CTABanner() {
             <h2 className="display">Markets don't wait.<br/>Neither should you.</h2>
             <p>Open a live account today and get a $100 trading credit on your first deposit.*</p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href="#register" className="btn btn-primary btn-lg">Open live account</a>
-              <a href="#contact" className="btn btn-ghost btn-lg">Talk to an expert</a>
+              <a href="#register" className="btn btn-primary btn-lg">Open Live Account</a>
+              <a href="#contact" className="btn btn-ghost btn-lg">Talk to an Expert</a>
             </div>
             <p style={{ fontSize: 11, color: "var(--fg-mute)", marginTop: 14 }}>* Terms apply. Trading credit subject to volume requirements.</p>
           </div>
@@ -2232,7 +2227,7 @@ function AssetShowcase() {
       <div className="container">
         <div className="asset-header">
           <span className="eyebrow">Markets</span>
-          <h2 className="sec-title">Trade every major asset class</h2>
+          <h2 className="sec-title">Trade every <em>major asset class</em></h2>
         </div>
         <div className="asset-tabs">
           {tabs.map(t => (
@@ -2400,7 +2395,7 @@ function EducationTeaser() {
             <h2 className="sec-title">Learn from the ground up</h2>
             <p className="sec-sub">Self-paced tracks built by trading-desk veterans. Free for every RakizFx client.</p>
           </div>
-          <a href="#academy" className="btn btn-ghost">All tracks →</a>
+          <a href="#academy" className="btn btn-ghost">All Tracks →</a>
         </div>
         <div className="edu-teaser-grid">
           {tracks.map((t, i) => (
@@ -2411,7 +2406,7 @@ function EducationTeaser() {
               <span className="edu-teaser-level">{t.level} · {t.lessons} lessons</span>
               <h3>{t.title}</h3>
               <p>{t.body}</p>
-              <span className="edu-teaser-go">Start track →</span>
+              <span className="edu-teaser-go">Start Track →</span>
             </a>
           ))}
         </div>
@@ -2436,14 +2431,14 @@ function FullCTA() {
             <span className="hero-chip-dot" />
             Start in 2 minutes
           </span>
-          <h2>Markets don't wait.<br/><em>Neither should you.</em></h2>
+          <h2>Markets don&rsquo;t wait<br/><em>Neither should you</em></h2>
           <p>Open a live account in under 2 minutes. Fund from $50 via bank wire, card or crypto. Trade 1,200+ instruments from a single MetaTrader 5 login.</p>
           <div className="full-cta-actions">
             <a href="#register" className="btn btn-primary btn-lg">
               Open live account
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
             </a>
-            <a href="#register" className="btn btn-ghost-light btn-lg">Try free demo</a>
+            <a href="#register" className="btn btn-ghost-light btn-lg">Try Free Demo</a>
           </div>
           <div className="full-cta-trust">
             <span>✓ From $50</span>
@@ -2454,12 +2449,7 @@ function FullCTA() {
         </div>
         <div className="full-cta-art">
           <div className="full-cta-photo">
-            <img src="/assets/img-currency.jpg" alt="Multi-currency funding" />
-            <div className="full-cta-photo-cap">
-              <span className="full-cta-stat-eb">Funding · Live FX</span>
-              <div className="full-cta-bignum"><CountVal to={28} duration={1400} /><sup>ms</sup></div>
-              <div className="full-cta-stat-sub">average execution speed</div>
-            </div>
+            <img src="/assets/img-trader-screens.jpg" alt="Trader monitoring charts on laptop and phone" />
           </div>
         </div>
       </div>
@@ -2476,7 +2466,7 @@ function PlatformShowcase() {
       <div className="container platform-grid">
         <div className="platform-copy">
           <span className="eyebrow">Platforms</span>
-          <h2 className="sec-title">MetaTrader 5 — everywhere you trade</h2>
+          <h2 className="sec-title">MetaTrader 5 — <em>everywhere you trade</em></h2>
           <p className="sec-sub">Desktop, web and mobile — your account stays in sync. One-click execution, 38 built-in indicators, depth of market, expert advisors and the MQL5 marketplace.</p>
           <ul className="platform-points">
             <li><span className="platform-tick">⚡</span><div><b>Lightning execution</b><span>28ms average fill across all markets</span></div></li>
@@ -2485,8 +2475,8 @@ function PlatformShowcase() {
             <li><span className="platform-tick">📱</span><div><b>Mobile-first</b><span>Native iOS &amp; Android with biometric login</span></div></li>
           </ul>
           <div className="platform-ctas">
-            <a href="#register" className="btn btn-primary">Open MT5 account</a>
-            <a href="#academy" className="btn btn-ghost">MT5 tutorials</a>
+            <a href="#register" className="btn btn-primary">Open MT5 Account</a>
+            <a href="#academy" className="btn btn-ghost">MT5 Tutorials</a>
           </div>
         </div>
         <div className="platform-art">
@@ -2773,7 +2763,7 @@ function MarketsNewsGrid() {
             <span className="eyebrow">Markets in motion</span>
             <h2 className="sec-title">Today's market news</h2>
           </div>
-          <a href="#tools" className="btn btn-ghost">All analysis →</a>
+          <a href="#tools" className="btn btn-ghost">All Analysis →</a>
         </div>
         <div className="mkt-news-grid">
           {news.map((n, i) => (
@@ -3399,7 +3389,7 @@ function PromotionPage() {
                     <path d="m13 5 7 7-7 7" />
                   </svg>
                 </a>
-                <a href="#help" className="btn btn-ghost btn-lg">View full terms</a>
+                <a href="#help" className="btn btn-ghost btn-lg">View Full Terms</a>
               </div>
             </div>
 
@@ -3497,7 +3487,7 @@ function AffiliatePage() {
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 32 }}>
-            <a href="#register" className="btn btn-primary btn-lg">Apply to the affiliate program</a>
+            <a href="#register" className="btn btn-primary btn-lg">Apply to the Affiliate Program</a>
           </div>
         </div>
       </section>
@@ -3543,7 +3533,7 @@ function AffiliatePage() {
                 Schedule a consultation
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
               </a>
-              <a href="#register" className="btn btn-ghost-light btn-lg">Apply directly</a>
+              <a href="#register" className="btn btn-ghost-light btn-lg">Apply Directly</a>
             </div>
           </div>
         </div>
@@ -4000,7 +3990,7 @@ function EducationPage() {
                   <summary>{t.lessons.length} lessons</summary>
                   <ol>{t.lessons.map((l,i)=><li key={i}>{l}</li>)}</ol>
                 </details>
-                <a href="#" className="btn btn-ghost btn-sm">Start track →</a>
+                <a href="#" className="btn btn-ghost btn-sm">Start Track →</a>
               </div>
             ))}
           </div>
@@ -4194,7 +4184,7 @@ function PartnersPage() {
                 Schedule a consultation
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
               </a>
-              <a href="#register" className="btn btn-ghost-light btn-lg">Apply directly</a>
+              <a href="#register" className="btn btn-ghost-light btn-lg">Apply Directly</a>
             </div>
           </div>
         </div>
@@ -4896,8 +4886,8 @@ export default function App() {
       {route === "home" && (
         <>
           <HeroSingle />
-          <CoreFeaturesRow />
           <TickerStrip />
+          <CoreFeaturesRow />
           <AssetShowcase />
           <div className="reveal"><Why /></div>
           <AccountCompare />

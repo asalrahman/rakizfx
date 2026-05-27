@@ -894,8 +894,10 @@ html[lang="hi"] .page-h1 {
 
 /* ─── Mobile responsiveness for CTAs ──────────────────────────────────────── */
 @media (max-width: 480px) {
-  .hero-ctas-row { flex-wrap: wrap; gap: 10px; }
-  .hero-ctas-row .btn { flex: 1 1 100%; justify-content: center; }
+  /* Side-by-side CTAs on mobile, not stacked */
+  .hero-ctas-row { flex-wrap: nowrap !important; gap: 10px !important; display: flex !important; }
+  .hero-ctas-row .btn,
+  .hero-single .hero-ctas-row .btn { flex: 1 1 0 !important; min-width: 0 !important; justify-content: center !important; padding: 0 14px !important; font-size: 13.5px !important; }
   .nav-login { display: none; }
 }
 
@@ -1173,35 +1175,25 @@ html[lang="hi"] .page-h1 {
   max-width: 920px;
   text-align: start;
 }
+/* Slogan — plain text, no box, no pill */
 .hero-single .hero-slogan {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
-  gap: 9px;
-  padding: 9px 18px 9px 16px;
-  border-radius: var(--r-full);
-  background: linear-gradient(135deg,
-    color-mix(in oklab, var(--accent, #1ad17a) 16%, transparent) 0%,
-    color-mix(in oklab, var(--accent, #1ad17a) 6%, transparent) 100%);
-  border: 1px solid color-mix(in oklab, var(--accent, #1ad17a) 28%, transparent);
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.12) inset,
-    0 8px 24px -10px color-mix(in oklab, var(--accent, #1ad17a) 30%, transparent);
+  gap: 0;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent, #1ad17a) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
 }
-.hero-single .hero-slogan::before {
-  content: "✦";
-  color: var(--accent, #1ad17a);
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1;
-  transform: translateY(0.5px);
-}
+.hero-single .hero-slogan::before { content: none !important; }
 
 .hero-single .hero-h1 {
   color: #fff;
@@ -1519,17 +1511,63 @@ html[lang="hi"] .page-h1 {
   }
 }
 
-/* Side drawer polish */
+/* Side drawer — light theme matching the rest of the site */
 .sidebar {
-  background: var(--bg, #fff);
-  box-shadow: -20px 0 40px -20px rgba(10,20,15,.15);
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  box-shadow: -20px 0 40px -20px rgba(10, 20, 15, .25);
   transition: transform .35s var(--ease-out-soft);
 }
-[dir="rtl"] .sidebar { box-shadow: 20px 0 40px -20px rgba(10,20,15,.15); }
+[dir="rtl"] .sidebar { box-shadow: 20px 0 40px -20px rgba(10, 20, 15, .25); }
+
+.sidebar .side-brand img { filter: none !important; }
+.sidebar .side-close {
+  background: rgba(0, 0, 0, .06) !important;
+  color: #0a0a0a !important;
+}
+.sidebar .side-close:hover { background: rgba(0, 0, 0, .1) !important; }
+
+.sidebar .side-profile {
+  background: rgba(0, 0, 0, .04) !important;
+}
+.sidebar .side-id b   { color: #0a0a0a !important; }
+.sidebar .side-id span { color: rgba(0, 0, 0, .55) !important; }
+
+.sidebar .side-link {
+  color: #1a1a1a !important;
+  font-weight: 500;
+}
+.sidebar .side-link svg { color: rgba(0, 0, 0, .55) !important; }
+.sidebar .side-link:hover {
+  background: rgba(26, 209, 122, .08) !important;
+  color: #0a0a0a !important;
+}
+.sidebar .side-link:hover svg { color: var(--accent, #1ad17a) !important; }
+.sidebar .side-link.active {
+  background: var(--accent, #1ad17a) !important;
+  color: var(--accent-ink, #001b0e) !important;
+  font-weight: 700 !important;
+}
+.sidebar .side-link.active svg { color: var(--accent-ink, #001b0e) !important; }
+
+.sidebar .side-foot {
+  border-top: 1px solid rgba(0, 0, 0, .08) !important;
+}
+.sidebar .side-foot .btn-ghost {
+  border-color: rgba(0, 0, 0, .15) !important;
+  color: #0a0a0a !important;
+  background: transparent !important;
+}
+.sidebar .side-foot .btn-ghost:hover {
+  background: rgba(0, 0, 0, .04) !important;
+  border-color: rgba(0, 0, 0, .3) !important;
+}
+.sidebar .side-meta { color: rgba(0, 0, 0, .45) !important; }
+
 .side-overlay {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, .35);
+  background: rgba(0, 0, 0, .4);
   animation: fade-in .25s var(--ease-out-soft);
 }
 @keyframes fade-in {
@@ -2398,25 +2436,8 @@ section {
     transform 1s var(--ease-out-soft);
 }
 
-/* ─── Hero CTA primary — accent halo pulse on idle (subtle) ──────────────── */
-.hero-single .btn-primary {
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.32) inset,
-    0 0 0 0 color-mix(in oklab, var(--accent, #1ad17a) 50%, transparent),
-    var(--shadow-accent);
-  animation: heroBtnGlow 3.6s var(--ease-in-out-soft) infinite;
-}
-@keyframes heroBtnGlow {
-  0%, 100% { box-shadow:
-      0 1px 0 rgba(255,255,255,.32) inset,
-      0 0 0 0 color-mix(in oklab, var(--accent, #1ad17a) 0%, transparent),
-      var(--shadow-accent); }
-  50%      { box-shadow:
-      0 1px 0 rgba(255,255,255,.32) inset,
-      0 0 0 12px color-mix(in oklab, var(--accent, #1ad17a) 0%, transparent),
-      var(--shadow-accent-strong); }
-}
-.hero-single .btn-primary:hover { animation-play-state: paused; }
+/* Hero CTA primary — flat, no glow */
+.hero-single .btn-primary { box-shadow: none; animation: none; }
 
 /* ─── Core features row (Vantage-style, under the hero) ───────────────────── */
 /* ─── Vantage-style static feature cards + arrow nav ──────────────────────── */
@@ -2934,6 +2955,396 @@ h1, h2, h3, h4, h5, h6,
 /* ─── AccountCompare — tighten spacing ────────────────────────────────────── */
 .acct-compare-section { padding-block: clamp(64px, 7vw, 104px); }
 .acct-simple-grid--basic { margin-top: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL: pill buttons + accent keyword styling for headings
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Unified button system — header style applied everywhere ─────────────── */
+
+/* All buttons — pill-shaped to match the hero CTAs */
+.btn,
+.btn-primary,
+.btn-ghost,
+.btn-ghost-light,
+.btn-sm,
+.btn-lg {
+  border-radius: var(--r-full) !important;
+  font-family: "Inter", system-ui, sans-serif !important;
+  letter-spacing: -0.005em;
+}
+
+/* Sizes — consistent */
+.btn-lg {
+  height: 54px;
+  padding: 0 28px !important;
+  font-size: 15px;
+  font-weight: 700;
+}
+.btn-sm {
+  height: 38px;
+  padding: 0 18px !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+.btn {
+  font-weight: 600;
+}
+
+/* Primary — solid accent green pill (everywhere) */
+.btn-primary {
+  background: var(--accent, #1ad17a) !important;
+  color: var(--accent-ink, #001b0e) !important;
+  border-color: transparent !important;
+  font-weight: 700 !important;
+}
+.btn-primary:hover {
+  background: color-mix(in oklab, var(--accent, #1ad17a) 88%, #fff) !important;
+}
+
+/* Ghost (light surfaces) — soft border, dark text */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line-2, color-mix(in oklab, var(--fg, #0f1814) 12%, transparent));
+  color: var(--fg, #0f1814);
+}
+.btn-ghost:hover {
+  background: var(--bg-2, rgba(0, 0, 0, .04));
+  border-color: var(--fg-dim, #4a4a48);
+}
+
+/* Ghost (dark surfaces — hero, CTA banner) — white border, white text */
+.btn-ghost-light {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, .65);
+  color: #fff;
+  font-weight: 700;
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, .08);
+  border-color: #fff;
+}
+
+/* Nav "Log In" — borderless text-link to match the header screenshot */
+.nav-cta .nav-login {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--fg, #0f1814) !important;
+  padding: 0 14px !important;
+  font-weight: 600;
+}
+.nav-cta .nav-login:hover {
+  background: var(--bg-2, rgba(0,0,0,.04)) !important;
+}
+
+/* Hero CTAs — locked to screenshot proportions */
+.hero-single .btn-primary {
+  min-width: 200px;
+  justify-content: center;
+}
+.hero-single .btn-ghost-light {
+  min-width: 200px;
+  justify-content: center;
+}
+
+/* ─── Body text & nav typography (header-consistent) ─────────────────────── */
+body,
+.nav-links a,
+.nav-group-trigger,
+.foot-grid a,
+.btn,
+input,
+button,
+select,
+textarea {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Section titles — green-accent emphasis on the <em> word ───────────────── */
+.sec-title em,
+.page-h1 em,
+.why-title em,
+.full-cta-section h2 em,
+.cta-banner h2 em {
+  font-style: normal;
+  color: var(--accent, #1ad17a) !important;
+  -webkit-text-fill-color: var(--accent, #1ad17a) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STANDARD BUTTONS (no 3D / no shine / no glow / no magnetic / no animation)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn,
+.btn-primary,
+.btn-ghost,
+.btn-ghost-light {
+  /* Kill magnetic offset variables */
+  --mdx: 0 !important;
+  --mdy: 0 !important;
+  /* Flat baseline shadow */
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* Remove the shine sweep + halo pulse on hero primary */
+.btn-primary::before,
+.btn-primary::after { content: none !important; }
+.hero-single .btn-primary { animation: none !important; }
+
+/* Hover = simple background change, no transform */
+.btn:hover,
+.btn-primary:hover,
+.btn-ghost:hover,
+.btn-ghost-light:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── Ticker attached flush below hero video ──────────────────────────────── */
+.hero-single + .ticker,
+.ticker {
+  margin-top: 0 !important;
+  border-top: 0 !important;
+}
+.hero-single { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+/* ─── Mobile responsive sweep ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Section padding tightens on mobile */
+  section { padding-block: clamp(48px, 8vw, 80px); }
+  .why-section { padding-block: 56px; }
+  .acct-compare-section { padding-block: 56px; }
+  /* Section heads narrower */
+  .section-head { margin-bottom: 28px; }
+  .sec-title { font-size: clamp(24px, 6vw, 32px); }
+  .page-h1 { font-size: clamp(28px, 7vw, 38px); }
+}
+@media (max-width: 560px) {
+  /* Footer wraps gracefully */
+  .foot-grid > div { max-width: 100%; }
+  .foot-social-bar { justify-content: center; text-align: center; }
+  .foot-end { flex-direction: column; gap: 10px; align-items: flex-start; }
+  /* Bonus bar — compact 2-row */
+  .bonus-bar-inner { padding-block: 10px; gap: 10px; }
+  .bonus-text-main { font-size: 12px; line-height: 1.4; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Targeted feedback fixes
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. MobileApp section — no decorative background, no SVG, just text */
+.mobile-section--no-bg::before,
+.mobile-section--no-bg::after { content: none !important; }
+.mobile-section--no-bg .parallax-shapes { display: none !important; }
+.mobile-grid--text-only { grid-template-columns: 1fr !important; max-width: 880px; }
+.mobile-grid--text-only .sec-title { max-width: 16ch; }
+.mobile-grid--text-only .mobile-features { grid-template-columns: 1fr 1fr; }
+@media (max-width: 720px) {
+  .mobile-grid--text-only .mobile-features { grid-template-columns: 1fr; }
+}
+
+/* 2. MT5 devices image — fill the column more aggressively */
+.platform-grid {
+  grid-template-columns: 0.85fr 1.4fr !important;   /* wider image column */
+}
+@media (max-width: 920px) {
+  .platform-grid { grid-template-columns: 1fr !important; }
+}
+.platform-art .mt5-devices img {
+  width: 115% !important;
+  max-width: 115% !important;
+  transform: scale(1.12) translateX(2%) !important;
+  transform-origin: center right;
+}
+@media (max-width: 920px) {
+  .platform-art .mt5-devices img {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+}
+
+/* 3. Remove mobile floating CTA bar entirely */
+.mobile-cta-bar { display: none !important; }
+.chat-fab { bottom: 16px !important; }
+
+/* 4. Core features — show arrow nav buttons (they were hidden by some override) */
+.core-marquee .core-nav-btn {
+  display: inline-flex !important;
+}
+@media (max-width: 640px) {
+  /* Keep arrows even on smaller screens — touch users can also use them */
+  .core-marquee .core-nav-btn {
+    width: 38px;
+    height: 38px;
+    display: inline-flex !important;
+  }
+}
+
+/* 5. Asset tabs — mobile responsive (was breaking) */
+.asset-tabs {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  justify-content: flex-start !important;
+  margin-bottom: 24px !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+.asset-tabs button {
+  flex: 0 0 auto !important;
+  padding: 9px 16px !important;
+  font-size: 13px !important;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .asset-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-block: 4px 8px !important;
+    /* fade-edge mask so tabs scroll naturally */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+  }
+  .asset-tabs::-webkit-scrollbar { display: none; }
+  .asset-tabs button { padding: 9px 14px !important; font-size: 12.5px !important; }
+}
+
+/* 6. Burger menu — move to far right (after the CTA buttons) */
+.side-burger {
+  order: 5 !important;
+  margin-inline-start: 8px !important;
+  margin-inline-end: 0 !important;
+}
+.nav-brand { margin-inline-end: auto !important; }
+@media (min-width: 861px) {
+  /* Hide burger entirely on desktop (nav links are visible) */
+  .side-burger { display: none !important; }
+}
+@media (max-width: 860px) {
+  /* Hide nav-cta extras on mobile so the burger has room */
+  .nav-cta .nav-lang,
+  .nav-cta .nav-login { display: none !important; }
+  .nav-cta { gap: 6px !important; }
+  /* Tighten nav-register so it doesn't push burger off-screen */
+  .nav-cta .nav-register {
+    padding: 0 14px !important;
+    height: 36px !important;
+    font-size: 12.5px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NO PAGE SPLIT LINES + headings always black on white + alignment lock
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Strip all section-level dividing lines (top/bottom borders on sections) */
+.why-section,
+.acct-compare-section,
+.platform-showcase,
+.asset-showcase,
+.asset-specialities,
+.core-stats,
+.core-marquee,
+.mobile-section,
+.full-cta-section,
+.partner-cta,
+.site-footer,
+.page-hd,
+section {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+/* Footer — keep visual rhythm but no hairlines between blocks */
+.foot-grid,
+.foot-social-bar,
+.foot-end,
+.site-footer .foot-end,
+.site-footer .foot-grid {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+/* All headings on white/light surfaces — pure black, including the em accent */
+.sec-title,
+.sec-title em,
+.page-h1,
+.page-h1 em,
+.why-title,
+.why-title em,
+.core-marquee-title,
+.acct-simple-name,
+.welcome-bonus-h2,
+.markets-class-card h3,
+.asset-speciality-card h3,
+.core-feature-title {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+/* Exceptions: dark-surface headings stay white + green em */
+.hero-single .hero-h1,
+.full-cta-section h2,
+.cta-banner h2,
+.welcome-bonus-card .welcome-bonus-h2,
+.acct-simple-grid--basic .acct-simple.premium .acct-simple-name {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.hero-single .hero-h1 em,
+.full-cta-section h2 em,
+.cta-banner h2 em {
+  color: var(--accent, #1ad17a) !important;
+  -webkit-text-fill-color: var(--accent, #1ad17a) !important;
+}
+
+/* ─── Alignment lock — consistent container & centered section headers ──── */
+.container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+
+/* Center the standard section header pattern */
+.section-head,
+.asset-header,
+.markets-class-card,
+.acct-compare-section > .container > div:first-child,
+.why-header,
+.core-features-head,
+.asset-specialities-head,
+.asset-pairs-head,
+.welcome-bonus-shell,
+.mt5-platforms,
+.platforms,
+.mkt-news-head {
+  /* let internal alignment rules win — just clean the box */
+}
+
+.section-head,
+.why-header,
+.asset-header,
+.asset-specialities-head,
+.asset-pairs-head {
+  text-align: center;
+  margin-inline: auto;
+}
+
+/* Heading + body have consistent gap */
+.section-head .sec-title + .sec-sub,
+.why-header .why-title + .why-sub,
+.asset-header .sec-title + .sec-sub {
+  margin-block-start: 14px;
+}
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
