@@ -44,6 +44,15 @@ html {
   scroll-padding-top: 96px;
 }
 
+/* Fix sticky navbar — globals.css sets `body { overflow-x: hidden }` which
+   silently breaks `position: sticky` on descendants because it turns body
+   into a scroll container. `overflow-x: clip` prevents horizontal scroll
+   without creating a scroll context, so sticky works correctly. */
+html, body {
+  overflow-x: clip;
+}
+body { overflow-x: clip !important; overflow-y: visible !important; }
+
 body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
@@ -102,9 +111,10 @@ h1, .display, .hero-h1, .page-h1 { letter-spacing: -0.032em; }
 
 /* ─── Nav — premium glass + perfect logo alignment ────────────────────────── */
 .nav-wrap {
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
   background: color-mix(in oklab, var(--bg, #fff) 80%, transparent);
   border-bottom: 1px solid color-mix(in oklab, var(--line, #eaeae6) 50%, transparent);
   backdrop-filter: blur(22px) saturate(180%);
@@ -113,6 +123,7 @@ h1, .display, .hero-h1, .page-h1 { letter-spacing: -0.032em; }
     background .3s var(--ease-out-soft),
     border-color .3s var(--ease-out-soft),
     box-shadow .3s var(--ease-out-soft);
+  will-change: background, box-shadow;
 }
 .nav-wrap.scrolled {
   background: color-mix(in oklab, var(--bg, #fff) 92%, transparent);
@@ -168,6 +179,73 @@ h1, .display, .hero-h1, .page-h1 { letter-spacing: -0.032em; }
   }
   .nav-links a:hover,
   .nav-group-trigger:hover { background: var(--bg-2, rgba(0,0,0,.04)); }
+  /* Reset native <button> defaults so the group trigger matches the link siblings */
+  button.nav-group-trigger {
+    background: transparent;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  button.nav-group-trigger:focus { outline: none; }
+  button.nav-group-trigger:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--accent, #1ad17a) 65%, transparent);
+    outline-offset: 2px;
+  }
+
+  /* ── Uniform sizing for every top-level nav item ───────────────────────
+     Home (<a>) and the group triggers (<button>) must render identically
+     so the navbar reads as one row of equally-sized labels. */
+  .nav-links > a,
+  .nav-links > .nav-group > button.nav-group-trigger {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 10px 14px !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.005em !important;
+    border-radius: var(--r-sm, 10px) !important;
+    white-space: nowrap !important;
+    color: var(--fg-dim, #475569) !important;
+    height: auto !important;
+  }
+  .nav-links > a:hover,
+  .nav-links > .nav-group > button.nav-group-trigger:hover,
+  .nav-links > a.active,
+  .nav-links > .nav-group > button.nav-group-trigger.active,
+  .nav-links > .nav-group > button.nav-group-trigger.hovered {
+    color: var(--fg, #0b1220) !important;
+  }
+  /* Chevron next to group labels — uniform size + position */
+  .nav-links > .nav-group > button.nav-group-trigger > svg {
+    width: 10px !important;
+    height: 10px !important;
+    opacity: 0.6;
+    transition: transform .2s var(--ease-out-soft, ease), opacity .2s var(--ease-out-soft, ease);
+  }
+  .nav-links > .nav-group > button.nav-group-trigger.hovered > svg,
+  .nav-links > .nav-group > button.nav-group-trigger[aria-expanded="true"] > svg {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  /* Home link in the sticky nav stays clean — no background tint or
+     green underline accent when active. Keeps the nav minimal. */
+  .nav-links > a[href="#home"].active,
+  .nav-links > a[href="#home"]:hover {
+    background: transparent !important;
+    color: var(--fg) !important;
+  }
+  .nav-links > a[href="#home"].active::after,
+  .nav-links > a[href="#home"]::after {
+    display: none !important;
+  }
 }
 
 .nav-cta {
@@ -4810,9 +4888,7 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
 }
 
 .acct-v2-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 12px;
   font-weight: 500;
@@ -4821,25 +4897,39 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
   color: #64748b;
   margin-bottom: 20px;
 }
-.acct-v2-chip {
+
+/* Standalone POPULAR / VIP badge pill — sits above the eyebrow */
+.acct-v2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 4px 9px;
+  padding: 8px 16px;
   border-radius: 999px;
+  margin-bottom: 18px;
+  line-height: 1;
 }
-.acct-v2-chip.is-popular {
+.acct-v2-badge svg { flex-shrink: 0; }
+
+.acct-v2-badge.is-popular {
   color: #0b6e3a;
-  background: rgba(26, 209, 122, 0.12);
-  border: 1px solid rgba(26, 209, 122, 0.32);
+  background: linear-gradient(135deg, rgba(26, 209, 122, 0.18) 0%, rgba(26, 209, 122, 0.08) 100%);
+  border: 1px solid rgba(26, 209, 122, 0.42);
+  box-shadow: 0 6px 18px -10px rgba(26, 209, 122, 0.55);
 }
-.acct-v2-chip.is-vip {
-  color: #7a5800;
-  background: rgba(245, 196, 0, 0.14);
-  border: 1px solid rgba(245, 196, 0, 0.40);
+.acct-v2-badge.is-popular svg { color: #0fa760; }
+
+.acct-v2-badge.is-vip {
+  color: #6b4d00;
+  background: linear-gradient(135deg, rgba(245, 196, 0, 0.22) 0%, rgba(245, 196, 0, 0.08) 100%);
+  border: 1px solid rgba(245, 196, 0, 0.55);
+  box-shadow: 0 6px 18px -10px rgba(245, 196, 0, 0.55);
 }
+.acct-v2-badge.is-vip svg { color: #d4a900; }
 
 .acct-v2-h1 {
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -5286,6 +5376,126 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
 }
 
 [dir="rtl"] .acct-cmp2-table tbody th { text-align: right; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   CAREERS — simple "not hiring" state + standard contact form
+   ════════════════════════════════════════════════════════════════════════ */
+.careers-empty {
+  background: #f5f6f8;       /* light gray section so the white card pops */
+  padding: 32px 0 96px;
+}
+.careers-form-card {
+  max-width: 560px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #d6dae0;  /* solid, visible gray border — not washed out */
+  border-radius: 10px;        /* standard form radius — not pillowy */
+  padding: 36px 36px 32px;
+}
+@media (max-width: 640px) {
+  .careers-empty { padding: 24px 0 72px; }
+  .careers-form-card { padding: 28px 22px 26px; }
+}
+
+.careers-form { display: grid; gap: 18px; }
+.careers-form-row { display: grid; gap: 7px; }
+.careers-form-row label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #1e293b;
+}
+.careers-form-row input,
+.careers-form-row textarea {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1.5px solid #cbd2db; /* solid mid-gray border */
+  border-radius: 8px;
+  padding: 11px 14px;
+  width: 100%;
+  transition: border-color .15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.careers-form-row input::placeholder,
+.careers-form-row textarea::placeholder { color: #94a3b8; }
+.careers-form-row input:hover,
+.careers-form-row textarea:hover { border-color: #94a3b8; }
+.careers-form-row input:focus,
+.careers-form-row textarea:focus {
+  outline: none;
+  border-color: #1ad17a;
+}
+.careers-form-row textarea { resize: vertical; min-height: 110px; font-family: inherit; }
+
+.careers-form-submit {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px !important;
+  justify-content: center;
+  margin-top: 6px;
+}
+.careers-form-submit svg { transition: transform .25s ease; }
+.careers-form-submit:hover:not(:disabled) svg { transform: translateX(3px); }
+.careers-form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Success state — flat, no gradient */
+.careers-form-success { text-align: center; padding: 8px 0 4px; }
+.careers-form-tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #1ad17a;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+.careers-form-success h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0b1220;
+  margin: 0 0 8px;
+}
+.careers-form-success p {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+[dir="rtl"] .careers-form-submit:hover:not(:disabled) svg { transform: translateX(-3px); }
+
+.careers-form-hint {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #64748b;
+  text-align: center;
+  margin: 8px 0 0;
+}
+.careers-form-hint a {
+  color: #0fa760;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease;
+}
+.careers-form-hint a:hover { border-bottom-color: #0fa760; }
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

@@ -597,9 +597,6 @@ function SearchOverlay({ onClose, onNav }) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M6 6l12 12M18 6L6 18" /></svg>
             </button>
           )}
-          <span className="search-kbd-row">
-            <kbd>esc</kbd>
-          </span>
         </div>
 
         <div className="search-body">
@@ -638,18 +635,11 @@ function SearchOverlay({ onClose, onNav }) {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={glyphFor(r.c)}/></svg>
                     </span>
                     <span className="search-result-title">{r.t}</span>
-                    <svg className="search-result-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
                   </button>
                 );
               })}
             </div>
           ))}
-        </div>
-
-        <div className="search-hint">
-          <span><kbd>↵</kbd> {t("search.hint_select")}</span>
-          <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
-          <span><kbd>esc</kbd> {t("search.hint_close")}</span>
         </div>
       </div>
     </div>
@@ -684,6 +674,24 @@ function Nav({ route, onNav }) {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // FxPro-style mega menu: close on click-outside the nav, close on Escape.
+  useEffect(() => {
+    if (!hoverGroup) return;
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest('.nav-wrap')) setHoverGroup(null);
+    };
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setHoverGroup(null);
+    };
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, [hoverGroup]);
+
   const groups = [
     {
       id: "markets", label: "Markets", route: "markets",
@@ -706,12 +714,15 @@ function Nav({ route, onNav }) {
       ],
     },
     {
-      id: "accounts", label: "Accounts", route: "account-standard",
+      id: "accounts", label: "Accounts", route: "accounts",
       cols: [
         { h: "Account types", items: [
           ["account-standard", "Standard", "Direct-to-market execution"],
           ["account-pro",      "Pro",      "For active traders"],
           ["account-elite",    "Elite",    "VIP & high-volume"],
+        ]},
+        { h: "Overview", items: [
+          ["accounts", "Compare all 3", "Side-by-side comparison"],
         ]},
       ],
     },
@@ -791,16 +802,26 @@ function Nav({ route, onNav }) {
             <a href="#home" className={route === "home" ? "active" : ""} onClick={go("home")} onMouseEnter={() => setHoverGroup(null)}>{t("nav.home")}</a>
             {groups.map(g => {
               const labelKey = `nav.${g.id === 'partner' ? 'partner' : g.id}`;
+              // Active when on the group's own route OR on any of its sub-item routes
+              const groupActive = route === g.route ||
+                (g.cols || []).some(c => c.items.some(it => it[0] === route));
               return (
                 <div key={g.id} className="nav-group" onMouseEnter={() => setHoverGroup(g.id)}>
-                  <a
-                    href={`#${g.route}`}
-                    className={`nav-group-trigger ${route === g.route ? "active" : ""} ${hoverGroup === g.id ? "hovered" : ""}`}
-                    onClick={go(g.route)}
+                  <button
+                    type="button"
+                    className={`nav-group-trigger ${groupActive ? "active" : ""} ${hoverGroup === g.id ? "hovered" : ""}`}
+                    aria-haspopup="true"
+                    aria-expanded={hoverGroup === g.id}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // FxPro-style: clicking the parent label only toggles the dropdown,
+                      // never navigates. Sub-items in the mega menu do the navigation.
+                      setHoverGroup(prev => prev === g.id ? null : g.id);
+                    }}
                   >
                     {t(labelKey) === labelKey ? g.label : t(labelKey)}
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="m6 9 6 6 6-6"/></svg>
-                  </a>
+                  </button>
                 </div>
               );
             })}
@@ -1472,7 +1493,7 @@ function HeroSlider() {
     {
       eyebrow: "Lightning execution",
       title: <>Fills in <em>28 milliseconds.</em><br/>No requotes. Ever.</>,
-      lede: "Tier-1 liquidity from 25+ banks. Co-located servers in LD4, NY4 and TY3.",
+      lede: "Aggregated liquidity from 25+ providers. Co-located servers in LD4, NY4 and TY3.",
       cta: "See execution stats",
       sub: "Spreads from 0.0 pips",
       bg: "linear-gradient(135deg, #0a0a0a 0%, #11261a 60%, #0a1410 100%)",
@@ -2070,7 +2091,7 @@ function Footer({ onNav }) {
   };
   const cols = [
     { h: "Trading",   l: [["markets","Markets"],["funding","Deposits & withdrawals"],["tools","Calculators"],["tools","Economic calendar"]] },
-    { h: "Platforms", l: [["home","MetaTrader 5"],["home","MT5 Web"],["home","MT5 Mobile"],["partners","VPS hosting"]] },
+    { h: "Platforms", l: [["home","MetaTrader 5"],["home","MT5 Web"],["home","MT5 Mobile"]] },
     { h: "Company",   l: [["about","About"],["partners","Partners (IB)"],["careers","Careers"],["contact","Contact"]] },
     { h: "Learn",     l: [["academy","Academy"],["academy","Glossary"],["faq","Help centre"],["faq","FAQ"]] },
     { h: "Legal",     l: [
@@ -2097,7 +2118,7 @@ function Footer({ onNav }) {
           <div className="foot-brand">
             <RakizLogo size={32} />
             <p className="foot-tagline">
-              Institutional-grade trading for ambitious retail traders. Tier-1 execution, transparent pricing, segregated client funds.
+              RakizFx is the international trading brand of Rakiz Capital Ltd. Fair pricing, fast execution and segregated client funds across 1,200+ markets on MetaTrader 5.
             </p>
             <div className="foot-contact">
               <a href="mailto:support@rakizfx.com" className="foot-contact-row">
@@ -2819,7 +2840,7 @@ function WhyTraders() {
     { t: "Easy withdrawals",           p: "Same-day processing on every method. No hidden fees, no friction.", i: "M19 12H5M11 19l-7-7 7-7" },
     { t: "No commissions",             p: "Zero commission on Standard, Pro and Elite accounts on every trade.", i: "M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3" },
     { t: "Negative balance protection",p: "You can never lose more than your deposit. Built in for every account.", i: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
-    { t: "Tier-1 liquidity",           p: "25+ liquidity providers and deep market depth on every instrument.", i: "M2 22V12a10 10 0 0 1 20 0v10M2 17h20M2 12h20" },
+    { t: "Deep market liquidity",      p: "25+ liquidity providers and deep order-book depth on every instrument.", i: "M2 22V12a10 10 0 0 1 20 0v10M2 17h20M2 12h20" },
     { t: "MetaTrader 5",               p: "The world's most advanced trading platform — desktop, web and mobile.", i: "M3 3h18v18H3zM3 9h18M9 21V9" },
   ];
   return (
@@ -3687,40 +3708,115 @@ function AffiliatePage() {
 
 // Careers page
 function CareersPage() {
-  const jobs = [
-    { t: "Senior Trading Systems Engineer", dep: "Engineering",  loc: "Mumbai · Hybrid" },
-    { t: "Quant Developer (C++ / Python)",  dep: "Engineering",  loc: "Bangalore · On-site" },
-    { t: "Compliance Officer (CFD)",        dep: "Compliance",   loc: "Dubai · On-site" },
-    { t: "Customer Success Manager",        dep: "Operations",   loc: "Mumbai · Hybrid" },
-    { t: "Product Designer",                dep: "Product",      loc: "Remote (IST hours)" },
-    { t: "Performance Marketing Lead",      dep: "Marketing",    loc: "Mumbai · Hybrid" },
-  ];
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const canSubmit = name.trim().length > 1 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) &&
+    message.trim().length > 5;
+
+  // Open the user's mail client with everything pre-filled to
+  // support@rakizfx.com — message guaranteed to reach the inbox.
+  // Works identically on localhost and production, no backend.
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    const subject = encodeURIComponent(`Careers enquiry — ${name.trim()}`);
+    const body = encodeURIComponent(
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}\n\n—\nSent from rakizfx.com/#careers`
+    );
+    window.location.href = `mailto:support@rakizfx.com?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
+
   return (
     <>
       <section className="page-hd">
         <div className="container">
           <span className="eyebrow">Careers</span>
-          <h1 className="page-h1">Build the future of trading with us</h1>
-          <p className="page-sub">We're hiring across engineering, compliance, product, design and operations. Remote and hybrid roles available.</p>
+          <h1 className="page-h1">We&rsquo;re not actively hiring right now</h1>
         </div>
       </section>
-      <section style={{ paddingTop: 0 }}>
+
+      <section className="careers-empty">
         <div className="container">
-          <div className="careers-list">
-            {jobs.map((j, i) => (
-              <div key={i} className="career-row">
-                <div>
-                  <h3>{j.t}</h3>
-                  <span>{j.dep} · {j.loc}</span>
+          <motion.div
+            className="careers-form-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {!submitted ? (
+              <form className="careers-form" onSubmit={onSubmit} noValidate>
+                <div className="careers-form-row">
+                  <label htmlFor="cf-name">Name</label>
+                  <input
+                    id="cf-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your full name"
+                    autoComplete="name"
+                    required
+                  />
                 </div>
-                <a href="mailto:careers@rakizfx.com" className="btn btn-ghost">Apply →</a>
-              </div>
-            ))}
-          </div>
-          <div className="careers-foot card">
-            <h3>Don't see your role?</h3>
-            <p>We'd still love to hear from you. Send your CV and a short note about what you'd like to work on to <a href="mailto:careers@rakizfx.com">careers@rakizfx.com</a>.</p>
-          </div>
+                <div className="careers-form-row">
+                  <label htmlFor="cf-email">Email</label>
+                  <input
+                    id="cf-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+                <div className="careers-form-row">
+                  <label htmlFor="cf-msg">Message</label>
+                  <textarea
+                    id="cf-msg"
+                    rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="A short note about what you'd like to work on. Feel free to link your CV or portfolio."
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary careers-form-submit"
+                  disabled={!canSubmit}
+                >
+                  Send message
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+                  </svg>
+                </button>
+                <p className="careers-form-hint">
+                  Goes straight to <a href="mailto:support@rakizfx.com">support@rakizfx.com</a> via your email client.
+                </p>
+              </form>
+            ) : (
+              <motion.div
+                className="careers-form-success"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <span className="careers-form-tick" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </span>
+                <h3>Thanks, {name.split(" ")[0]}.</h3>
+                <p>Your email client just opened with the message addressed to <b>support@rakizfx.com</b>. Hit send there and we&rsquo;ll be in touch.</p>
+              </motion.div>
+            )}
+          </motion.div>
         </div>
       </section>
     </>
@@ -3733,7 +3829,7 @@ function HelpCenterPage() {
     { h: "Getting started", links: ["Open a live account", "Verify your identity (KYC)", "Choose the right account type", "Switch from another broker"] },
     { h: "Funding",          links: ["Bank wire instructions", "Card deposits & withdrawal limits", "Crypto deposits", "Why was my deposit delayed?"] },
     { h: "Trading",          links: ["Place your first trade", "Order types explained", "Margin, leverage and stop-out", "What is swap / rollover?"] },
-    { h: "Platforms",        links: ["Install MetaTrader 5", "Connect MT5 to your account", "Mobile app — get started", "VPS hosting for EAs"] },
+    { h: "Platforms",        links: ["Install MetaTrader 5", "Connect MT5 to your account", "Mobile app — get started", "Run Expert Advisors (EAs)"] },
     { h: "Account",          links: ["Change your password", "Enable 2FA", "Update bank details", "Close my account"] },
     { h: "Bonuses",          links: ["Claim the welcome bonus", "Bonus volume requirements", "Referral program rules", "Cashback eligibility"] },
   ];
@@ -4187,7 +4283,7 @@ function PartnersPage() {
     { t: "Competitive commission structure",  p: "Industry-leading payouts on every referred trader.", i: <><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></> },
     { t: "Fast & secure payments",            p: "Daily settlements to bank, card or crypto wallet.", i: <><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></> },
     { t: "Dedicated partner support",         p: "A relationship manager assigned from day one.", i: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></> },
-    { t: "Institutional-grade technology",    p: "Tier-1 liquidity, sub-30ms execution, deep depth.", i: <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></> },
+    { t: "Direct market access",              p: "Multi-LP liquidity, sub-30ms order routing, transparent fills.", i: <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></> },
     { t: "Global growth opportunities",       p: "Active clients in 60+ countries — promote across markets.", i: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></> },
     { t: "Professional trading infrastructure",p: "MetaTrader 5, Client Area, full back-office stack.", i: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></> },
   ];
@@ -4383,7 +4479,7 @@ function AboutPage() {
                   <dt>Legal entity</dt><dd>Rakiz Capital Ltd</dd>
                   <dt>Auditor</dt><dd>Big-4 external audit, annually</dd>
                   <dt>Headquarters</dt><dd>Mumbai, India</dd>
-                  <dt>Liquidity</dt><dd>Tier-1 banks · 25+ LPs</dd>
+                  <dt>Liquidity</dt><dd>25+ liquidity providers</dd>
                   <dt>Client funds</dt><dd>Segregated, top-tier banks</dd>
                   <dt>Insurance</dt><dd>$1M per client compensation scheme</dd>
                 </dl>
@@ -4445,8 +4541,8 @@ function FAQPage() {
     {
       cat: "Platform & technical",
       items: [
-        ["Which platforms do you support?", "MetaTrader 5 on Windows, macOS, iOS, Android and Web. Pro and Elite clients also have access to MT5 VPS hosting (free with qualifying balance)."],
-        ["Can I run Expert Advisors (EAs)?", "Yes. All EAs and custom indicators are permitted. Free VPS for Pro/Elite clients ensures 24/5 uptime for your automated strategies."],
+        ["Which platforms do you support?", "MetaTrader 5 on Windows, macOS, iOS, Android and Web. One account works across every device — log in anywhere, your positions and history stay in sync."],
+        ["Can I run Expert Advisors (EAs)?", "Yes. All EAs, custom indicators and scripts are permitted on every account tier. Run them from any MetaTrader 5 instance — desktop, laptop or your own server."],
         ["What is your server time?", "EET (Eastern European Time, GMT+2/GMT+3 with DST). Daily candles close at 23:59 server time."],
         ["I'm having connection issues. What now?", "Try switching MT5 server (look for the lowest ping in File → Login). If problems persist, contact support — chat replies in seconds."],
       ],
@@ -5491,15 +5587,29 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       {/* Hero — airy, typography-led, no heavy card */}
       <section className="acct-v2-hero">
         <div className="container">
+          {current.badge && (
+            <motion.div
+              className={`acct-v2-badge ${tier === "elite" ? "is-vip" : "is-popular"}`}
+              initial={{ opacity: 0, y: -6, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.18 22 12 17.27 5.82 22l2.36-8.15L2 9.36h7.61L12 2z"/>
+              </svg>
+              {current.badge}
+            </motion.div>
+          )}
+
           <motion.span
             className="acct-v2-eyebrow"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, delay: current.badge ? 0.06 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
             Account · {current.name}
-            {current.badge && <span className={`acct-v2-chip ${tier === "elite" ? "is-vip" : "is-popular"}`}>{current.badge}</span>}
           </motion.span>
 
           <motion.h1
