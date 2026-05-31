@@ -37,8 +37,13 @@ export const metadata: Metadata = {
     images: ['/assets/img-currency.jpg'],
   },
   icons: {
-    icon: '/assets/rakizfx-logo-light.svg',
-    apple: '/assets/rakizfx-logo-light.png',
+    icon: [
+      { url: '/assets/favicon.svg', type: 'image/svg+xml' },
+      { url: '/assets/favicon.svg', sizes: '32x32' },
+      { url: '/assets/favicon.svg', sizes: '16x16' },
+    ],
+    apple: '/assets/favicon.svg',
+    shortcut: '/assets/favicon.svg',
   },
   robots: { index: true, follow: true },
 };
@@ -54,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -63,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <div id="root">{children}</div>
       </body>
     </html>

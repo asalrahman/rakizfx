@@ -4,6 +4,13 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useI18n, useT, LANGS } from "@/lib/i18n";
+import { motion } from "framer-motion";
+import {
+  Twitter, Instagram, Youtube, Linkedin, Facebook, Send,
+  Mail, Phone, ChevronDown, ChevronRight, Search as SearchIcon,
+  Globe, Zap, Shield, TrendingUp, BarChart3, CircleDollarSign,
+  Headphones, Clock, Award, Sparkles
+} from "lucide-react";
 
 
 // ─── from logo.jsx ────────────────────────────────────────────────────
@@ -542,34 +549,12 @@ function SearchOverlay({ onClose, onNav }) {
 
         <div className="search-body">
           {!query && (
-            <>
-              <div className="search-section-h">Popular</div>
-              <div className="search-pills">
-                {popular.map((p, i) => (
-                  <button key={i} className="search-pill" onClick={() => onNav(p.r)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={glyphFor("Markets")}/></svg>
-                    {p.t}
-                  </button>
-                ))}
-              </div>
-
-              <div className="search-section-h">Quick links</div>
-              <div className="search-quicklinks">
-                {[
-                  ["markets",   "All markets"],
-                  ["accounts",  "Account types"],
-                  ["tools",     "Trading tools"],
-                  ["promotion", "Welcome bonus"],
-                  ["help",      "Help center"],
-                  ["contact",   "Contact us"],
-                ].map(([r, label]) => (
-                  <button key={r} className="search-quicklink" onClick={() => onNav(r)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </>
+            <div className="search-hint-empty">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <span>{t("search.placeholder")}</span>
+            </div>
           )}
 
           {query && results.length === 0 && (
@@ -623,6 +608,7 @@ function Nav({ route, onNav }) {
   const [hoverGroup, setHoverGroup] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [sideOpenGroup, setSideOpenGroup] = useState<string | null>(null);
   const { lang, setLang } = useI18n();
   const t = useT();
   // Open search on Cmd/Ctrl+K and "/" hotkey from anywhere.
@@ -845,14 +831,65 @@ function Nav({ route, onNav }) {
         </div>
 
         <nav className="side-nav">
-          {sideLinks.map(([r, label, d]) => (
-            <a key={r} href={`#${r}`} className={`side-link ${route === r ? "active" : ""}`} onClick={go(r)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d={d}/>
-              </svg>
-              <span>{label}</span>
-            </a>
-          ))}
+          {/* Home (flat link) */}
+          <a
+            href="#home"
+            className={`side-link ${route === "home" ? "active" : ""}`}
+            onClick={go("home")}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12 12 3l9 9M5 10v10h14V10"/>
+            </svg>
+            <span>{t("nav.home")}</span>
+          </a>
+
+          {/* Groups — accordion with sub-items */}
+          {groups.map((g) => {
+            const items = g.cols.flatMap((c: any) => c.items as Array<[string, string, string]>);
+            const labelKey = `nav.${g.id === 'partner' ? 'partner' : g.id}`;
+            const trLabel = t(labelKey) === labelKey ? g.label : t(labelKey);
+            const isOpen = sideOpenGroup === g.id;
+            return (
+              <div key={g.id} className={`side-acc ${isOpen ? "open" : ""}`}>
+                <button
+                  type="button"
+                  className={`side-link side-acc-trigger ${route === g.route ? "active" : ""}`}
+                  aria-expanded={isOpen}
+                  onClick={() => setSideOpenGroup(isOpen ? null : g.id)}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={
+                      g.id === "markets"   ? "M3 17l6-6 4 4 8-8M14 7h7v7" :
+                      g.id === "accounts"  ? "M16 11a4 4 0 1 0-8 0v3a4 4 0 0 0 8 0v-3zM3 21v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2" :
+                      g.id === "tools"     ? "M14.7 6.3a4 4 0 0 1 5.7 5.7L8.4 23.9l-5.4.6.6-5.4L14.7 6.3z" :
+                      g.id === "partner"   ? "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" :
+                      g.id === "promotion" ? "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" :
+                                             "M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"
+                    }/>
+                  </svg>
+                  <span>{trLabel}</span>
+                  <svg className="side-acc-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                <div className="side-acc-panel" aria-hidden={!isOpen}>
+                  <div className="side-acc-inner">
+                    {items.map(([r, label, desc], i) => (
+                      <a
+                        key={`${g.id}-${i}`}
+                        href={`#${r}`}
+                        className={`side-sub-link ${route === r ? "active" : ""}`}
+                        onClick={go(r)}
+                      >
+                        <b>{label}</b>
+                        <span>{desc}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </nav>
 
         <div className="side-foot">
@@ -1972,50 +2009,24 @@ function Footer({ onNav }) {
   const cols = [
     { h: "Trading",   l: [["markets","Markets"],["funding","Deposits & withdrawals"],["tools","Calculators"],["tools","Economic calendar"]] },
     { h: "Platforms", l: [["home","MetaTrader 5"],["home","MT5 Web"],["home","MT5 Mobile"],["partners","VPS hosting"]] },
-    { h: "Company",   l: [["about","About"],["about","Regulation"],["partners","Partners (IB)"],["contact","Contact"]] },
+    { h: "Company",   l: [["about","About"],["partners","Partners (IB)"],["careers","Careers"],["contact","Contact"]] },
     { h: "Learn",     l: [["academy","Academy"],["academy","Glossary"],["faq","Help centre"],["faq","FAQ"]] },
+    { h: "Legal",     l: [
+      ["legal-privacy",          "Privacy Policy"],
+      ["legal-terms",            "Terms and Conditions"],
+      ["legal-risk",             "Risk Warning"],
+      ["legal-aml",              "AML & KYC Policy"],
+      ["legal-client-agreement", "Client Agreement"],
+      ["legal-withdrawal",       "Withdrawal & Refund Policy"],
+    ] },
   ];
-  const socials: Array<{ name: string; href: string; svg: React.ReactNode }> = [
-    {
-      name: "X",
-      href: "https://x.com/rakizfx",
-      svg: <path d="M18.244 2H21l-6.52 7.45L22 22h-6.828l-4.77-6.232L4.8 22H2l7.04-8.046L1.6 2h7l4.33 5.7L18.244 2zm-1.196 18.4h1.86L7.04 3.49H5.094L17.048 20.4z" />,
-    },
-    {
-      name: "Instagram",
-      href: "https://instagram.com/rakizfx",
-      svg: <>
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-      </>,
-    },
-    {
-      name: "YouTube",
-      href: "https://youtube.com/@rakizfx",
-      svg: <>
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.96-1.96C18.88 4 12 4 12 4s-6.88 0-8.58.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.96 1.96C5.12 20 12 20 12 20s6.88 0 8.58-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-        <polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="currentColor" stroke="none" />
-      </>,
-    },
-    {
-      name: "Telegram",
-      href: "https://t.me/rakizfx",
-      svg: <path d="M22 3 2 11l6.4 2.2L11 21l3-4.6 4.8 3.6L22 3zM9.6 14.4 9 18l1.8-2.6 4.2 3.1L18.6 7 9.6 14.4z" />,
-    },
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com/company/rakizfx",
-      svg: <>
-        <rect x="2" y="2" width="20" height="20" rx="3" />
-        <path d="M7 9v9M7 6.5h.01M11 18v-5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5M11 13v5" />
-      </>,
-    },
-    {
-      name: "Facebook",
-      href: "https://facebook.com/rakizfx",
-      svg: <path d="M22 12a10 10 0 1 0-11.6 9.87v-6.98H7.9V12h2.5V9.8c0-2.47 1.47-3.83 3.72-3.83 1.08 0 2.2.19 2.2.19v2.42h-1.24c-1.22 0-1.6.76-1.6 1.54V12h2.72l-.43 2.89h-2.29v6.98A10 10 0 0 0 22 12z" />,
-    },
+  const socials: Array<{ name: string; href: string; Icon: React.ComponentType<{ size?: number; strokeWidth?: number }> }> = [
+    { name: "X",         href: "https://x.com/rakizfx",                 Icon: Twitter },
+    { name: "Instagram", href: "https://instagram.com/rakizfx",         Icon: Instagram },
+    { name: "YouTube",   href: "https://youtube.com/@rakizfx",          Icon: Youtube },
+    { name: "Telegram",  href: "https://t.me/rakizfx",                  Icon: Send },
+    { name: "LinkedIn",  href: "https://linkedin.com/company/rakizfx",  Icon: Linkedin },
+    { name: "Facebook",  href: "https://facebook.com/rakizfx",          Icon: Facebook },
   ];
   return (
     <footer className="site-footer">
@@ -2024,16 +2035,12 @@ function Footer({ onNav }) {
           <div className="foot-brand">
             <RakizLogo size={32} />
             <p className="foot-tagline">
-              Institutional-grade trading for ambitious retail traders. Built in India, regulated globally.
+              Institutional-grade trading for ambitious retail traders. Tier-1 execution, transparent pricing, segregated client funds.
             </p>
             <div className="foot-contact">
               <a href="mailto:support@rakizfx.com" className="foot-contact-row">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
                 support@rakizfx.com
-              </a>
-              <a href="tel:+912269000000" className="foot-contact-row">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                +91 22 6900 0000
               </a>
             </div>
           </div>
@@ -2048,33 +2055,38 @@ function Footer({ onNav }) {
         <div className="foot-social-bar">
           <span className="foot-social-label">Follow us</span>
           <div className="foot-socials">
-            {socials.map(s => (
-              <a
+            {socials.map((s, i) => (
+              <motion.a
                 key={s.name}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.name}
                 className="foot-social"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ delay: 0.05 * i, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, scale: 1.06 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  {s.svg}
-                </svg>
-              </a>
+                <s.Icon size={18} strokeWidth={1.9} />
+              </motion.a>
             ))}
           </div>
         </div>
 
         <div className="foot-risk">
-          <strong>Risk warning:</strong> Trading leveraged derivatives carries a high level of risk and may not be suitable for all investors. You may lose more than your initial deposit. Past performance is not indicative of future results. Please ensure you fully understand the risks involved and seek independent advice if necessary. RakizFx is the trade name of Rakiz Capital Ltd, authorised and regulated by the FSA (Licence 23847). Services are not offered to residents of the United States, Canada, North Korea, or any other jurisdiction where they would be contrary to local law.
+          <strong>Risk warning:</strong> Trading leveraged derivatives carries a high level of risk and may not be suitable for all investors. You may lose more than your initial deposit. Past performance is not indicative of future results. Please ensure you fully understand the risks involved and seek independent advice if necessary. RakizFx is the trade name of Rakiz Capital Ltd, registered at Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia (Registration No. 2025-00287). Services are not offered to residents of the United States, Canada, North Korea, or any other jurisdiction where they would be contrary to local law.
         </div>
         <div className="foot-end">
           <span>© 2026 Rakiz Capital Ltd. All rights reserved.</span>
           <span className="foot-end-links">
-            <a href="#" onClick={(e)=>e.preventDefault()}>Privacy</a>
-            <a href="#" onClick={(e)=>e.preventDefault()}>Terms</a>
-            <a href="#" onClick={(e)=>e.preventDefault()}>Cookies</a>
-            <a href="#" onClick={(e)=>e.preventDefault()}>Risk disclosure</a>
+            <a href="#legal-privacy"          onClick={go("legal-privacy")}>Privacy</a>
+            <a href="#legal-terms"            onClick={go("legal-terms")}>Terms</a>
+            <a href="#legal-client-agreement" onClick={go("legal-client-agreement")}>Client Agreement</a>
+            <a href="#legal-risk"             onClick={go("legal-risk")}>Risk Warning</a>
+            <a href="#legal-aml"              onClick={go("legal-aml")}>AML / KYC</a>
+            <a href="#legal-withdrawal"       onClick={go("legal-withdrawal")}>Withdrawals</a>
           </span>
         </div>
       </div>
@@ -4762,7 +4774,10 @@ const ROUTES = [
   "faq", "contact", "register", "login",
   // Asset-class detail pages (clicked from Markets overview)
   "market-forex", "market-metals", "market-indices", "market-energies",
-  "market-crypto", "market-shares"
+  "market-crypto", "market-shares",
+  // Legal pages
+  "legal-privacy", "legal-terms", "legal-risk", "legal-aml",
+  "legal-client-agreement", "legal-withdrawal"
 ] as const;
 
 function shade(hex, pct) {
@@ -4997,6 +5012,12 @@ export default function App() {
       {route === "about" && <AboutPage />}
       {route === "faq" && <FAQPage />}
       {route === "contact" && <ContactPage />}
+      {route === "legal-privacy"          && <LegalPage slug="privacy" />}
+      {route === "legal-terms"            && <LegalPage slug="terms" />}
+      {route === "legal-risk"             && <LegalPage slug="risk" />}
+      {route === "legal-aml"              && <LegalPage slug="aml" />}
+      {route === "legal-client-agreement" && <LegalPage slug="client" />}
+      {route === "legal-withdrawal"       && <LegalPage slug="withdrawal" />}
       {route === "register" && <RegisterPage onNav={nav} />}
       {route === "login" && <LoginPage onNav={nav} />}
 
@@ -5098,6 +5119,581 @@ function CoreFeaturesRow() {
         </button>
       </div>
     </section>
+  );
+}
+
+// ─── Legal pages (Privacy / Terms / Risk / AML / Client / Withdrawal) ─────
+type LegalSlug = "privacy" | "terms" | "risk" | "aml" | "client" | "withdrawal";
+
+const LEGAL_INDEX: Array<{ slug: LegalSlug; route: string; title: string }> = [
+  { slug: "privacy",    route: "legal-privacy",          title: "Privacy Policy" },
+  { slug: "terms",      route: "legal-terms",            title: "Terms and Conditions" },
+  { slug: "risk",       route: "legal-risk",             title: "Risk Warning" },
+  { slug: "aml",        route: "legal-aml",              title: "AML & KYC Policy" },
+  { slug: "client",     route: "legal-client-agreement", title: "Client Agreement" },
+  { slug: "withdrawal", route: "legal-withdrawal",       title: "Withdrawal & Refund Policy" },
+];
+
+function LegalPage({ slug }: { slug: LegalSlug }) {
+  const goLegal = (r: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = `#${r}`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const titles: Record<LegalSlug, string> = {
+    privacy:    "Privacy Policy",
+    terms:      "Terms and Conditions",
+    risk:       "Risk Warning",
+    aml:        "AML & KYC Policy",
+    client:     "Client Agreement",
+    withdrawal: "Withdrawal & Refund Policy",
+  };
+
+  return (
+    <>
+      <section className="page-hd legal-hd">
+        <div className="container">
+          <span className="eyebrow">Legal · RakizFx</span>
+          <h1 className="page-h1">{titles[slug]}</h1>
+          <p className="page-sub">RakizFx is operated by Rakiz Capital Ltd, registered in Saint Lucia (Registration No. 2025-00287). This document forms part of the agreement between RakizFx and its clients.</p>
+        </div>
+      </section>
+
+      <section className="legal-shell">
+        <div className="container legal-grid">
+          {/* Sidebar — all 6 legal docs */}
+          <aside className="legal-nav">
+            <h4>Documents</h4>
+            <ul>
+              {LEGAL_INDEX.map((d) => (
+                <li key={d.slug}>
+                  <a
+                    href={`#${d.route}`}
+                    className={d.slug === slug ? "active" : ""}
+                    onClick={goLegal(d.route)}
+                  >
+                    {d.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="legal-contact">
+              <h5>Contact</h5>
+              <p><b>Registered office</b><br/>
+              Ground Floor, The Sotheby Building,<br/>
+              Rodney Village, Rodney Bay,<br/>
+              Gros-Islet, Saint Lucia.<br/>
+              Reg. No. 2025-00287</p>
+              <p><b>Operations office</b><br/>
+              Merab Kostava Street 33,<br/>
+              N23 0171 Tbilisi, Georgia</p>
+              <p><b>Email</b><br/>
+              <a href="mailto:support@rakizfx.com">support@rakizfx.com</a></p>
+            </div>
+          </aside>
+
+          {/* Main document body */}
+          <article className="legal-doc">
+            {slug === "privacy" && <LegalPrivacy />}
+            {slug === "terms" && <LegalTerms />}
+            {slug === "risk" && <LegalRisk />}
+            {slug === "aml" && <LegalAML />}
+            {slug === "client" && <LegalClient />}
+            {slug === "withdrawal" && <LegalWithdrawal />}
+          </article>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ── PRIVACY POLICY (supplied verbatim by client) ─────────────────────── */
+function LegalPrivacy() {
+  return (
+    <>
+      <h2>1. Purpose</h2>
+      <p>RakizFx values the privacy and security of client information. This Privacy Policy explains how personal information is collected, used, stored, processed, and disclosed when individuals access RakizFx websites, trading platforms, applications, products, or services. By accessing or using RakizFx services, you acknowledge and agree to the practices described in this Policy.</p>
+
+      <h2>2. Who We Are</h2>
+      <p>RakizFx is an online trading service provider offering access to financial market products and related technologies. References to &ldquo;RakizFx&rdquo;, &ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo; in this Policy refer to the operator providing the services through the RakizFx brand.</p>
+
+      <h2>3. Information We Collect</h2>
+      <p>RakizFx may collect information necessary for operational, legal, regulatory, security, and business purposes.</p>
+
+      <h3>3.1 Personal Identification Information</h3>
+      <ul>
+        <li>Full name</li><li>Date of birth</li><li>Nationality</li>
+        <li>Residential address</li><li>Phone number</li><li>Email address</li>
+      </ul>
+
+      <h3>3.2 Financial &amp; Account Information</h3>
+      <ul>
+        <li>Employment information</li><li>Source of funds</li><li>Payment method details</li>
+        <li>Trading experience and objectives</li><li>Transaction history</li>
+      </ul>
+
+      <h3>3.3 Verification Documents</h3>
+      <p>To comply with KYC/AML obligations, RakizFx may request:</p>
+      <ul>
+        <li>Passport</li><li>National ID</li><li>Driver&rsquo;s license</li>
+        <li>Proof of address</li><li>Corporate registration documents</li>
+      </ul>
+
+      <h3>3.4 Technical Information</h3>
+      <p>Automatically collected information may include:</p>
+      <ul>
+        <li>IP address</li><li>Device information</li><li>Browser type</li>
+        <li>Operating system</li><li>Access timestamps</li><li>Platform activity logs</li>
+      </ul>
+
+      <h2>4. How Information Is Used</h2>
+      <ul>
+        <li>Account registration and management</li>
+        <li>Identity verification procedures</li>
+        <li>AML and fraud prevention monitoring</li>
+        <li>Processing deposits and withdrawals</li>
+        <li>Providing trading services</li>
+        <li>Executing trading instructions</li>
+        <li>Customer support operations</li>
+        <li>Internal analytics and platform improvement</li>
+        <li>Legal and regulatory compliance</li>
+        <li>Risk management and security monitoring</li>
+        <li>Communication regarding products, services, and operational updates</li>
+      </ul>
+
+      <h2>5. Cookies &amp; Tracking Technologies</h2>
+      <p>RakizFx may use cookies, analytics tools, and similar technologies to improve website functionality, enhance user experience, analyze traffic, and maintain platform security. Users may modify browser settings to disable cookies; however, certain features or services may not function properly if cookies are restricted.</p>
+
+      <h2>6. Sharing of Information</h2>
+      <p>RakizFx does not sell personal information to third parties. Information may be shared where necessary with:</p>
+      <ul>
+        <li>Payment service providers</li>
+        <li>Banking institutions</li>
+        <li>Liquidity providers</li>
+        <li>Technology and infrastructure vendors</li>
+        <li>Compliance and verification providers</li>
+        <li>Legal, audit, or professional advisers</li>
+        <li>Governmental, regulatory, or law enforcement authorities where legally required</li>
+      </ul>
+      <p>Information sharing is conducted only where reasonably necessary for business, operational, legal, or compliance purposes.</p>
+
+      <h2>7. Data Protection &amp; Security</h2>
+      <p>RakizFx implements commercially reasonable administrative, technical, and organizational safeguards designed to protect personal information from unauthorized access, misuse, alteration, disclosure, or destruction. Security measures may include:</p>
+      <ul>
+        <li>Encrypted communications</li>
+        <li>Access controls</li>
+        <li>Authentication procedures</li>
+        <li>Internal confidentiality policies</li>
+        <li>Monitoring systems</li>
+      </ul>
+      <p>Despite such measures, no electronic system or internet transmission can be guaranteed to be completely secure.</p>
+
+      <h2>8. Retention of Records</h2>
+      <p>RakizFx may retain personal information for as long as necessary to:</p>
+      <ul>
+        <li>Maintain business records</li>
+        <li>Comply with legal and regulatory obligations</li>
+        <li>Resolve disputes</li>
+        <li>Prevent fraud and abuse</li>
+        <li>Enforce agreements and policies</li>
+      </ul>
+
+      <h2>9. Client Rights</h2>
+      <p>Subject to applicable law, individuals may request:</p>
+      <ul>
+        <li>Access to personal data</li>
+        <li>Correction of inaccurate information</li>
+        <li>Deletion of information where permissible</li>
+        <li>Restriction of certain processing activities</li>
+        <li>Withdrawal of consent where applicable</li>
+      </ul>
+      <p>RakizFx may request identity verification before processing such requests.</p>
+
+      <h2>10. International Data Transfers</h2>
+      <p>Personal information may be processed or stored in jurisdictions outside the client&rsquo;s country of residence where RakizFx or its service providers operate. By using RakizFx services, users acknowledge and consent to such transfers where permitted by law.</p>
+
+      <h2>11. Third-Party Services</h2>
+      <p>RakizFx websites or platforms may contain links, plugins, or integrations connected to third-party services. RakizFx is not responsible for the privacy practices, policies, or content of external third-party websites or systems.</p>
+
+      <h2>12. Policy Changes</h2>
+      <p>RakizFx reserves the right to amend, modify, or update this Privacy Policy at any time. Updated versions become effective upon publication on the official RakizFx website or platforms. Continued use of RakizFx services after updates constitutes acceptance of the revised Policy.</p>
+
+      <h2>13. Contact Information</h2>
+      <p>Questions regarding this Privacy Policy may be directed to:<br/>
+      <b>RakizFx Support Department</b><br/>
+      Email: <a href="mailto:support@rakizfx.com">support@rakizfx.com</a><br/>
+      Website: <a href="https://www.rakizfx.com">www.rakizfx.com</a></p>
+    </>
+  );
+}
+
+/* ── TERMS AND CONDITIONS ─────────────────────────────────────────────── */
+function LegalTerms() {
+  return (
+    <>
+      <h2>1. Acceptance of Terms</h2>
+      <p>These Terms and Conditions (&ldquo;Terms&rdquo;) govern the use of RakizFx services, websites, trading platforms, and applications. By registering an account or accessing any RakizFx service, you confirm that you have read, understood, and agree to be bound by these Terms.</p>
+
+      <h2>2. Definitions</h2>
+      <ul>
+        <li><b>RakizFx</b> &mdash; the trade name of Rakiz Capital Ltd, the company providing the services.</li>
+        <li><b>Client</b> &mdash; any individual or entity accessing RakizFx services.</li>
+        <li><b>Services</b> &mdash; trading, account management, market information, and related functions provided by RakizFx.</li>
+        <li><b>Platform</b> &mdash; the MetaTrader 5 trading environment, RakizFx web portal, and mobile applications.</li>
+      </ul>
+
+      <h2>3. Eligibility</h2>
+      <p>Clients must be at least 18 years of age and legally capable of entering binding agreements in their jurisdiction. RakizFx reserves the right to refuse, suspend, or terminate accounts where eligibility cannot be established.</p>
+
+      <h2>4. Account Registration</h2>
+      <p>Clients must provide accurate, current, and complete information during registration and keep such information up to date. Multiple accounts under the same beneficial owner without prior approval are not permitted.</p>
+
+      <h2>5. Services Offered</h2>
+      <p>RakizFx provides access to over-the-counter contracts for difference (CFDs) on instruments including forex pairs, metals, indices, energies, cryptocurrencies and shares. Execution is routed via tier-1 liquidity providers under a market-execution model.</p>
+
+      <h2>6. Client Obligations</h2>
+      <ul>
+        <li>Use the Services only for lawful purposes.</li>
+        <li>Maintain the confidentiality of login credentials.</li>
+        <li>Notify RakizFx immediately of any unauthorized account access.</li>
+        <li>Provide accurate verification documents when requested.</li>
+        <li>Comply with applicable tax obligations in the client&rsquo;s jurisdiction.</li>
+      </ul>
+
+      <h2>7. Trading Conditions</h2>
+      <p>Spreads, swap rates, margin requirements and leverage are published on the platform and may be amended without prior notice in response to market conditions. All orders are executed at the best available price, with no requotes and no dealing-desk intervention.</p>
+
+      <h2>8. Deposits and Withdrawals</h2>
+      <p>Deposits and withdrawals are governed by the Withdrawal &amp; Refund Policy. Funds may only be transferred between accounts in the client&rsquo;s own name; third-party transfers are not accepted.</p>
+
+      <h2>9. Risk Acknowledgement</h2>
+      <p>Trading leveraged derivative products carries a high level of risk. The Client acknowledges that losses may exceed deposited capital where negative balance protection does not apply, and confirms that trading is conducted at their own risk and judgement.</p>
+
+      <h2>10. Intellectual Property</h2>
+      <p>All content, branding, platform technology, and proprietary materials are the property of RakizFx or its licensors. No reproduction, distribution, modification or commercial use is permitted without express written consent.</p>
+
+      <h2>11. Suspension and Termination</h2>
+      <p>RakizFx reserves the right to suspend or terminate any account where the Client breaches these Terms, engages in market abuse or fraud, fails to complete verification, or where required by law. Funds held in a suspended account will be returned subject to verification and applicable holds.</p>
+
+      <h2>12. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, RakizFx shall not be liable for indirect, incidental, consequential or punitive losses arising from use of the Services, including but not limited to platform interruptions, market volatility, third-party failures, or force majeure events.</p>
+
+      <h2>13. Amendments</h2>
+      <p>RakizFx may amend these Terms at any time. Updated versions become binding upon publication on the official website. Continued use of the Services after amendment constitutes acceptance of the revised Terms.</p>
+
+      <h2>14. Governing Law</h2>
+      <p>These Terms are governed by the laws of Saint Lucia. Any dispute shall be subject to the exclusive jurisdiction of the competent courts of Saint Lucia, save where otherwise required by applicable consumer protection law.</p>
+
+      <h2>15. Contact</h2>
+      <p>For questions about these Terms, contact <a href="mailto:support@rakizfx.com">support@rakizfx.com</a>.</p>
+    </>
+  );
+}
+
+/* ── RISK WARNING ─────────────────────────────────────────────────────── */
+function LegalRisk() {
+  return (
+    <>
+      <h2>1. General Risk</h2>
+      <p>Trading leveraged derivatives, including contracts for difference (CFDs) on forex, metals, indices, energies, cryptocurrencies and shares, carries a high level of risk and may not be suitable for all investors. The leveraged nature of these products means that small market movements can result in disproportionately large gains or losses.</p>
+
+      <h2>2. Possibility of Loss</h2>
+      <p>You may lose some or all of your invested capital. Past performance of any instrument or strategy is not a reliable indicator of future results. You should not invest funds you cannot afford to lose.</p>
+
+      <h2>3. Leverage Risk</h2>
+      <p>Leverage magnifies both profits and losses. A trade opened with high leverage can move against you rapidly, requiring additional margin or resulting in automatic stop-out and the closure of open positions.</p>
+
+      <h2>4. Market Risk</h2>
+      <p>Financial markets can be volatile and are influenced by macroeconomic events, monetary policy decisions, geopolitical developments, and other unpredictable factors. Prices may gap, spreads may widen, and liquidity may decrease during such events.</p>
+
+      <h2>5. Execution and Slippage</h2>
+      <p>Orders are executed at the best available price at the time of execution. Slippage may occur in fast-moving or low-liquidity markets, resulting in execution at a price different from that requested.</p>
+
+      <h2>6. Technology Risk</h2>
+      <p>Trading is conducted over the internet and depends on hardware, software, and network connectivity. Outages, latency, or disruption of services beyond the reasonable control of RakizFx may prevent timely order execution or modification.</p>
+
+      <h2>7. Counterparty Risk</h2>
+      <p>RakizFx routes orders to tier-1 liquidity providers. Although client funds are held in segregated accounts, complete protection cannot be guaranteed against insolvency events affecting third-party institutions.</p>
+
+      <h2>8. Currency Risk</h2>
+      <p>Trades denominated in a currency other than the account&rsquo;s base currency are subject to exchange-rate fluctuations that may adversely affect realised profits and losses.</p>
+
+      <h2>9. Tax Risk</h2>
+      <p>Tax treatment of trading results varies by jurisdiction and personal circumstances. You are responsible for assessing the tax implications of your trading activity and seeking independent advice where appropriate.</p>
+
+      <h2>10. Independent Judgement</h2>
+      <p>RakizFx does not provide personal investment advice. Any market information, research, or analysis provided is for general reference only and does not constitute a recommendation to buy or sell any instrument. You should make all trading decisions based on your own assessment.</p>
+
+      <h2>11. Acknowledgement</h2>
+      <p>By opening and using a RakizFx account, you acknowledge that you have read this Risk Warning, understand the risks associated with leveraged trading, and accept full responsibility for your trading decisions and outcomes.</p>
+    </>
+  );
+}
+
+/* ── AML & KYC POLICY ─────────────────────────────────────────────────── */
+function LegalAML() {
+  return (
+    <>
+      <h2>1. Purpose</h2>
+      <p>RakizFx is committed to preventing money laundering, terrorist financing, and other financial crimes. This Anti-Money Laundering (AML) and Know-Your-Customer (KYC) Policy outlines the procedures used to identify clients, monitor transactions, and report suspicious activity.</p>
+
+      <h2>2. Regulatory Framework</h2>
+      <p>RakizFx aligns its AML controls with internationally recognised standards including the Financial Action Task Force (FATF) recommendations and equivalent local requirements applicable to its registered jurisdiction.</p>
+
+      <h2>3. Customer Due Diligence (CDD)</h2>
+      <p>Before opening an account and at periodic intervals thereafter, RakizFx will collect and verify identification information including:</p>
+      <ul>
+        <li>Full legal name, date of birth, nationality and country of residence.</li>
+        <li>Government-issued photo identification (passport, national ID or driving licence).</li>
+        <li>Proof of residential address dated within the last three months.</li>
+        <li>Source of funds and source of wealth where relevant.</li>
+        <li>For corporate clients: certificate of incorporation, shareholding structure and identification of ultimate beneficial owners.</li>
+      </ul>
+
+      <h2>4. Enhanced Due Diligence (EDD)</h2>
+      <p>Additional verification, including source-of-funds documentation, banking references, or interviews may be required for clients identified as higher-risk, including politically exposed persons (PEPs), residents of high-risk jurisdictions, or accounts with unusually large deposit volumes.</p>
+
+      <h2>5. Ongoing Monitoring</h2>
+      <p>Account activity is monitored on a continuous basis to detect transactions that are inconsistent with the client&rsquo;s profile or that exhibit patterns associated with money laundering, market abuse, or fraud. RakizFx reserves the right to request supporting documentation at any time.</p>
+
+      <h2>6. Prohibited Activity</h2>
+      <ul>
+        <li>Use of third-party funds or payment methods not belonging to the account holder.</li>
+        <li>Structuring transactions to avoid reporting thresholds.</li>
+        <li>Account use for the transfer of funds rather than genuine trading.</li>
+        <li>Any activity reasonably believed to be connected with criminal proceeds, terrorism, or sanctions evasion.</li>
+      </ul>
+
+      <h2>7. Reporting Suspicious Activity</h2>
+      <p>RakizFx is required to report suspicious transactions to the relevant authorities. Such reports are made confidentially and clients will not be informed if their account is the subject of a report.</p>
+
+      <h2>8. Record Keeping</h2>
+      <p>Identification documents, transaction records, and correspondence are retained for a minimum period required by applicable law, typically seven years from account closure or the date of the relevant transaction.</p>
+
+      <h2>9. Sanctions Compliance</h2>
+      <p>RakizFx screens clients and counterparties against international sanctions lists. Accounts of persons or entities subject to sanctions will be frozen and reported as required.</p>
+
+      <h2>10. Client Cooperation</h2>
+      <p>Clients are expected to cooperate fully with verification and information requests. Failure to provide required documentation may result in account suspension, refusal of withdrawals, or termination of the relationship.</p>
+
+      <h2>11. Contact</h2>
+      <p>AML enquiries may be directed to the Compliance Department at <a href="mailto:support@rakizfx.com">support@rakizfx.com</a>.</p>
+    </>
+  );
+}
+
+/* ── CLIENT AGREEMENT (expanded, MorfinFX-style depth) ────────────────── */
+function LegalClient() {
+  return (
+    <>
+      <h2>1. Introduction</h2>
+      <p>This Client Agreement (the &ldquo;Agreement&rdquo;) sets out the terms and conditions governing the relationship between Rakiz Capital Ltd, a company registered in Saint Lucia (Registration No. 2025-00287, registered office: Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia) operating under the trade name &ldquo;RakizFx&rdquo; (the &ldquo;Company&rdquo;), and the person or entity opening an account with RakizFx (the &ldquo;Client&rdquo;). By submitting the account application form, the Client confirms acceptance of this Agreement in its entirety.</p>
+
+      <h2>2. Interpretation of Terms</h2>
+      <p>The following terms have the meanings ascribed below unless the context requires otherwise:</p>
+      <ul>
+        <li><b>Access Data</b> &mdash; the Client&rsquo;s username, password, trading account numbers and any security credentials issued by the Company.</li>
+        <li><b>Account</b> &mdash; the personalised trading account opened by the Client with the Company.</li>
+        <li><b>Balance</b> &mdash; the total financial result of completed transactions and deposit/withdrawal operations.</li>
+        <li><b>CFD</b> &mdash; a contract for difference, the financial instrument provided by the Company.</li>
+        <li><b>Client Area</b> &mdash; the secure online portal where the Client manages account information, documents, deposits and withdrawals.</li>
+        <li><b>Equity</b> &mdash; Balance plus floating profit and loss on open positions.</li>
+        <li><b>Initial Margin</b> &mdash; the funds required to open a position at the prevailing leverage.</li>
+        <li><b>Leverage</b> &mdash; the ratio between Initial Margin and Transaction Size (e.g. 1:500).</li>
+        <li><b>Margin Call</b> &mdash; notification that the margin level has dropped below the threshold and additional funds or position reduction may be required.</li>
+        <li><b>Order</b> &mdash; a Client instruction to open, close or modify a position.</li>
+        <li><b>Quote</b> &mdash; the bid/ask price stream displayed on the Platform.</li>
+        <li><b>Platform</b> &mdash; the MetaTrader 5 software, RakizFx web portal and mobile applications.</li>
+        <li><b>Slippage</b> &mdash; the difference between the expected price of a trade and the actual execution price.</li>
+        <li><b>Spread</b> &mdash; the difference between the bid and ask price of an instrument.</li>
+        <li><b>Stop-out Level</b> &mdash; the margin level at which the Platform automatically closes open positions.</li>
+        <li><b>Swap</b> &mdash; the financing charge applied for holding a leveraged position overnight.</li>
+        <li><b>Transaction</b> &mdash; any operation on the Account, including opening, closing and modifying positions.</li>
+      </ul>
+
+      <h2>3. Commencement &amp; Account Activation</h2>
+      <p>The Agreement becomes effective on the date the Company sends written confirmation that the Account has been opened and the first eligible deposit has been received. The Company reserves the right to complete internal compliance, identity verification and source-of-funds checks before activating live trading functionality.</p>
+
+      <h2>4. Client Categorisation</h2>
+      <p>The Company classifies clients as Retail, Professional or Eligible Counterparty based on information provided in the account application form and on documented financial knowledge and experience. The category determines the level of protection afforded under applicable regulations. Clients may request reclassification, which the Company will assess in accordance with internal policy.</p>
+
+      <h2>5. Client Capacity</h2>
+      <p>The Client warrants that they act as principal and not as agent, representative, trustee or custodian on behalf of any other person. Any deviation from this capacity requires prior written approval from the Company supported by appropriate documentation.</p>
+
+      <h2>6. Third-Party Authorisation</h2>
+      <p>The Client may authorise a third party to issue instructions on their behalf only with the prior written consent of the Company. Authorisation must be supported by a duly executed power of attorney. The Company may decline or revoke any third-party authorisation without explanation. Termination of an authorisation requires not less than five (5) business days&rsquo; prior written notice.</p>
+
+      <h2>7. Personal Data &amp; Confidentiality</h2>
+      <p>The Company processes Client data in accordance with the Privacy Policy. Telephone calls and electronic communications may be recorded for compliance, training and dispute-resolution purposes. The Company may disclose Client information to regulators, law-enforcement agencies, banking partners, auditors and other parties where reasonably required by law or by the Company&rsquo;s legitimate business interests.</p>
+
+      <h2>8. Services</h2>
+      <p>The Company provides order transmission and execution services in CFDs on instruments including foreign exchange pairs, metals, indices, energies, cryptocurrencies and shares. The Company does not deliver any underlying asset physically and does not provide investment advice. The Company may decline, delay, suspend or cancel orders without prior notice where doing so is reasonably necessary, including (without limitation) for reasons of insufficient margin, market disruption, suspected market abuse or compliance investigations.</p>
+
+      <h2>9. Trading Procedures &amp; Orders</h2>
+      <p>Quotes displayed on the Platform are based on prevailing market conditions and may differ from prices available on other venues. Orders are executed using the market-execution model; price improvements and negative slippage are passed through symmetrically. Trading hours, contract specifications, swap rates and margin requirements are published on the Platform and may be amended without prior notice in line with market conditions and risk policy.</p>
+
+      <h2>10. Margin Requirements &amp; Stop-out</h2>
+      <p>The Client must maintain sufficient Equity to cover the Initial Margin of all open positions. The Company may modify Initial Margin, leverage and Stop-out Level at its discretion and without prior notice. If the margin level falls below the published Stop-out Level, open positions will be automatically closed by the Platform, largest-loss first, until the margin level is restored. Margin Call notifications are advisory and the absence of such notification does not relieve the Client of margin obligations.</p>
+
+      <h2>11. Swap-Free Account Policy</h2>
+      <p>Swap-free status, where granted, applies for an initial period of thirty (30) days from the opening of a position. Beyond this period, standard swap charges may be applied retrospectively at the Company&rsquo;s discretion. The Company reserves the right to revoke swap-free status where it identifies abusive use, including but not limited to hedging across paired accounts or trading specifically to exploit the absence of swap.</p>
+
+      <h2>12. Trade Confirmations</h2>
+      <p>Confirmations of executed trades are made available in real time on the Platform and in the Client Area. The Client must report any discrepancies in writing within two (2) business days of execution. Confirmations are deemed final and binding in the absence of such timely written objection.</p>
+
+      <h2>13. Decline of Orders, Requests &amp; Instructions</h2>
+      <p>The Company may decline any order, request or instruction without notice or reason where, in its reasonable judgement, doing so is necessary in light of market conditions, internal risk limits, insufficient margin, manifest price errors, suspected fraud or market abuse, force majeure, or compliance with applicable law.</p>
+
+      <h2>14. Dormant &amp; Inactive Accounts</h2>
+      <p>An Account with no trading activity for six (6) consecutive months may be classified as dormant. A monthly inactivity fee, as published on the Platform, may apply from this point. An Account dormant for twelve (12) consecutive months may be frozen. Reactivation may require renewed Know-Your-Customer verification and a fresh deposit.</p>
+
+      <h2>15. Regulatory Provisions</h2>
+      <p>The Company complies with applicable laws, market-conduct rules and reporting obligations in the jurisdictions where it operates. Where required, the Company will disclose Client information to regulators and supervisory bodies. Client records are retained for a minimum of five (5) years from the closure of the relationship.</p>
+
+      <h2>16. Applicable &amp; Governing Law</h2>
+      <p>This Agreement is governed by and shall be construed in accordance with the laws of Saint Lucia. Any dispute arising out of or in connection with this Agreement, including any question regarding its existence, validity or termination, shall first be addressed through the Company&rsquo;s complaints procedure. Disputes not resolved through that procedure shall be referred to binding arbitration administered in Saint Lucia under rules selected by the appointed arbitrator(s). The Client must initiate any action within three (3) months from the date the cause of action arose, after which the right to bring such action is forever waived.</p>
+
+      <h2>17. Severability</h2>
+      <p>If any provision of this Agreement is held invalid or unenforceable by a court or arbitrator of competent jurisdiction, the remaining provisions shall continue in full force and effect, and the invalid provision shall be deemed amended only to the minimum extent required to make it enforceable.</p>
+
+      <h2>18. Non-Exercise of Rights</h2>
+      <p>The failure or delay by the Company in exercising any right under this Agreement shall not constitute a waiver of that right. A single or partial exercise of a right does not preclude further exercise.</p>
+
+      <h2>19. Assignment</h2>
+      <p>The Client may not assign, transfer, charge, or otherwise dispose of any rights or obligations under this Agreement without the prior written consent of the Company. The Company may assign its rights and obligations to an affiliate or to a successor in title upon written notice to the Client.</p>
+
+      <h2>20. Corporate Action Adjustments</h2>
+      <p>The Company may adjust open positions and pending orders to reflect corporate actions affecting the underlying instrument, including dividends, stock splits, mergers, demergers, rights issues and bonus issues. Adjustments are made in good faith and are binding on the Client.</p>
+
+      <h2>21. Netting &amp; Set-Off</h2>
+      <p>The Company may set off mutual obligations and may combine Account balances of the same Client. Where indebtedness exists, the Company holds a general lien over Client funds and may apply such funds to discharge outstanding obligations.</p>
+
+      <h2>22. Currency Conversion</h2>
+      <p>The Company may convert funds between currencies for the purpose of settlement using prevailing market rates plus a transparent conversion margin. The Client bears all foreign-exchange risk associated with non-base-currency transactions.</p>
+
+      <h2>23. Commissions, Charges &amp; Costs</h2>
+      <p>The Client is responsible for all fees, commissions, taxes, stamp duties, network charges, withdrawal fees, conversion margins and other costs incurred in connection with the Services. The Company may amend its schedule of charges without prior notice. Charges deducted are final and not subject to set-off by the Client.</p>
+
+      <h2>24. Deposits &amp; Withdrawals</h2>
+      <p>Deposits and withdrawals are processed under the Withdrawal &amp; Refund Policy. Only payments from accounts in the Client&rsquo;s own name are accepted. Withdrawals are returned to the original funding source, up to the amount deposited via that source. Withdrawals to bank, card and crypto are typically processed within one (1) business day of request.</p>
+
+      <h2>25. Client Money</h2>
+      <p>Client funds are held in segregated accounts separate from the Company&rsquo;s own operating funds. No interest is paid to clients on funds held. Omnibus account structures may be used as permitted by applicable law. The Company holds a general lien over Client funds for any liability owed by the Client under this Agreement.</p>
+
+      <h2>26. Communications &amp; Written Notices</h2>
+      <p>Written notices may be delivered by email to the address registered in the Client Area, by post or courier to a registered physical address, or by publication on the Company&rsquo;s website. Communications are deemed received when sent via the relevant channel. The Client is responsible for keeping contact details up to date.</p>
+
+      <h2>27. Complaints Handling</h2>
+      <p>Complaints must be submitted in writing to the Compliance Department at support@rakizfx.com. The Company aims to acknowledge receipt within five (5) business days and resolve substantively within thirty (30) business days. Both parties are bound by the complaints procedure published on the Company&rsquo;s website.</p>
+
+      <h2>28. Language &amp; Website</h2>
+      <p>The official language of this Agreement and of communications between the parties is English. Translations into other languages, where provided, are for informational convenience only and are not legally binding. The website at <a href="https://www.rakizfx.com">www.rakizfx.com</a> is the primary source of operational and contractual information.</p>
+
+      <h2>29. Online Trading Systems &amp; Mobile Services</h2>
+      <p>The Client is responsible for the safekeeping of Access Data and for any actions performed on the Account. The Client must use compatible devices, secure network connections, and take reasonable precautions against unauthorised access. The Client may not reverse-engineer, redistribute or attempt to access the source code of the Platform.</p>
+
+      <h2>30. Electronic Signature &amp; Acceptance</h2>
+      <p>The Client&rsquo;s submission of the online account application form by clicking &ldquo;Submit&rdquo; or any equivalent affirmation constitutes an electronic signature with the same legal effect as a handwritten signature. The Client confirms understanding and acceptance of this Agreement, the Terms and Conditions, Risk Warning, AML &amp; KYC Policy, Privacy Policy and Withdrawal &amp; Refund Policy.</p>
+
+      <h2>31. Force Majeure</h2>
+      <p>Neither party shall be liable for failure or delay in performance arising from events beyond reasonable control, including natural disasters, acts of government, war, terrorism, civil unrest, sanctions, regulatory bans, extreme market movements, suspension of trading on a relevant exchange, internet outages, and failures of third-party infrastructure.</p>
+
+      <h2>32. Events of Default</h2>
+      <p>Each of the following constitutes an Event of Default: failure to meet a margin obligation; insolvency, bankruptcy or analogous proceedings; any representation or warranty under this Agreement proving false or misleading; abusive trading behaviour; failure to comply with regulatory obligations. On the occurrence of an Event of Default, the Company may suspend the Account, close open positions, set off balances and recover any associated costs.</p>
+
+      <h2>33. Termination</h2>
+      <p>Either party may terminate this Agreement with immediate effect by written notice. All amounts due to the Company become immediately payable. The Company may retain funds reasonably required to close out positions and discharge outstanding obligations before remitting any balance to the Client.</p>
+
+      <h2>34. Business Introducers</h2>
+      <p>An introducer, affiliate or business partner is an independent contractor and not an agent or representative of the Company. The Company is not responsible for the conduct or representations of any introducer. The Client indemnifies the Company against any loss arising from the introducer&rsquo;s actions or omissions.</p>
+
+      <h2>35. Limitations of Liability &amp; Indemnity</h2>
+      <p>To the maximum extent permitted by law, the Company shall not be liable for indirect, incidental, consequential or punitive losses, including loss of profits, loss of opportunity or loss of data, except in cases of proven fraud, wilful default or gross negligence. The Client shall indemnify the Company against all claims, costs and damages arising from the Client&rsquo;s breach of this Agreement or misuse of the Services.</p>
+
+      <h2>36. Representations &amp; Warranties</h2>
+      <p>The Client represents and warrants on a continuing basis that: information provided is true, complete and accurate; the Client has full legal capacity and authority to enter into this Agreement; funds used originate from legal sources; the Client is not a politically exposed person unless disclosed in writing; the use of the Services complies with the laws of the Client&rsquo;s jurisdiction.</p>
+
+      <h2>37. Conflicts of Interest</h2>
+      <p>The Company may act as counterparty to a transaction, match transactions between Clients, hold opposite positions or provide services to other Clients with potentially conflicting interests. The Company maintains a Conflicts of Interest Policy and takes reasonable steps to identify and manage such conflicts.</p>
+
+      <h2>38. Risk Acknowledgements</h2>
+      <p>The Client acknowledges that CFD trading is highly speculative; that leverage magnifies losses as well as gains; that foreign exchange and crypto markets are particularly volatile; that online systems are subject to outages; and that the Client bears full responsibility for trading decisions and outcomes.</p>
+
+      <h2>39. Manifest Error</h2>
+      <p>The Company may, acting reasonably, void or amend any transaction affected by a manifest error in price, calculation or execution. The Company shall not be liable for losses arising from the rectification of a manifest error save in cases of proven fraud, wilful default or gross negligence.</p>
+
+      <h2>40. Amendment</h2>
+      <p>The Company may amend this Agreement by providing not less than two (2) business days&rsquo; prior notice published on the website. Amendments required by changes in law or regulation may take immediate effect. The Client&rsquo;s first transaction after the effective date of an amendment constitutes acceptance of the amended Agreement.</p>
+
+      <h2>41. Entire Agreement</h2>
+      <p>This Agreement, together with the Terms and Conditions, Risk Warning, AML &amp; KYC Policy, Withdrawal &amp; Refund Policy and Privacy Policy, constitutes the entire agreement between the parties and supersedes any prior arrangements relating to its subject matter. No oral statement or representation forms part of the Agreement unless confirmed in writing by the Company.</p>
+
+      <h2>42. Customer Acknowledgements &amp; Signature</h2>
+      <p>By submitting an account application or by clicking &ldquo;Submit&rdquo; or any equivalent affirmation, the Client confirms that they have read, understood and agree to be bound by this Agreement in its entirety. The Client acknowledges that their electronic signature has the same legal force as a handwritten signature.</p>
+    </>
+  );
+}
+
+/* ── WITHDRAWAL & REFUND POLICY ───────────────────────────────────────── */
+function LegalWithdrawal() {
+  return (
+    <>
+      <h2>1. General Principles</h2>
+      <p>Withdrawals from RakizFx accounts are processed in line with the principles of source-of-funds traceability, anti-money laundering compliance, and same-name routing.</p>
+
+      <h2>2. Routing Rule</h2>
+      <p>Withdrawals are returned to the original funding source, up to the amount deposited via that source. Profits in excess of the deposit may be withdrawn to a verified bank account in the Client&rsquo;s name.</p>
+
+      <h2>3. Withdrawal Methods</h2>
+      <p>Supported withdrawal channels include:</p>
+      <ul>
+        <li>Bank wire transfer</li>
+        <li>Debit and credit card (Visa, Mastercard)</li>
+        <li>Cryptocurrency (USDT and other supported networks)</li>
+      </ul>
+
+      <h2>4. Processing Times</h2>
+      <p>Withdrawal requests are reviewed and processed within one business day under standard conditions. Settlement to the receiving institution may take additional time depending on the chosen method:</p>
+      <ul>
+        <li>Card: 1&ndash;3 business days</li>
+        <li>Bank wire: 1&ndash;3 business days</li>
+        <li>Cryptocurrency: typically within one hour of approval, subject to network confirmations</li>
+      </ul>
+
+      <h2>5. Minimum Withdrawal Amounts</h2>
+      <p>The minimum withdrawal amount per method is published on the platform and is subject to change. Bank wire withdrawals below the stated minimum may incur correspondent banking fees outside the control of RakizFx.</p>
+
+      <h2>6. Verification</h2>
+      <p>Full Know-Your-Customer (KYC) verification must be completed before any withdrawal request is processed. RakizFx may request additional documentation where activity is inconsistent with the Client&rsquo;s profile.</p>
+
+      <h2>7. Fees</h2>
+      <p>RakizFx does not charge withdrawal fees for standard methods. Network fees for cryptocurrency withdrawals are deducted from the withdrawal amount. Correspondent or beneficiary-bank fees, if applied, are the responsibility of the Client.</p>
+
+      <h2>8. Currency Conversion</h2>
+      <p>Withdrawals to a non-base-currency account are converted at the prevailing mid-market rate plus a transparent conversion margin published on the platform.</p>
+
+      <h2>9. Refunds</h2>
+      <p>Refunds may be granted in the following circumstances:</p>
+      <ul>
+        <li>A deposit was made in error and trading on the account has not yet commenced.</li>
+        <li>A duplicate deposit was processed due to a payment-system fault.</li>
+        <li>Funds were credited to an account that the Client did not authorise.</li>
+      </ul>
+      <p>Refund requests must be submitted to <a href="mailto:support@rakizfx.com">support@rakizfx.com</a> with supporting evidence within 30 days of the original deposit.</p>
+
+      <h2>10. Reversals and Chargebacks</h2>
+      <p>The Client agrees not to initiate a chargeback or payment-reversal for any deposit funding a trading account. Chargebacks are considered a breach of this Agreement and may result in account suspension and recovery of associated costs.</p>
+
+      <h2>11. Bonus Funds</h2>
+      <p>Bonus credit issued under any RakizFx promotional offer is not directly withdrawable. Bonus amounts convert to withdrawable balance only after the volume requirements set out in the relevant promotion terms have been met.</p>
+
+      <h2>12. Withdrawal Refusal</h2>
+      <p>RakizFx reserves the right to suspend, delay or refuse a withdrawal where the request is reasonably believed to be connected to fraud, market abuse, sanctions evasion, or where additional information is required to satisfy regulatory obligations.</p>
+
+      <h2>13. Contact</h2>
+      <p>Withdrawal and refund queries may be directed to <a href="mailto:support@rakizfx.com">support@rakizfx.com</a>.</p>
+    </>
   );
 }
 

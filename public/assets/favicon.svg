@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1ad17a"/>
+      <stop offset="0.5" stop-color="#0fb068"/>
+      <stop offset="1" stop-color="#066a3e"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="candle-bull" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#dafde9"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background with gradient -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#shine)"/>
+
+  <!-- Candlestick chart icon, white -->
+  <g transform="translate(14 14)" fill="url(#candle-bull)">
+    <!-- Wicks -->
+    <rect x="3"  y="14" width="2" height="18" rx="1" fill="#ffffff" opacity=".75"/>
+    <rect x="13" y="6"  width="2" height="26" rx="1" fill="#ffffff" opacity=".75"/>
+    <rect x="23" y="2"  width="2" height="28" rx="1" fill="#ffffff" opacity=".75"/>
+    <rect x="33" y="0"  width="2" height="30" rx="1" fill="#ffffff" opacity=".75"/>
+
+    <!-- Candles bodies (4 candlesticks growing upward) -->
+    <rect x="0"  y="18" width="8"  height="12" rx="2" fill="#ffffff"/>
+    <rect x="10" y="12" width="8"  height="16" rx="2" fill="#ffffff"/>
+    <rect x="20" y="6"  width="8"  height="20" rx="2" fill="#ffffff"/>
+    <rect x="30" y="2"  width="8"  height="22" rx="2" fill="#ffffff"/>
+
+    <!-- Arrow rising through candles -->
+    <path d="M-2 30 L40 -4" stroke="#ffffff" stroke-width="1.6" fill="none" opacity=".55" stroke-linecap="round"/>
+  </g>
+</svg>
