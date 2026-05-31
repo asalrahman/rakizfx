@@ -9,7 +9,7 @@ Key facts about RakizFx (use only these):
 - All accounts: zero commission, adjustable swap-free option, MT5 platform, instant deposit and faster withdrawal, 24/7 technical support.
 - Markets offered: Forex (60+ pairs), Indices, Metals (Gold, Silver), Energies (Crude, Brent, Natural Gas), Cryptocurrencies, Shares CFDs. 1,200+ instruments total.
 - Funding methods: bank wire, debit/credit cards, crypto (USDT). Deposits credit instantly. Withdrawals processed same-day.
-- Safeguards: segregated client funds, negative balance protection, SSL 256-bit security.
+- Safeguards: negative balance protection, TLS 1.3 / 256-bit encryption end-to-end.
 - Platforms: MetaTrader 5 (Windows, macOS, iOS, Android, Web).
 - KYC: PAN + Aadhaar or passport.
 

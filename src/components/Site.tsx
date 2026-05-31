@@ -793,10 +793,22 @@ function Nav({ route, onNav }) {
       <div className="nav-wrap" onMouseLeave={() => setHoverGroup(null)}>
         <div className="container nav">
           <a href="#home" onClick={go("home")} className="nav-brand"><RakizLogo size={40} /></a>
-          <button className="side-burger" onClick={() => setOpen(true)} aria-label="Open menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
-            </svg>
+          <button
+            className={`side-burger ${open ? 'is-open' : ''}`}
+            onClick={() => setOpen(o => !o)}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+          >
+            {open ? (
+              /* X — shown when the menu is open, sits in the same slot as the burger */
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                <path d="M6 6l12 12"/><path d="M18 6L6 18"/>
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+              </svg>
+            )}
           </button>
           <nav className="nav-links">
             <a href="#home" className={route === "home" ? "active" : ""} onClick={go("home")} onMouseEnter={() => setHoverGroup(null)}>{t("nav.home")}</a>
@@ -849,7 +861,7 @@ function Nav({ route, onNav }) {
               </div>
             </div>
             <a href="#login" className="btn btn-ghost btn-sm nav-login" onClick={go("login")}>{t("cta.login")}</a>
-            <a href="#register" className="btn btn-primary btn-sm nav-register" onClick={go("register")}>{t("cta.open_account")}</a>
+            <a href="#register" className="btn btn-primary btn-sm nav-register" onClick={go("register")}>{t("cta.register")}</a>
           </div>
         </div>
 
@@ -893,9 +905,8 @@ function Nav({ route, onNav }) {
           <a href="#home" onClick={go("home")} className="side-brand">
             <RakizLogo size={28} />
           </a>
-          <button className="side-close" onClick={() => setOpen(false)} aria-label="Close menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
-          </button>
+          {/* The close (X) lives in the navbar burger slot — see <Nav>'s burger
+              button which morphs between ☰ and ✕ based on `open`. */}
         </div>
 
         <div className="side-profile">
@@ -968,13 +979,37 @@ function Nav({ route, onNav }) {
           })}
         </nav>
 
+        {/* Language picker — lives inside the side menu on mobile */}
+        <div className="side-lang">
+          <div className="side-lang-h">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>
+            </svg>
+            <span>{t("nav.language")}</span>
+          </div>
+          <div className="side-lang-row">
+            {LANGS.map((l) => (
+              <button
+                key={l.code}
+                type="button"
+                className={`side-lang-pill ${lang === l.code ? "is-active" : ""}`}
+                onClick={() => setLang(l.code)}
+                aria-pressed={lang === l.code}
+              >
+                <b>{l.short}</b>
+                <span>{l.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="side-foot">
           <a href="#register" className="btn btn-primary side-cta" onClick={go("register")}>
-            Open Account
+            {t("cta.register")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
           </a>
-          <a href="#login" className="btn btn-ghost side-cta" onClick={go("login")}>Log in</a>
-          <div className="side-meta">24/5 support · Segregated funds</div>
+          <a href="#login" className="btn btn-ghost side-cta" onClick={go("login")}>{t("cta.login")}</a>
+          <div className="side-meta">24/5 human support</div>
         </div>
       </aside>
     </>
@@ -1570,7 +1605,6 @@ function HeroSlider() {
         ))}
       </div>
       <div className="hs-trust container">
-        <span>✓ Segregated funds</span>
         <span>✓ Negative balance protection</span>
         <span>✓ 24/5 human support</span>
         <span>✓ Same-day withdrawals</span>
@@ -2118,7 +2152,7 @@ function Footer({ onNav }) {
           <div className="foot-brand">
             <RakizLogo size={32} />
             <p className="foot-tagline">
-              RakizFx is the international trading brand of Rakiz Capital Ltd. Fair pricing, fast execution and segregated client funds across 1,200+ markets on MetaTrader 5.
+              RakizFx is the international trading brand of Rakiz Capital Ltd. Fair pricing, fast execution and 1,200+ markets on MetaTrader 5.
             </p>
             <div className="foot-contact">
               <a href="mailto:support@rakizfx.com" className="foot-contact-row">
@@ -4493,7 +4527,7 @@ function AboutPage() {
         <div className="container">
           <h2 className="sec-title">Client protection</h2>
           <div className="why-grid">
-            <div className="card why-card"><h3>Segregated funds</h3><p>Client deposits are held in tier-1 bank accounts, fully segregated from operational capital and reconciled daily.</p></div>
+            <div className="card why-card"><h3>Encrypted infrastructure</h3><p>All client data and transactions secured with TLS 1.3 / 256-bit encryption end-to-end. ISO 27001-aligned access controls and 24/7 SOC monitoring.</p></div>
             <div className="card why-card"><h3>Negative balance protection</h3><p>Retail accounts cannot go into deficit. In a gap event, your balance is reset to zero at no cost.</p></div>
             <div className="card why-card"><h3>Compensation scheme</h3><p>Up to $1,000,000 per eligible client through our investor compensation insurance, underwritten by Lloyd's syndicates.</p></div>
             <div className="card why-card"><h3>Independent audit</h3><p>Annual external audit by a Big-4 firm. Financial statements and regulator filings are publicly available.</p></div>
@@ -4700,9 +4734,9 @@ function RegisterPage({ onNav }) {
             <li><span className="crm-ic">✓</span><div><b>Demo capital $50,000</b><span>Practice without funding</span></div></li>
           </ul>
           <div className="crm-trust">
-            <span>Segregated funds</span>
             <span>NBP protection</span>
             <span>Same-day withdrawals</span>
+            <span>24/5 human support</span>
           </div>
         </aside>
       </div>
@@ -4776,7 +4810,7 @@ Key facts about RakizFx (use only these):
 - All accounts: zero commission, adjustable swap-free option, MT5 platform, instant deposit and faster withdrawal, 24/7 technical support.
 - Markets offered: Forex (60+ pairs), Indices, Metals (Gold, Silver), Energies (Crude, Brent, Natural Gas), Cryptocurrencies, Shares CFDs. 1,200+ instruments total.
 - Funding methods: bank wire, debit/credit cards, crypto (USDT). Deposits credit instantly. Withdrawals processed same-day.
-- Safeguards: segregated client funds, negative balance protection, SSL 256-bit security.
+- Safeguards: negative balance protection, TLS 1.3 / 256-bit encryption end-to-end.
 - Platforms: MetaTrader 5 (Windows, macOS, iOS, Android, Web).
 - KYC: Passport or government ID.
 

@@ -273,6 +273,19 @@ h1, .display, .hero-h1, .page-h1 { letter-spacing: -0.032em; }
 .nav-search:hover,
 .nav-lang-btn:hover { transform: translateY(-1px); }
 
+/* Search button — no box, no border, no background. Just the icon. */
+.nav-wrap .nav-cta .nav-search {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+}
+.nav-wrap .nav-cta .nav-search:hover {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--accent, #1ad17a) !important;
+}
+
 @media (max-width: 860px) {
   .nav { height: 60px; gap: 12px; }
   .nav-brand img,
@@ -1599,11 +1612,37 @@ html[lang="hi"] .page-h1 {
 [dir="rtl"] .sidebar { box-shadow: 20px 0 40px -20px rgba(10, 20, 15, .25); }
 
 .sidebar .side-brand img { filter: none !important; }
+
+/* Close (X) button — clear, high-contrast circle so users see how to dismiss the menu */
 .sidebar .side-close {
-  background: rgba(0, 0, 0, .06) !important;
-  color: #0a0a0a !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, 0.06) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  color: #0b1220 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
 }
-.sidebar .side-close:hover { background: rgba(0, 0, 0, .1) !important; }
+.sidebar .side-close svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke-width: 2.6 !important;
+}
+.sidebar .side-close:hover {
+  background: rgba(15, 23, 42, 0.10) !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+.sidebar .side-close:active { transform: scale(0.94); }
+.sidebar .side-close:focus { outline: none; }
+.sidebar .side-close:focus-visible {
+  outline: 2px solid rgba(26, 209, 122, 0.55);
+  outline-offset: 2px;
+}
+
 
 .sidebar .side-profile {
   background: rgba(0, 0, 0, .04) !important;
@@ -3336,29 +3375,75 @@ textarea {
   .side-burger { display: none !important; }
 }
 @media (max-width: 860px) {
-  /* Keep search + language visible — only hide Log In on mobile */
-  .nav-cta .nav-login { display: none !important; }
-  .nav-cta .nav-search,
-  .nav-cta .nav-lang { display: inline-flex !important; }
-  .nav-cta { gap: 6px !important; }
-  /* Shrink chrome a touch so everything fits */
-  .nav-cta .nav-search,
-  .nav-cta .nav-lang-btn {
+  /* Mobile layout — three buttons in the top bar:
+        BRAND  …  SEARCH  LOG IN  BURGER
+     Register and the language picker live in the side menu only.
+
+     NOTE: globals.css has multiple .nav-login { display: none !important }
+     rules with `a.btn-ghost` selectors that out-specificity my class-only
+     overrides. The selectors below intentionally use compound chains
+     (.nav-wrap .nav-cta a.btn.nav-login) to win the cascade. */
+  .nav-cta .nav-lang     { display: none !important; }
+  .nav-cta .nav-register { display: none !important; }
+  .nav-wrap .nav-cta a.btn.btn-ghost.nav-login,
+  .nav-wrap .nav-cta a.btn.nav-login {
+    display: inline-flex !important;
+  }
+  .nav-cta .nav-search { display: inline-flex !important; }
+  .nav-cta { gap: 6px !important; align-items: center; }
+
+  /* Push burger to the far right, after the CTAs */
+  .nav .nav-brand   { order: 1 !important; }
+  .nav .nav-cta     { order: 2 !important; margin-left: auto !important; }
+  .nav .side-burger {
+    order: 3 !important;
+    margin-left: 6px !important;
+    position: relative;
+    z-index: 110;            /* above sidebar (96) and overlay (95) so the X stays clickable */
+  }
+  /* Subtle icon swap animation */
+  .nav .side-burger svg { transition: transform .25s ease, opacity .2s ease; }
+  .nav .side-burger.is-open svg { transform: rotate(90deg); }
+
+  /* Inside nav-cta: Search first, Log In right before the burger */
+  .nav-cta .nav-search { order: 1; }
+  .nav-cta .nav-login  { order: 2; }
+
+  /* Compact sizing so the row hugs the right edge */
+  .nav-cta .nav-search {
     width: 36px !important;
     height: 36px !important;
     padding: 0 !important;
   }
-  .nav-cta .nav-lang-btn span { display: none; } /* hide "EN" label, keep globe icon */
-  /* Tighten nav-register so it doesn't push burger off-screen */
-  .nav-cta .nav-register {
-    padding: 0 12px !important;
+  /* Mobile Log In — clean text only, no box / no border / no blur */
+  .nav-wrap .nav-cta a.btn.nav-login {
+    padding: 0 8px !important;
     height: 36px !important;
-    font-size: 12.5px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    align-items: center !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--fg, #0b1220) !important;
+  }
+  .nav-wrap .nav-cta a.btn.nav-login:hover {
+    background: rgba(15, 23, 42, 0.04) !important;
+    border: 0 !important;
+    color: var(--accent, #1ad17a) !important;
   }
 }
-@media (max-width: 480px) {
-  /* On the smallest phones, hide the Open Account button — burger handles it */
-  .nav-cta .nav-register { display: none !important; }
+/* Override the @media (max-width:560px) rule in globals.css line 214
+   that hides .nav-login on the smallest phones — we want it visible. */
+@media (max-width: 560px) {
+  .nav-wrap .nav-cta a.btn.btn-ghost.nav-login,
+  .nav-wrap .nav-cta a.btn.nav-login {
+    display: inline-flex !important;
+  }
 }
 
 /* Mobile sidebar accordion — remove the left line / box shading */
@@ -4846,34 +4931,9 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
 }
 .acct-cta-card p b { color: #fff; font-weight: 700; }
 
-/* ─── Mobile language icon alignment ─────────────────────────────────────── */
-@media (max-width: 860px) {
-  .nav-cta .nav-lang {
-    display: inline-flex !important;
-    align-items: center;
-  }
-  .nav-cta .nav-lang-btn {
-    width: 36px !important;
-    height: 36px !important;
-    padding: 0 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0 !important;
-  }
-  .nav-cta .nav-lang-btn > svg:first-of-type {
-    margin: 0 !important;     /* globe icon centered exactly */
-  }
-  .nav-cta .nav-lang-btn > svg:last-of-type,
-  .nav-cta .nav-lang-btn > span {
-    display: none !important;  /* hide EN label + chevron on mobile */
-  }
-  /* Language dropdown menu — anchor flush to the right edge of the nav */
-  .nav-cta .nav-lang.open .nav-lang-menu {
-    right: 0 !important;
-    left: auto !important;
-  }
-}
+/* Mobile language picker moved into the side menu (.side-lang) —
+   the top-bar `.nav-lang` stays hidden via the rule in the main
+   mobile-layout block (~line 3338). No overrides needed here. */
 
 /* ════════════════════════════════════════════════════════════════════════
    ACCOUNT DETAIL PAGE v2 — clean simple premium model
@@ -5496,6 +5556,80 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
   transition: border-color .15s ease;
 }
 .careers-form-hint a:hover { border-bottom-color: #0fa760; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SIDEBAR LANGUAGE PICKER (mobile menu)
+   ════════════════════════════════════════════════════════════════════════ */
+.side-lang {
+  padding: 18px 16px 8px;
+  border-top: 1px solid var(--line, #eaeae6);
+  margin-top: 6px;
+}
+.side-lang-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute, #64748b);
+  margin-bottom: 10px;
+}
+.side-lang-h svg { color: var(--fg-mute, #64748b); }
+
+.side-lang-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.side-lang-pill {
+  background: var(--bg, #ffffff);
+  border: 1px solid var(--line, #d6dae0);
+  border-radius: 10px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+  font: inherit;
+  color: var(--fg, #0b1220);
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: center;
+}
+.side-lang-pill b {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.side-lang-pill span {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-mute, #64748b);
+  line-height: 1.2;
+}
+.side-lang-pill:hover {
+  border-color: rgba(26, 209, 122, 0.45);
+}
+.side-lang-pill.is-active {
+  border-color: #1ad17a;
+  background: rgba(26, 209, 122, 0.08);
+  color: #0b1220;
+}
+.side-lang-pill.is-active b { color: #0b6e3a; }
+.side-lang-pill.is-active span { color: #0b6e3a; }
+.side-lang-pill:focus { outline: none; }
+.side-lang-pill:focus-visible {
+  outline: 2px solid rgba(26, 209, 122, 0.55);
+  outline-offset: 2px;
+}
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
