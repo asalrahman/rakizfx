@@ -289,7 +289,7 @@ function MobileApp() {
   return (
     <section id="mobile" className="mobile-section mobile-section--with-art">
       <div className="container mobile-split">
-        {/* LEFT — app screen illustration */}
+        {/* LEFT — app screen illustration (SVG iPhone model) */}
         <motion.div
           className="mobile-phone-stage"
           initial={{ opacity: 0, y: 32 }}
@@ -706,13 +706,12 @@ function Nav({ route, onNav }) {
       ],
     },
     {
-      id: "accounts", label: "Accounts", route: "accounts",
+      id: "accounts", label: "Accounts", route: "account-standard",
       cols: [
         { h: "Account types", items: [
           ["account-standard", "Standard", "Direct-to-market execution"],
           ["account-pro",      "Pro",      "For active traders"],
           ["account-elite",    "Elite",    "VIP & high-volume"],
-          ["accounts",         "Compare all accounts", "Side-by-side comparison"],
         ]},
       ],
     },
@@ -2237,7 +2236,7 @@ const ASSET_CLASSES = {
       { sym: "NAS100", name: "US Tech 100",    spread: "0.4", change: "+0.78%" },
       { sym: "US30",   name: "Wall Street 30", spread: "0.6", change: "+0.31%" },
       { sym: "GER40",  name: "Germany 40",     spread: "0.4", change: "+0.14%" },
-      { sym: "IN50",   name: "India 50 (Nifty)",spread: "1.5",change: "+0.22%" },
+      { sym: "IN50",   name: "Nifty 50",spread: "1.5",change: "+0.22%" },
     ],
   },
   Metals: {
@@ -2708,7 +2707,7 @@ const MARKETS_DATA = {
     { sym: "GER40",  name: "Germany 40",     bid: 18432,  ask: 18433,  spread: "0.4", change: "+0.14", d: 0 },
     { sym: "UK100",  name: "FTSE 100",       bid: 8224.5, ask: 8225.1, spread: "0.4", change: "-0.22", d: 1 },
     { sym: "JP225",  name: "Nikkei 225",     bid: 38573,  ask: 38576,  spread: "3.0", change: "+0.55", d: 0 },
-    { sym: "IN50",   name: "India 50 (Nifty)",bid: 22487, ask: 22489,  spread: "1.5", change: "+0.22", d: 1 },
+    { sym: "IN50",   name: "Nifty 50",bid: 22487, ask: 22489,  spread: "1.5", change: "+0.22", d: 1 },
     { sym: "HK50",   name: "Hang Seng 50",   bid: 18642,  ask: 18645,  spread: "3.0", change: "-0.18", d: 0 },
   ],
   Metals: [
@@ -3213,7 +3212,7 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     what: [
       "A stock index measures the performance of a basket of shares — typically the largest or most representative companies in a market. The S&P 500 (US500), for example, tracks the 500 largest US-listed companies; the Nasdaq 100 (NAS100) tracks the 100 largest non-financial Nasdaq stocks. The level of the index is a weighted average of its constituents.",
       "Index CFDs let you take a view on the overall direction of a market — bullish or bearish — without buying every individual stock. They're widely used to hedge equity portfolios, speculate on macro releases (CPI, payrolls, FOMC) or capture cyclical rotations between regions and sectors.",
-      "RakizFx offers cash CFDs on the major global indices: US500, NAS100, US30, GER40 (DAX), UK100 (FTSE), JP225 (Nikkei), IN50 (Nifty) and HK50 (Hang Seng) — covering North America, Europe, Asia and India from one account.",
+      "RakizFx offers cash CFDs on the major global indices: US500, NAS100, US30, GER40 (DAX), UK100 (FTSE), JP225 (Nikkei), IN50 (Nifty) and HK50 (Hang Seng) — covering North America, Europe and Asia from one account.",
     ],
     how: [
       "Each index CFD price tracks the underlying index in real-time, with no expiry — you can hold positions indefinitely. Long if you expect the index to rise, short if you expect it to fall. Going short on an index CFD doesn't require borrowing the underlying stocks — a key advantage over cash equity short-selling.",
@@ -3243,7 +3242,7 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
       { sym: "GER40",  name: "Germany 40 (DAX)", spread: "0.4", leverage: "1:200", size: "25/pt" },
       { sym: "UK100",  name: "FTSE 100",         spread: "0.4", leverage: "1:200", size: "10/pt" },
       { sym: "JP225",  name: "Japan 225",        spread: "3.0", leverage: "1:200", size: "500/pt" },
-      { sym: "IN50",   name: "India 50 (Nifty)", spread: "1.5", leverage: "1:100", size: "20/pt" },
+      { sym: "IN50",   name: "Nifty 50", spread: "1.5", leverage: "1:100", size: "20/pt" },
       { sym: "HK50",   name: "Hang Seng",        spread: "3.0", leverage: "1:100", size: "10/pt" },
     ],
     terms: [
@@ -3813,7 +3812,7 @@ function TradingConditionsPage() {
     ["GER40",  "Germany 40 (DAX)",   "1.0", "0.6", "0.4", "1:200"],
     ["UK100",  "FTSE 100",           "1.0", "0.6", "0.4", "1:200"],
     ["JP225",  "Japan 225 (Nikkei)", "7",   "5",   "3",   "1:200"],
-    ["IN50",   "India 50 (Nifty)",   "3",   "2",   "1.5", "1:100"],
+    ["IN50",   "Nifty 50",   "3",   "2",   "1.5", "1:100"],
   ];
   const energies = [
     ["USOIL", "WTI Crude Oil",  "0.04", "0.025", "0.018", "1:100"],
@@ -3916,8 +3915,6 @@ function TradingConditionsPage() {
 // ─────────────────────────────────────────────────────────────
 function FundingPage() {
   const methods = [
-    { name: "UPI",          dep: "Instant",    wd: "Up to 2 hrs",      fee: "Free", min: "₹500",   icon: "₹" },
-    { name: "IMPS / NEFT",  dep: "Instant",    wd: "Up to 24 hrs",     fee: "Free", min: "₹1,000", icon: "🏦" },
     { name: "Bank wire",    dep: "1–3 days",   wd: "1–3 business days",fee: "Free*", min: "$200",  icon: "🌐" },
     { name: "Visa / Master",dep: "Instant",    wd: "1–3 business days",fee: "Free", min: "$50",    icon: "💳" },
     { name: "Crypto (USDT)",dep: "1 confirm",  wd: "Up to 1 hr",       fee: "Network only", min: "$50", icon: "₮" },
@@ -3966,7 +3963,7 @@ function FundingPage() {
             </div>
             <div className="card why-card">
               <h3>Verification</h3>
-              <p>Full KYC (PAN + Aadhaar, or passport) must be complete before first withdrawal. Documents are reviewed within 1 business day, usually under 30 minutes.</p>
+              <p>Full KYC verification must be complete before first withdrawal. Documents are reviewed within 1 business day, usually under 30 minutes.</p>
             </div>
             <div className="card why-card">
               <h3>Currency conversion</h3>
@@ -3974,7 +3971,7 @@ function FundingPage() {
             </div>
             <div className="card why-card">
               <h3>Tax statements</h3>
-              <p>Annual profit & loss, swap and commission statements are available in your Client Area in PDF and CSV formats, sectioned per Indian financial year.</p>
+              <p>Annual profit & loss, swap and commission statements are available in your Client Area in PDF and CSV formats.</p>
             </div>
             <div className="card why-card">
               <h3>Dormancy</h3>
@@ -4421,10 +4418,10 @@ function FAQPage() {
     {
       cat: "Getting started",
       items: [
-        ["How do I open a RakizFx account?", "Sign up with your email and phone in the registration form. Upload PAN + Aadhaar (or passport for non-Indian residents). Verification typically completes within 10 minutes. Once approved, fund your account via UPI or any supported method and start trading."],
+        ["How do I open a RakizFx account?", "Sign up with your email and phone in the registration form. Upload your passport or government-issued photo ID. Verification typically completes within 10 minutes. Once approved, fund your account via bank wire, card or crypto and start trading."],
         ["What is the minimum deposit?", "Standard accounts start at $50 (or equivalent in INR). Pro from $200, Elite from $2,000. There is no maximum deposit limit."],
         ["Can I open a demo account first?", "Yes. A demo account with $50,000 virtual capital is available with no deposit required and no time limit. Switch to a live account anytime from your Client Area."],
-        ["What documents are required for KYC?", "For Indian residents: PAN card + Aadhaar card (or passport). For other jurisdictions: a government-issued photo ID and a proof of residence (utility bill or bank statement, less than 6 months old)."],
+        ["What documents are required for KYC?", "A government-issued photo ID (passport, national ID or driver’s licence) plus a proof of residence (utility bill or bank statement, less than 6 months old)."],
       ],
     },
     {
@@ -4439,7 +4436,7 @@ function FAQPage() {
     {
       cat: "Funding",
       items: [
-        ["How long do withdrawals take?", "UPI: up to 2 hours. Cards: 1–3 business days. Bank wire: 1–3 business days. Crypto: usually within 1 hour after blockchain confirmation."],
+        ["How long do withdrawals take?", "Card: 1–3 business days. Bank wire: 1–3 business days. Crypto: usually within 1 hour after blockchain confirmation."],
         ["Are there any deposit fees?", "RakizFx covers all standard deposit fees. Some payment processors may charge their own fees outside our control — these are clearly displayed before you confirm."],
         ["Can I withdraw to a different account?", "No. Under anti-money-laundering rules, withdrawals must return to the same payment method and account name used for deposit, up to the deposited amount."],
         ["What happens if my deposit fails?", "Failed deposits are typically reversed by the payment provider within 5–7 business days. If you don't see a refund, contact support with the transaction reference."],
@@ -4580,7 +4577,7 @@ function RegisterPage({ onNav }) {
 
           <div className="crm-stages">
             <div><span className="crm-num">1</span><div><b>Create profile</b><span>Email, phone, country</span></div></div>
-            <div><span className="crm-num">2</span><div><b>Verify identity</b><span>PAN + Aadhaar or passport</span></div></div>
+            <div><span className="crm-num">2</span><div><b>Verify identity</b><span>Passport or government ID</span></div></div>
             <div><span className="crm-num">3</span><div><b>Fund &amp; trade</b><span>From $50 via wire / card / crypto</span></div></div>
           </div>
 
@@ -4685,7 +4682,7 @@ Key facts about RakizFx (use only these):
 - Funding methods: bank wire, debit/credit cards, crypto (USDT). Deposits credit instantly. Withdrawals processed same-day.
 - Safeguards: segregated client funds, negative balance protection, SSL 256-bit security.
 - Platforms: MetaTrader 5 (Windows, macOS, iOS, Android, Web).
-- KYC: PAN + Aadhaar or passport.
+- KYC: Passport or government ID.
 
 Style guide:
 - Be concise, factual, friendly. 2-4 short sentences typical.
@@ -5074,44 +5071,17 @@ export default function App() {
       {route === "accounts" && (
         <>
           <PageHeader
-            eyebrow="Account types"
-            title="Pick the account that fits your strategy"
-            sub="Three tiers — Standard, Pro and Elite — built around how actively you trade and how much capital you deploy."
+            eyebrow="Accounts"
+            title="Compare our 3 account types"
+            sub="Standard, Pro and Elite — all running on MetaTrader 5 with the same 1,200+ instruments. Pick the tier that matches your size and style."
           />
-          <Accounts />
+          <AccountsCompare />
           <Steps />
         </>
       )}
-      {route === "account-standard" && (
-        <>
-          <PageHeader
-            eyebrow="Account · Standard"
-            title="Standard account"
-            sub="Direct-to-market execution, $50 minimum deposit, transparent spreads — ideal for getting started."
-          />
-          <Accounts only="stp" />
-        </>
-      )}
-      {route === "account-pro" && (
-        <>
-          <PageHeader
-            eyebrow="Account · Pro"
-            title="Pro account"
-            sub="Tight spreads, higher leverage and priority execution for active daily traders."
-          />
-          <Accounts only="pro" />
-        </>
-      )}
-      {route === "account-elite" && (
-        <>
-          <PageHeader
-            eyebrow="Account · Elite"
-            title="Elite account"
-            sub="Ultra-tight spreads, custom leverage, dedicated relationship manager and VIP perks."
-          />
-          <Accounts only="elite" />
-        </>
-      )}
+      {route === "account-standard" && <AccountDetailPage tier="standard" />}
+      {route === "account-pro"      && <AccountDetailPage tier="pro" />}
+      {route === "account-elite"    && <AccountDetailPage tier="elite" />}
 
       {route === "funding" && <FundingPage />}
       {route === "tools" && <ToolsPage tool="all" />}
@@ -5233,6 +5203,453 @@ function CoreFeaturesRow() {
         </button>
       </div>
     </section>
+  );
+}
+
+// ─── Account detail pages (per-tier: Standard / Pro / Elite) ───────────────
+type AccountTier = "standard" | "pro" | "elite";
+
+// Side-by-side comparison of all 3 account tiers (shown under route === "accounts")
+function AccountsCompare() {
+  const goRegister = (id: AccountTier) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = `#account-${id}`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // tick / dash for boolean rows
+  const tick = (
+    <span className="acct-cmp2-tick" aria-label="Included">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </span>
+  );
+  const dash = (
+    <span className="acct-cmp2-dash" aria-label="Not included">—</span>
+  );
+
+  const rows: Array<{ k: string; standard: string | boolean; pro: string | boolean; elite: string | boolean }> = [
+    { k: "Minimum deposit",         standard: "$50",            pro: "$200",            elite: "$2,000" },
+    { k: "Base currency",           standard: "USD",            pro: "USD",             elite: "USD" },
+    { k: "Typical EUR/USD spread",  standard: "From 0.8 pips",  pro: "From 0.3 pips",   elite: "From 0.0 pips" },
+    { k: "Commission",              standard: "Zero",           pro: "Zero",            elite: "Zero" },
+    { k: "Maximum leverage",        standard: "1:400",          pro: "1:500",           elite: "Custom" },
+    { k: "Execution model",         standard: "Market (STP)",   pro: "Market (STP/ECN)",elite: "Direct ECN" },
+    { k: "Maximum positions",       standard: "200",            pro: "Unlimited",       elite: "Unlimited" },
+    { k: "Funding speed",           standard: "Instant",        pro: "Instant",         elite: "Dedicated" },
+    { k: "Withdrawals",             standard: "Same-day",       pro: "Priority queue",  elite: "Highest priority" },
+    { k: "Expert Advisors",         standard: true,             pro: true,              elite: true },
+    { k: "Hedging",                 standard: true,             pro: true,              elite: true },
+    { k: "Scalping",                standard: true,             pro: true,              elite: true },
+    { k: "Swap-free option",        standard: true,             pro: true,              elite: true },
+    { k: "Priority support",        standard: false,            pro: true,              elite: true },
+    { k: "Dedicated manager",       standard: false,            pro: false,             elite: true },
+    { k: "VIP events",              standard: false,            pro: false,             elite: true },
+  ];
+
+  const cell = (v: string | boolean) => (typeof v === "boolean" ? (v ? tick : dash) : v);
+
+  return (
+    <section className="acct-cmp2">
+      <div className="container">
+        <motion.div
+          className="acct-cmp2-wrap"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <table className="acct-cmp2-table">
+            <thead>
+              <tr>
+                <th aria-hidden="true"></th>
+                <th>
+                  <span className="acct-cmp2-name">Standard</span>
+                  <span className="acct-cmp2-sub">From $50</span>
+                </th>
+                <th className="is-pro">
+                  <span className="acct-cmp2-pill">Popular</span>
+                  <span className="acct-cmp2-name">Pro</span>
+                  <span className="acct-cmp2-sub">From $200</span>
+                </th>
+                <th>
+                  <span className="acct-cmp2-name">Elite</span>
+                  <span className="acct-cmp2-sub">From $2,000</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={i}>
+                  <th scope="row">{r.k}</th>
+                  <td data-tier="Standard">{cell(r.standard)}</td>
+                  <td className="is-pro" data-tier="Pro">{cell(r.pro)}</td>
+                  <td data-tier="Elite">{cell(r.elite)}</td>
+                </tr>
+              ))}
+              {/* CTA row */}
+              <tr className="acct-cmp2-cta-row">
+                <th scope="row" aria-hidden="true"></th>
+                <td>
+                  <a href="#account-standard" onClick={goRegister("standard")} className="btn btn-outline acct-cmp2-cta">
+                    Open Standard
+                  </a>
+                </td>
+                <td className="is-pro">
+                  <a href="#account-pro" onClick={goRegister("pro")} className="btn btn-primary acct-cmp2-cta">
+                    Open Pro
+                  </a>
+                </td>
+                <td>
+                  <a href="#account-elite" onClick={goRegister("elite")} className="btn btn-outline acct-cmp2-cta">
+                    Open Elite
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function AccountDetailPage({ tier }: { tier: AccountTier }) {
+  const t = useT();
+  const goRegister = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // CRM disabled — click intentionally no-ops
+  };
+  const goTier = (id: AccountTier) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = `#account-${id}`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const data: Record<AccountTier, {
+    name: string;
+    tag: string;
+    badge?: string;
+    accent: string;
+    description: string;
+    minDeposit: string;
+    stats: Array<{ k: string; v: string }>;
+    groups: Array<{ h: string; items: Array<{ k: string; v: string }> }>;
+    perks: string[];
+  }> = {
+    standard: {
+      name: "Standard",
+      tag: "Direct-to-market execution",
+      accent: "#1ad17a",
+      description: "An easy start with fast, transparent execution routed straight to liquidity providers — built for traders opening their first live account.",
+      minDeposit: "$50",
+      stats: [
+        { k: "Minimum deposit",   v: "$50" },
+        { k: "Typical spread",    v: "Standard" },
+        { k: "Maximum leverage",  v: "1:400" },
+        { k: "Commission",        v: "Zero" },
+      ],
+      groups: [
+        { h: "Trading conditions", items: [
+          { k: "Execution model",     v: "Market execution (STP)" },
+          { k: "Typical EUR/USD spread", v: "From 0.8 pips" },
+          { k: "Maximum leverage",    v: "1:400" },
+          { k: "Commission",          v: "Zero per lot" },
+          { k: "Swap-free option",    v: "Available on request" },
+          { k: "Hedging",             v: "Permitted" },
+          { k: "Expert Advisors",     v: "Permitted" },
+        ]},
+        { h: "Account & funding", items: [
+          { k: "Minimum deposit",     v: "$50" },
+          { k: "Base currencies",     v: "USD" },
+          { k: "Maximum positions",   v: "200 open positions" },
+          { k: "Funding speed",       v: "Instant via card / crypto" },
+          { k: "Withdrawals",         v: "Same-day processing" },
+        ]},
+        { h: "Platform & support", items: [
+          { k: "Platform",            v: "MetaTrader 5" },
+          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
+          { k: "Support",             v: "24/7 technical chat" },
+          { k: "Education",           v: "Free Academy access" },
+        ]},
+      ],
+      perks: [
+        "Zero commission on every trade — you only pay the spread",
+        "Instant deposits via card, bank wire or crypto",
+        "Same-day withdrawals back to your funding source",
+        "Adjustable swap-free option for eligible accounts",
+        "Trade 1,200+ instruments from a single account",
+      ],
+    },
+    pro: {
+      name: "Pro",
+      tag: "For active traders",
+      badge: "POPULAR",
+      accent: "#1ad17a",
+      description: "Tighter spreads, higher leverage and priority execution for traders running multiple positions a day — built around the way active traders actually trade.",
+      minDeposit: "$200",
+      stats: [
+        { k: "Minimum deposit",   v: "$200" },
+        { k: "Typical spread",    v: "Low" },
+        { k: "Maximum leverage",  v: "1:500" },
+        { k: "Commission",        v: "Zero" },
+      ],
+      groups: [
+        { h: "Trading conditions", items: [
+          { k: "Execution model",     v: "Market execution (STP/ECN)" },
+          { k: "Typical EUR/USD spread", v: "From 0.3 pips" },
+          { k: "Maximum leverage",    v: "1:500" },
+          { k: "Commission",          v: "Zero per lot" },
+          { k: "Swap-free option",    v: "Available on request" },
+          { k: "Hedging",             v: "Permitted" },
+          { k: "Expert Advisors",     v: "Permitted (incl. scalping)" },
+        ]},
+        { h: "Account & funding", items: [
+          { k: "Minimum deposit",     v: "$200" },
+          { k: "Base currencies",     v: "USD" },
+          { k: "Maximum positions",   v: "Unlimited" },
+          { k: "Funding speed",       v: "Instant via card / crypto" },
+          { k: "Withdrawals",         v: "Same-day priority queue" },
+        ]},
+        { h: "Platform & support", items: [
+          { k: "Platform",            v: "MetaTrader 5" },
+          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
+          { k: "Support",             v: "24×7 priority support" },
+          { k: "Education",           v: "Pro webinars + research" },
+        ]},
+      ],
+      perks: [
+        "Tight spreads from 0.3 pips on major forex pairs",
+        "Leverage up to 1:500 across forex and metals",
+        "Priority order routing and faster fills",
+        "Priority withdrawal queue — same day, every day",
+        "Pro webinars and weekly market analysis included",
+      ],
+    },
+    elite: {
+      name: "Elite",
+      tag: "VIP & high-volume",
+      badge: "VIP",
+      accent: "#1ad17a",
+      description: "Ultra-tight institutional spreads, custom leverage and a dedicated relationship manager for high-volume and high-net-worth traders.",
+      minDeposit: "$2,000",
+      stats: [
+        { k: "Minimum deposit",   v: "$2,000" },
+        { k: "Typical spread",    v: "Ultra-low" },
+        { k: "Maximum leverage",  v: "Custom" },
+        { k: "Commission",        v: "Zero" },
+      ],
+      groups: [
+        { h: "Trading conditions", items: [
+          { k: "Execution model",     v: "Direct ECN / institutional" },
+          { k: "Typical EUR/USD spread", v: "From 0.0 pips" },
+          { k: "Maximum leverage",    v: "Custom (subject to risk policy)" },
+          { k: "Commission",          v: "Zero per lot" },
+          { k: "Swap-free option",    v: "Available on request" },
+          { k: "Hedging",             v: "Permitted" },
+          { k: "Expert Advisors",     v: "Permitted (no scalping limits)" },
+        ]},
+        { h: "Account & funding", items: [
+          { k: "Minimum deposit",     v: "$2,000" },
+          { k: "Base currencies",     v: "USD" },
+          { k: "Maximum positions",   v: "Unlimited" },
+          { k: "Funding speed",       v: "Dedicated banking channels" },
+          { k: "Withdrawals",         v: "Highest withdrawal priority" },
+        ]},
+        { h: "Platform & support", items: [
+          { k: "Platform",            v: "MetaTrader 5 Advanced" },
+          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
+          { k: "Support",             v: "Dedicated 24×7 desk + RM" },
+          { k: "Education",           v: "1-on-1 strategy sessions" },
+        ]},
+      ],
+      perks: [
+        "Ultra-tight spreads from 0.0 pips on major pairs",
+        "Custom leverage tailored to your strategy and risk",
+        "Dedicated relationship manager and priority desk",
+        "Invitations to exclusive RakizFx VIP events",
+        "Highest-priority withdrawals processed within the hour",
+      ],
+    },
+  };
+
+  const current = data[tier];
+  const goCompare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = "#accounts";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  // Avoid unused-var TS lint
+  void goTier; void t;
+
+  // Pluck out 4 headline stats from the tier data for the inline metric row
+  const headline = current.stats;
+
+  return (
+    <>
+      {/* Hero — airy, typography-led, no heavy card */}
+      <section className="acct-v2-hero">
+        <div className="container">
+          <motion.span
+            className="acct-v2-eyebrow"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Account · {current.name}
+            {current.badge && <span className={`acct-v2-chip ${tier === "elite" ? "is-vip" : "is-popular"}`}>{current.badge}</span>}
+          </motion.span>
+
+          <motion.h1
+            className="acct-v2-h1"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {current.name}
+          </motion.h1>
+
+          <motion.p
+            className="acct-v2-lede"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.55, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {current.description}
+          </motion.p>
+
+          <motion.div
+            className="acct-v2-stats"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {headline.map((s, i) => (
+              <div key={i} className="acct-v2-stat">
+                <b>{s.v}</b>
+                <span>{s.k}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="acct-v2-ctas"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <a href="#register" onClick={goRegister} className="btn btn-primary btn-lg acct-v2-cta">
+              Open {current.name} account
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#accounts" onClick={goCompare} className="acct-v2-ghost">Compare all 3 accounts →</a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Specs — 3 grouped 2-column lists, calm and minimal */}
+      <section className="acct-v2-specs">
+        <div className="container">
+          <motion.h2
+            className="acct-v2-sec-h"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {current.name} specifications
+          </motion.h2>
+
+          <div className="acct-v2-spec-grid">
+            {current.groups.map((g, gi) => (
+              <motion.div
+                key={gi}
+                className="acct-v2-spec-group"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.55, delay: gi * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <h3>{g.h}</h3>
+                <dl>
+                  {g.items.map((it, ii) => (
+                    <div key={ii} className="acct-v2-spec-row">
+                      <dt>{it.k}</dt>
+                      <dd>{it.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Included — quiet 2-column list with subtle ticks */}
+      <section className="acct-v2-included">
+        <div className="container">
+          <motion.h2
+            className="acct-v2-sec-h"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            What&rsquo;s included
+          </motion.h2>
+          <ul className="acct-v2-perks">
+            {current.perks.map((p, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ delay: i * 0.05, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <span className="acct-v2-tick" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </span>
+                <span>{p}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Strip CTA — single quiet line, no big card */}
+      <section className="acct-v2-strip">
+        <div className="container">
+          <motion.div
+            className="acct-v2-strip-inner"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div>
+              <h3>Ready to open a {current.name} account?</h3>
+              <p>From <b>{current.minDeposit}</b> minimum deposit. Live in under 2 minutes.</p>
+            </div>
+            <a href="#register" onClick={goRegister} className="btn btn-primary btn-lg">
+              Open account
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+              </svg>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 }
 
