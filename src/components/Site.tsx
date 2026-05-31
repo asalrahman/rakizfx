@@ -252,50 +252,105 @@ function PhoneScreen2() {
 
 function MobileApp() {
   const t = useT();
-  const feats = [
-    { t: "Real-time market overview",  p: "Watch 1,200+ instruments stream live — bid, ask, spread and 24-hour change at a glance.",
-      i: <><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></> },
-    { t: "Price & volatility alerts",  p: "Custom push notifications when your watchlist moves. Wake up to the move, not the news cycle.",
-      i: <><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></> },
-    { t: "Account & balance management",p: "View live equity, margin level, open positions and account history — no trade entry inside the app.",
-      i: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></> },
-    { t: "Quick deposit & withdraw",   p: "Fund via bank wire, card or crypto — request withdrawals from your phone in under a minute.",
-      i: <><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></> },
+  // Vantage / FXPro-style colorful gradient icons — each feature has its own brand color
+  const feats: Array<{
+    t: string;
+    p: string;
+    gradFrom: string;
+    gradTo: string;
+    icon: React.ReactNode;
+  }> = [
+    {
+      t: "Real-time market overview",
+      p: "Watch 1,200+ instruments stream live — bid, ask, spread and 24-hour change at a glance.",
+      gradFrom: "#3b82f6", gradTo: "#06b6d4",
+      icon: <TrendingUp size={22} strokeWidth={2.2} />,
+    },
+    {
+      t: "Account balance & equity",
+      p: "Real-time view of equity, margin level, open positions and historical performance — fully synced with MT5.",
+      gradFrom: "#10b981", gradTo: "#059669",
+      icon: <CircleDollarSign size={22} strokeWidth={2.2} />,
+    },
+    {
+      t: "Quick deposit & withdraw",
+      p: "Fund via bank wire, card or crypto — request withdrawals from your phone in under a minute.",
+      gradFrom: "#f97316", gradTo: "#ea580c",
+      icon: <Zap size={22} strokeWidth={2.2} />,
+    },
+    {
+      t: "Profile, KYC & alerts",
+      p: "Manage personal details, upload KYC documents, set price alerts and 2FA — all in one app.",
+      gradFrom: "#8b5cf6", gradTo: "#6366f1",
+      icon: <Shield size={22} strokeWidth={2.2} />,
+    },
   ];
+
   return (
-    <section id="mobile" className="mobile-section mobile-section--no-bg">
-      <div className="container mobile-grid mobile-grid--text-only" style={{ position: "relative" }}>
-        <div className="reveal r-right d-200">
+    <section id="mobile" className="mobile-section mobile-section--with-art">
+      <div className="container mobile-split">
+        {/* LEFT — app screen illustration */}
+        <motion.div
+          className="mobile-phone-stage"
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <img
+            src="/assets/app-screen.svg"
+            alt="RakizFx companion app — balance, deposit, withdraw, profile and history"
+          />
+        </motion.div>
+
+        {/* RIGHT — copy + colorful features + badges */}
+        <div>
           <h2 className="sec-title">{t("mobile.title")} <em>{t("mobile.title_em")}</em></h2>
           <p className="sec-sub">The RakizFx companion app gives you live market data, account balance, deposits and withdrawals on the go. For trade execution, use MetaTrader 5 — fully integrated with the same account.</p>
-          <div className="mobile-features">
+
+          <div className="mobile-features mobile-features--vivid">
             {feats.map((f, i) => (
-              <div key={i} className="mobile-feat">
-                <span className="ic">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{f.i}</svg>
+              <motion.div
+                key={i}
+                className="mobile-feat"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.06 * i, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <span
+                  className="ic ic--vivid"
+                  style={{
+                    background: `linear-gradient(135deg, ${f.gradFrom} 0%, ${f.gradTo} 100%)`,
+                    boxShadow: `0 12px 24px -10px ${f.gradFrom}80`,
+                  }}
+                >
+                  {f.icon}
                 </span>
                 <div><h4>{f.t}</h4><p>{f.p}</p></div>
-              </div>
+              </motion.div>
             ))}
           </div>
+
           <div className="app-badges">
-            <a href="#" className="app-badge">
+            <a href="#" className="app-badge" onClick={(e) => e.preventDefault()}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5a4 4 0 0 1 2-3.4 4.2 4.2 0 0 0-3.3-1.8c-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.7a4.4 4.4 0 0 0-3.7 2.3c-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2-1.1 2.8-2.2.6-.8 1-1.7 1.3-2.6a3.9 3.9 0 0 1-2.6-3.6zM14.3 5.4a3.7 3.7 0 0 0 .9-2.7 3.9 3.9 0 0 0-2.5 1.3 3.6 3.6 0 0 0-.9 2.6 3.2 3.2 0 0 0 2.5-1.2z"/></svg>
               <span><span className="l">Download on the</span><br/><span className="b">App Store</span></span>
             </a>
-            <a href="#" className="app-badge">
+            <a href="#" className="app-badge" onClick={(e) => e.preventDefault()}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.8l13 9.7-2.6 2.6L3.6 21.2zm14.4 8L21 12l-3 2-2.4-2.4zm-3.4 3.4L4.5 22.7l9-9 1.1 1.1zm-2.6-2.6l-9-9 9.5 6.6z"/></svg>
               <span><span className="l">Get it on</span><br/><span className="b">Google Play</span></span>
             </a>
           </div>
-          <div style={{ display: "flex", gap: 16, marginTop: 22, alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: 28 }}>★ <CountUp to={4.8} decimals={1} duration={1600} /></span>
-              <span style={{ fontSize: 11, color: "var(--fg-mute)", textTransform: "uppercase", letterSpacing: ".1em" }}>App Store rating</span>
+
+          <div className="mobile-app-stats">
+            <div>
+              <span className="mobile-app-num">★ <CountUp to={4.8} decimals={1} duration={1600} /></span>
+              <span className="mobile-app-lbl">App Store rating</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: 28 }}><CountUp to={180} duration={1800} />K+</span>
-              <span style={{ fontSize: 11, color: "var(--fg-mute)", textTransform: "uppercase", letterSpacing: ".1em" }}>Active traders</span>
+            <div>
+              <span className="mobile-app-num"><CountUp to={180} duration={1800} />K+</span>
+              <span className="mobile-app-lbl">Active traders</span>
             </div>
           </div>
         </div>
@@ -654,9 +709,10 @@ function Nav({ route, onNav }) {
       id: "accounts", label: "Accounts", route: "accounts",
       cols: [
         { h: "Account types", items: [
-          ["accounts", "Standard", "Direct-to-market execution"],
-          ["accounts", "Pro",      "For active traders"],
-          ["accounts", "Elite",    "VIP & high-volume"],
+          ["account-standard", "Standard", "Direct-to-market execution"],
+          ["account-pro",      "Pro",      "For active traders"],
+          ["account-elite",    "Elite",    "VIP & high-volume"],
+          ["accounts",         "Compare all accounts", "Side-by-side comparison"],
         ]},
       ],
     },
@@ -664,8 +720,8 @@ function Nav({ route, onNav }) {
       id: "tools", label: "Tools", route: "tools",
       cols: [
         { h: "Trading tools", items: [
-          ["tools", "Pip Calculator",    "Pip value & required margin"],
-          ["tools", "Economic Calendar", "Macro events & data"],
+          ["tools-pip",      "Pip Calculator",    "Pip value & required margin"],
+          ["tools-calendar", "Economic Calendar", "Macro events & data"],
         ]},
       ],
     },
@@ -1795,7 +1851,7 @@ function Why() {
 
 // ─── Accounts ──────────────────────────────────────────────────────────────
 
-function Accounts() {
+function Accounts({ only }: { only?: "stp" | "pro" | "elite" } = {}) {
   const accts = [
     {
       name: "STP",
@@ -1855,11 +1911,18 @@ function Accounts() {
       premium: true,
     },
   ];
+  const filtered = only
+    ? accts.filter(a =>
+        (only === "stp"   && a.name === "STP") ||
+        (only === "pro"   && a.name === "Pro") ||
+        (only === "elite" && a.name === "Elite")
+      )
+    : accts;
   return (
     <section id="accounts">
       <div className="container">
-        <div className="accts">
-          {accts.map((a, i) => (
+        <div className={`accts ${only ? "accts--single" : ""}`}>
+          {filtered.map((a, i) => (
             <div key={i} className={`acct ${a.feat ? "feat" : ""} ${a.premium ? "premium" : ""}`}>
               {a.feat && <span className="pop">POPULAR</span>}
               {a.premium && <span className="pop pop-vip">VIP</span>}
@@ -2076,7 +2139,7 @@ function Footer({ onNav }) {
         </div>
 
         <div className="foot-risk">
-          <strong>Risk warning:</strong> Trading leveraged derivatives carries a high level of risk and may not be suitable for all investors. You may lose more than your initial deposit. Past performance is not indicative of future results. Please ensure you fully understand the risks involved and seek independent advice if necessary. RakizFx is the trade name of Rakiz Capital Ltd, registered at Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia (Registration No. 2025-00287). Services are not offered to residents of the United States, Canada, North Korea, or any other jurisdiction where they would be contrary to local law.
+          <strong>Risk warning:</strong> Trading leveraged derivatives carries a high level of risk and may not be suitable for all investors. You may lose more than your initial deposit. Past performance is not indicative of future results. Please ensure you fully understand the risks involved and seek independent advice if necessary. RakizFx is the trade name of Rakiz Capital Ltd. Full company and registration details are available in our <a href="#legal-client-agreement" onClick={go("legal-client-agreement")}>Client Agreement</a>. Services are not offered to residents of the United States, Canada, North Korea, or any other jurisdiction where they would be contrary to local law.
         </div>
         <div className="foot-end">
           <span>© 2026 Rakiz Capital Ltd. All rights reserved.</span>
@@ -3927,7 +3990,7 @@ function FundingPage() {
 // ─────────────────────────────────────────────────────────────
 // TOOLS (calculator + economic calendar)
 // ─────────────────────────────────────────────────────────────
-function ToolsPage() {
+function ToolsPage({ tool = "all" }: { tool?: "all" | "pip" | "calendar" }) {
   const [pair, setPair] = useState("EURUSD");
   const [lot, setLot] = useState(1);
   const [price, setPrice] = useState(1.0842);
@@ -3954,15 +4017,27 @@ function ToolsPage() {
     { t: "15:00", c: "🇨🇦", e: "BoC Overnight Rate",           i: "High",   p: "4.75%", a: "—" },
   ];
 
+  const showPip = tool === "all" || tool === "pip";
+  const showCal = tool === "all" || tool === "calendar";
+
   return (
     <>
       <PageHeader
         eyebrow="Trading tools"
-        title="Calculate, plan, prepare."
-        sub="Free pip-value, margin and swap calculators plus a real-time economic calendar — the same data feeds we use internally."
+        title={
+          tool === "pip" ? "Pip & margin calculator" :
+          tool === "calendar" ? "Economic calendar" :
+          "Calculate, plan, prepare"
+        }
+        sub={
+          tool === "pip" ? "Estimate pip value, required margin and notional value for any pair, lot size and leverage." :
+          tool === "calendar" ? "Real-time macro events affecting forex, indices, commodities and crypto — the same data feeds we use internally." :
+          "Free pip-value and margin calculator plus a real-time economic calendar."
+        }
       />
       <section style={{ paddingTop: 0 }}>
-        <div className="container tools-grid">
+        <div className={`container ${tool === "all" ? "tools-grid" : "tools-single"}`}>
+          {showPip && (
           <div className="card calc-card">
             <h3>Pip & margin calculator</h3>
             <div className="calc-row">
@@ -3989,7 +4064,9 @@ function ToolsPage() {
               <div><span>Notional value</span><b className="mono">${(100000 * lot * price).toLocaleString(undefined,{maximumFractionDigits:0})}</b></div>
             </div>
           </div>
+          )}
 
+          {showCal && (
           <div className="card calc-card">
             <h3>Today's economic calendar</h3>
             <div className="cal-list">
@@ -4004,6 +4081,7 @@ function ToolsPage() {
               ))}
             </div>
           </div>
+          )}
         </div>
       </section>
     </>
@@ -4775,6 +4853,10 @@ const ROUTES = [
   // Asset-class detail pages (clicked from Markets overview)
   "market-forex", "market-metals", "market-indices", "market-energies",
   "market-crypto", "market-shares",
+  // Account-tier detail pages
+  "account-standard", "account-pro", "account-elite",
+  // Tool detail pages
+  "tools-pip", "tools-calendar",
   // Legal pages
   "legal-privacy", "legal-terms", "legal-risk", "legal-aml",
   "legal-client-agreement", "legal-withdrawal"
@@ -4993,16 +5075,48 @@ export default function App() {
         <>
           <PageHeader
             eyebrow="Account types"
-            title="Pick the account that fits your strategy."
-            sub="Three tiers — STP, Pro and Elite — built around how actively you trade and how much capital you deploy."
+            title="Pick the account that fits your strategy"
+            sub="Three tiers — Standard, Pro and Elite — built around how actively you trade and how much capital you deploy."
           />
           <Accounts />
           <Steps />
         </>
       )}
+      {route === "account-standard" && (
+        <>
+          <PageHeader
+            eyebrow="Account · Standard"
+            title="Standard account"
+            sub="Direct-to-market execution, $50 minimum deposit, transparent spreads — ideal for getting started."
+          />
+          <Accounts only="stp" />
+        </>
+      )}
+      {route === "account-pro" && (
+        <>
+          <PageHeader
+            eyebrow="Account · Pro"
+            title="Pro account"
+            sub="Tight spreads, higher leverage and priority execution for active daily traders."
+          />
+          <Accounts only="pro" />
+        </>
+      )}
+      {route === "account-elite" && (
+        <>
+          <PageHeader
+            eyebrow="Account · Elite"
+            title="Elite account"
+            sub="Ultra-tight spreads, custom leverage, dedicated relationship manager and VIP perks."
+          />
+          <Accounts only="elite" />
+        </>
+      )}
 
       {route === "funding" && <FundingPage />}
-      {route === "tools" && <ToolsPage />}
+      {route === "tools" && <ToolsPage tool="all" />}
+      {route === "tools-pip" && <ToolsPage tool="pip" />}
+      {route === "tools-calendar" && <ToolsPage tool="calendar" />}
       {route === "academy" && <EducationPage />}
       {route === "partners" && <PartnersPage />}
       {route === "affiliate" && <AffiliatePage />}

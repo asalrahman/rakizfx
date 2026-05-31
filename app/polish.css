@@ -4188,6 +4188,277 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
 /* Hide the old addresses block (now lives only inside legal pages) */
 .foot-addresses { display: none !important; }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE APP SECTION — premium 2-col with app screen + vivid feature icons
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mobile-section--with-art {
+  background: var(--bg, #ffffff);
+  padding-block: clamp(56px, 7vw, 96px);
+}
+.mobile-split {
+  display: grid !important;
+  grid-template-columns: 0.85fr 1.05fr;
+  gap: clamp(28px, 5vw, 64px) !important;
+  align-items: center;
+}
+@media (max-width: 920px) {
+  .mobile-split { grid-template-columns: 1fr; }
+  .mobile-phone-stage { order: 2; }
+}
+
+.mobile-phone-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-phone-stage img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  filter: none;
+}
+
+/* Vivid feature icon grid (Vantage/FXPro inspiration — colorful gradient icons) */
+.mobile-features--vivid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 1.8vw, 22px);
+  margin-top: clamp(20px, 2.5vw, 30px);
+  margin-bottom: clamp(20px, 2.5vw, 28px);
+}
+@media (max-width: 540px) {
+  .mobile-features--vivid { grid-template-columns: 1fr; }
+}
+
+.mobile-features--vivid .mobile-feat {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 4px 0;
+}
+.mobile-features--vivid .ic.ic--vivid {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 13px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff !important;
+  flex-shrink: 0;
+  transition: transform .35s var(--ease-spring), box-shadow .3s var(--ease-out-soft);
+}
+.mobile-features--vivid .ic.ic--vivid svg {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.18));
+}
+.mobile-features--vivid .mobile-feat:hover .ic--vivid {
+  transform: scale(1.08) rotate(-3deg);
+}
+.mobile-features--vivid h4 {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif !important;
+  font-size: 15.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.018em !important;
+  margin: 2px 0 4px !important;
+  color: #000 !important;
+  line-height: 1.25;
+}
+.mobile-features--vivid p {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: var(--fg-dim, #4a4a48) !important;
+  margin: 0 !important;
+}
+
+/* App-store badges + stats row */
+.mobile-app-stats {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+.mobile-app-stats > div { display: flex; flex-direction: column; gap: 2px; }
+.mobile-app-num {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.024em;
+  color: #000;
+}
+.mobile-app-lbl {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg-mute, #6b6b65);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VANTAGE / FXPRO COLORFUL ICONS — applied site-wide
+   Every card icon (Why, CFD markets overview, Asset specialities, Core features,
+   Core marquee, Markets class, Asset class detail, Fund cards, Edu cards…)
+   gets one of four brand gradients, cycled by nth-child for a multi-color row.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --vivid-blue-from:   #3b82f6;  --vivid-blue-to:   #06b6d4;
+  --vivid-green-from:  #10b981;  --vivid-green-to:  #059669;
+  --vivid-orange-from: #f97316;  --vivid-orange-to: #ea580c;
+  --vivid-purple-from: #8b5cf6;  --vivid-purple-to: #6366f1;
+}
+
+/* Master selector — any container that hosts a card icon, anywhere */
+.why-card .why-icon,
+.core-feature-card .core-feature-ic,
+.core-marquee-card .core-marquee-ic,
+.markets-class-card .markets-class-ic,
+.asset-speciality-card .asset-speciality-tick,
+.cfd-markets-grid .cfd-market-ic,
+.cfd-marquee-track .cfd-market-ic,
+.fund-card .fund-icon,
+.why-traders-card .why-traders-ic,
+.edu-teaser-card .edu-teaser-ic,
+.promo-main-card .promo-main-ic,
+.affiliate-card .affiliate-ic {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--vivid-green-from) 0%, var(--vivid-green-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-green-from) !important;
+  border-radius: 13px !important;
+}
+.why-card .why-icon svg,
+.core-feature-card .core-feature-ic svg,
+.core-marquee-card .core-marquee-ic svg,
+.markets-class-card .markets-class-ic svg,
+.asset-speciality-card .asset-speciality-tick svg,
+.cfd-markets-grid .cfd-market-ic svg,
+.cfd-marquee-track .cfd-market-ic svg,
+.fund-card .fund-icon svg,
+.why-traders-card .why-traders-ic svg,
+.edu-teaser-card .edu-teaser-ic svg,
+.promo-main-card .promo-main-ic svg,
+.affiliate-card .affiliate-ic svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.18));
+}
+
+/* Cycle the palette: 1st child blue, 2nd green, 3rd orange, 4th purple, then repeat */
+.why-card:nth-child(4n+1) .why-icon,
+.core-feature-card:nth-child(4n+1) .core-feature-ic,
+.markets-class-card:nth-child(4n+1) .markets-class-ic,
+.asset-speciality-card:nth-child(4n+1) .asset-speciality-tick,
+.fund-card:nth-child(4n+1) .fund-icon,
+.why-traders-card:nth-child(4n+1) .why-traders-ic,
+.edu-teaser-card:nth-child(4n+1) .edu-teaser-ic,
+.promo-main-card:nth-child(4n+1) .promo-main-ic {
+  background: linear-gradient(135deg, var(--vivid-blue-from) 0%, var(--vivid-blue-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-blue-from) !important;
+}
+.why-card:nth-child(4n+2) .why-icon,
+.core-feature-card:nth-child(4n+2) .core-feature-ic,
+.markets-class-card:nth-child(4n+2) .markets-class-ic,
+.asset-speciality-card:nth-child(4n+2) .asset-speciality-tick,
+.fund-card:nth-child(4n+2) .fund-icon,
+.why-traders-card:nth-child(4n+2) .why-traders-ic,
+.edu-teaser-card:nth-child(4n+2) .edu-teaser-ic,
+.promo-main-card:nth-child(4n+2) .promo-main-ic {
+  background: linear-gradient(135deg, var(--vivid-green-from) 0%, var(--vivid-green-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-green-from) !important;
+}
+.why-card:nth-child(4n+3) .why-icon,
+.core-feature-card:nth-child(4n+3) .core-feature-ic,
+.markets-class-card:nth-child(4n+3) .markets-class-ic,
+.asset-speciality-card:nth-child(4n+3) .asset-speciality-tick,
+.fund-card:nth-child(4n+3) .fund-icon,
+.why-traders-card:nth-child(4n+3) .why-traders-ic,
+.edu-teaser-card:nth-child(4n+3) .edu-teaser-ic,
+.promo-main-card:nth-child(4n+3) .promo-main-ic {
+  background: linear-gradient(135deg, var(--vivid-orange-from) 0%, var(--vivid-orange-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-orange-from) !important;
+}
+.why-card:nth-child(4n+4) .why-icon,
+.core-feature-card:nth-child(4n+4) .core-feature-ic,
+.markets-class-card:nth-child(4n+4) .markets-class-ic,
+.asset-speciality-card:nth-child(4n+4) .asset-speciality-tick,
+.fund-card:nth-child(4n+4) .fund-icon,
+.why-traders-card:nth-child(4n+4) .why-traders-ic,
+.edu-teaser-card:nth-child(4n+4) .edu-teaser-ic,
+.promo-main-card:nth-child(4n+4) .promo-main-ic {
+  background: linear-gradient(135deg, var(--vivid-purple-from) 0%, var(--vivid-purple-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-purple-from) !important;
+}
+
+/* The core-marquee + CFD marquee inside <li> wrappers — cycle on the <li> */
+.core-marquee-track li:nth-child(7n+1) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+1) .cfd-market-ic {
+  background: linear-gradient(135deg, var(--vivid-blue-from) 0%, var(--vivid-blue-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-blue-from) !important;
+}
+.core-marquee-track li:nth-child(7n+2) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+2) .cfd-market-ic {
+  background: linear-gradient(135deg, var(--vivid-green-from) 0%, var(--vivid-green-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-green-from) !important;
+}
+.core-marquee-track li:nth-child(7n+3) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+3) .cfd-market-ic {
+  background: linear-gradient(135deg, var(--vivid-orange-from) 0%, var(--vivid-orange-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-orange-from) !important;
+}
+.core-marquee-track li:nth-child(7n+4) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+4) .cfd-market-ic {
+  background: linear-gradient(135deg, var(--vivid-purple-from) 0%, var(--vivid-purple-to) 100%) !important;
+  box-shadow: 0 12px 24px -10px var(--vivid-purple-from) !important;
+}
+.core-marquee-track li:nth-child(7n+5) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+5) .cfd-market-ic {
+  background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%) !important;     /* pink */
+  box-shadow: 0 12px 24px -10px #ec4899 !important;
+}
+.core-marquee-track li:nth-child(7n+6) .core-marquee-ic,
+.cfd-marquee-track li:nth-child(6n+6) .cfd-market-ic {
+  background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%) !important;     /* teal */
+  box-shadow: 0 12px 24px -10px #14b8a6 !important;
+}
+.core-marquee-track li:nth-child(7n+7) .core-marquee-ic {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;     /* amber */
+  box-shadow: 0 12px 24px -10px #f59e0b !important;
+}
+
+/* On hover, the icons scale + rotate (already on some — make universal) */
+.why-card:hover .why-icon,
+.core-feature-card:hover .core-feature-ic,
+.core-marquee-card:hover .core-marquee-ic,
+.markets-class-card:hover .markets-class-ic,
+.asset-speciality-card:hover .asset-speciality-tick,
+.cfd-market-card:hover .cfd-market-ic,
+.fund-card:hover .fund-icon,
+.why-traders-card:hover .why-traders-ic,
+.edu-teaser-card:hover .edu-teaser-ic,
+.promo-main-card:hover .promo-main-ic {
+  transform: scale(1.08) rotate(-3deg);
+  filter: brightness(1.05);
+}
+
+/* Single-card layouts for per-tool / per-account routes */
+.tools-single {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.tools-single .calc-card { max-width: 760px; margin-inline: auto; }
+
+.accts.accts--single {
+  grid-template-columns: 1fr !important;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
