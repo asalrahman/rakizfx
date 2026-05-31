@@ -5,11 +5,11 @@ import './polish.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://rakizfx.com'),
   title: {
-    default: 'RakizFx — Trade with momentum',
+    default: 'RakizFx, Trade with momentum',
     template: '%s · RakizFx',
   },
   description:
-    'Trade 1,200+ markets on MetaTrader 5 — forex, indices, metals, energies, crypto and shares from a single account. Spreads from 0.0 pips, 28ms fills.',
+    'Trade 1,200+ markets on MetaTrader 5, forex, indices, metals, energies, crypto and shares from a single account. Spreads from 0.0 pips, 28ms fills.',
   applicationName: 'RakizFx',
   authors: [{ name: 'Rakiz Capital Ltd' }],
   keywords: [
@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'RakizFx',
-    title: 'RakizFx — Trade with momentum',
+    title: 'RakizFx, Trade with momentum',
     description:
       'Fair pricing. Fast execution. 1,200+ markets on MetaTrader 5 from a single account.',
     images: [{ url: '/assets/img-currency.jpg', width: 1200, height: 630, alt: 'RakizFx' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RakizFx — Trade with momentum',
+    title: 'RakizFx, Trade with momentum',
     description: 'Spreads from 0.0 pips. 1,200+ instruments. Built for serious traders.',
     images: ['/assets/img-currency.jpg'],
   },

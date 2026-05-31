@@ -14,7 +14,7 @@ import {
 
 
 // ─── from logo.jsx ────────────────────────────────────────────────────
-// RakizFx Logo — uses the supplied logo PNG asset (transparent BG extracted).
+// RakizFx Logo, uses the supplied logo PNG asset (transparent BG extracted).
 
 function RakizLogo({ size = 32, showWord = true }) {
   // Image aspect ~ 196:44 ≈ 4.45:1. Height-driven.
@@ -38,7 +38,7 @@ function RakizLogo({ size = 32, showWord = true }) {
 
 
 // ─── from sections.jsx ────────────────────────────────────────────────
-// RakizFx sections — Hero, Markets, Why, Accounts, Platforms, Steps, CTA, Footer, Nav
+// RakizFx sections, Hero, Markets, Why, Accounts, Platforms, Steps, CTA, Footer, Nav
 
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -252,7 +252,7 @@ function PhoneScreen2() {
 
 function MobileApp() {
   const t = useT();
-  // Vantage / FXPro-style colorful gradient icons — each feature has its own brand color
+  // Vantage / FXPro-style colorful gradient icons, each feature has its own brand color
   const feats: Array<{
     t: string;
     p: string;
@@ -262,25 +262,25 @@ function MobileApp() {
   }> = [
     {
       t: "Real-time market overview",
-      p: "Watch 1,200+ instruments stream live — bid, ask, spread and 24-hour change at a glance.",
+      p: "Watch 1,200+ instruments stream live, bid, ask, spread and 24-hour change at a glance.",
       gradFrom: "#3b82f6", gradTo: "#06b6d4",
       icon: <TrendingUp size={22} strokeWidth={2.2} />,
     },
     {
       t: "Account balance & equity",
-      p: "Real-time view of equity, margin level, open positions and historical performance — fully synced with MT5.",
+      p: "Real-time view of equity, margin level, open positions and historical performance, fully synced with MT5.",
       gradFrom: "#10b981", gradTo: "#059669",
       icon: <CircleDollarSign size={22} strokeWidth={2.2} />,
     },
     {
       t: "Quick deposit & withdraw",
-      p: "Fund via bank wire, card or crypto — request withdrawals from your phone in under a minute.",
+      p: "Fund via bank wire, card or crypto, request withdrawals from your phone in under a minute.",
       gradFrom: "#f97316", gradTo: "#ea580c",
       icon: <Zap size={22} strokeWidth={2.2} />,
     },
     {
       t: "Profile, KYC & alerts",
-      p: "Manage personal details, upload KYC documents, set price alerts and 2FA — all in one app.",
+      p: "Manage personal details, upload KYC documents, set price alerts and 2FA, all in one app.",
       gradFrom: "#8b5cf6", gradTo: "#6366f1",
       icon: <Shield size={22} strokeWidth={2.2} />,
     },
@@ -289,7 +289,7 @@ function MobileApp() {
   return (
     <section id="mobile" className="mobile-section mobile-section--with-art">
       <div className="container mobile-split">
-        {/* LEFT — app screen illustration (SVG iPhone model) */}
+        {/* LEFT, app screen illustration (SVG iPhone model) */}
         <motion.div
           className="mobile-phone-stage"
           initial={{ opacity: 0, y: 32 }}
@@ -299,14 +299,14 @@ function MobileApp() {
         >
           <img
             src="/assets/app-screen.svg"
-            alt="RakizFx companion app — balance, deposit, withdraw, profile and history"
+            alt="RakizFx companion app, balance, deposit, withdraw, profile and history"
           />
         </motion.div>
 
-        {/* RIGHT — copy + colorful features + badges */}
+        {/* RIGHT, copy + colorful features + badges */}
         <div>
           <h2 className="sec-title">{t("mobile.title")} <em>{t("mobile.title_em")}</em></h2>
-          <p className="sec-sub">The RakizFx companion app gives you live market data, account balance, deposits and withdrawals on the go. For trade execution, use MetaTrader 5 — fully integrated with the same account.</p>
+          <p className="sec-sub">The RakizFx companion app gives you live market data, account balance, deposits and withdrawals on the go. For trade execution, use MetaTrader 5, fully integrated with the same account.</p>
 
           <div className="mobile-features mobile-features--vivid">
             {feats.map((f, i) => (
@@ -800,7 +800,7 @@ function Nav({ route, onNav }) {
             aria-expanded={open}
           >
             {open ? (
-              /* X — shown when the menu is open, sits in the same slot as the burger */
+              /* X, shown when the menu is open, sits in the same slot as the burger */
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
                 <path d="M6 6l12 12"/><path d="M18 6L6 18"/>
               </svg>
@@ -886,7 +886,7 @@ function Nav({ route, onNav }) {
               <div className="mega-promo">
                 <span className="mega-chip">Get started</span>
                 <h5>Open a live account in 2 minutes</h5>
-                <p>Standard tier from $50. Card, bank wire or crypto — instant deposit, same-day withdrawal.</p>
+                <p>Standard tier from $50. Card, bank wire or crypto, instant deposit, same-day withdrawal.</p>
                 <a href="#register" className="btn btn-primary btn-sm" onClick={go("register")}>
                   Open Account
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
@@ -905,7 +905,7 @@ function Nav({ route, onNav }) {
           <a href="#home" onClick={go("home")} className="side-brand">
             <RakizLogo size={28} />
           </a>
-          {/* The close (X) lives in the navbar burger slot — see <Nav>'s burger
+          {/* The close (X) lives in the navbar burger slot, see <Nav>'s burger
               button which morphs between ☰ and ✕ based on `open`. */}
         </div>
 
@@ -930,7 +930,7 @@ function Nav({ route, onNav }) {
             <span>{t("nav.home")}</span>
           </a>
 
-          {/* Groups — accordion with sub-items */}
+          {/* Groups, accordion with sub-items */}
           {groups.map((g) => {
             const items = g.cols.flatMap((c: any) => c.items as Array<[string, string, string]>);
             const labelKey = `nav.${g.id === 'partner' ? 'partner' : g.id}`;
@@ -979,7 +979,7 @@ function Nav({ route, onNav }) {
           })}
         </nav>
 
-        {/* Language picker — lives inside the side menu on mobile */}
+        {/* Language picker, lives inside the side menu on mobile */}
         <div className="side-lang">
           <div className="side-lang-h">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -1009,7 +1009,7 @@ function Nav({ route, onNav }) {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
           </a>
           <a href="#login" className="btn btn-ghost side-cta" onClick={go("login")}>{t("cta.login")}</a>
-          <div className="side-meta">24/5 human support</div>
+          <div className="side-meta">24/7 support</div>
         </div>
       </aside>
     </>
@@ -1518,7 +1518,7 @@ function HeroSlider() {
     {
       eyebrow: "Our promise",
       title: <>Grow without <em>limits</em></>,
-      lede: "Institutional execution. Transparent pricing. The infrastructure you need to compound your edge — at any scale.",
+      lede: "Institutional execution. Transparent pricing. The infrastructure you need to compound your edge, at any scale.",
       cta: "Open free account",
       sub: "From $50 · 1,200+ instruments · 24/5",
       bg: "linear-gradient(135deg, #050505 0%, #0a1a12 60%, #061008 100%)",
@@ -1537,7 +1537,7 @@ function HeroSlider() {
     {
       eyebrow: "1,200+ instruments",
       title: <>One account. <em>Every market.</em></>,
-      lede: "Forex, indices, metals, energies, crypto and shares — from a single login.",
+      lede: "Forex, indices, metals, energies, crypto and shares, from a single login.",
       cta: "Explore markets",
       sub: "24/5 across all asset classes",
       bg: "linear-gradient(135deg, #0a0a0a 0%, #0d2418 100%)",
@@ -1606,7 +1606,7 @@ function HeroSlider() {
       </div>
       <div className="hs-trust container">
         <span>✓ Negative balance protection</span>
-        <span>✓ 24/5 human support</span>
+        <span>✓ 24/7 support</span>
         <span>✓ Same-day withdrawals</span>
       </div>
     </section>
@@ -1709,7 +1709,7 @@ function Hero({ variant = "split" }) {
           </h1>
           <p className="lede fade-up d3">
             RakizFx gives ambitious traders institutional-grade execution on 1,200+ instruments —
-            forex, indices, metals, energies and crypto — from a single account.
+            forex, indices, metals, energies and crypto, from a single account.
           </p>
           <div className="hero-ctas fade-up d4">
             <a href="#register" className="btn btn-primary btn-lg">
@@ -1832,8 +1832,8 @@ function Markets() {
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 22 }}>
           <div>
             <span className="eyebrow">Markets</span>
-            <h2 className="sec-title">1,200+ instruments — one account</h2>
-            <p className="sec-sub">Tight, transparent spreads across every major asset class — with no hidden markups, no requotes.</p>
+            <h2 className="sec-title">1,200+ instruments, one account</h2>
+            <p className="sec-sub">Tight, transparent spreads across every major asset class, with no hidden markups, no requotes.</p>
           </div>
           <a href="#" className="btn btn-ghost">All Instruments
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
@@ -1861,12 +1861,12 @@ function Why() {
   const items = [
     {
       t: "24/7 support",
-      p: "Real humans, around the clock. Average first response under 90 seconds — every day of the year.",
+      p: "Real humans, around the clock. Average first response under 90 seconds, every day of the year.",
       i: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>,
     },
     {
       t: "Fast deposit · easy withdraw",
-      p: "Instant deposits via card, wire or crypto. Withdrawals processed same day — no friction, no hidden fees.",
+      p: "Instant deposits via card, wire or crypto. Withdrawals processed same day, no friction, no hidden fees.",
       i: <><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/><path d="M19 12H5" transform="translate(0 6) scale(1 -1)"/></>,
     },
     {
@@ -1876,7 +1876,7 @@ function Why() {
     },
     {
       t: "Zero commission accounts",
-      p: "Every account tier — STP, Pro and Elite — trades commission-free. You pay only the spread.",
+      p: "Every account tier (Standard, Pro and Elite) trades commission-free.",
       i: <><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></>,
     },
   ];
@@ -2064,17 +2064,17 @@ function Platforms() {
 
 function Steps() {
   const steps = [
-    { t: "Sign up in 2 minutes", p: "Email and phone — that's it. No paperwork to start." },
+    { t: "Sign up in 2 minutes", p: "Email and phone, that's it. No paperwork to start." },
     { t: "Verify your identity", p: "Passport or government ID. Most users verified in under 10 minutes." },
     { t: "Fund your account", p: "Bank wire, card or crypto. From $50. Instant credits." },
-    { t: "Start trading", p: "MetaTrader 5 — desktop, web or mobile. Live or demo — your call." },
+    { t: "Start trading", p: "MetaTrader 5, desktop, web or mobile. Live or demo, your call." },
   ];
   return (
     <section id="open">
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <span className="eyebrow">Get started</span>
-          <h2 className="sec-title">From zero to your first trade — in 10 minutes</h2>
+          <h2 className="sec-title">From zero to your first trade, in 10 minutes</h2>
         </div>
         <div className="steps">
           {steps.map((s, i) => (
@@ -2127,7 +2127,7 @@ function Footer({ onNav }) {
     { h: "Trading",   l: [["markets","Markets"],["funding","Deposits & withdrawals"],["tools","Calculators"],["tools","Economic calendar"]] },
     { h: "Platforms", l: [["home","MetaTrader 5"],["home","MT5 Web"],["home","MT5 Mobile"]] },
     { h: "Company",   l: [["about","About"],["partners","Partners (IB)"],["careers","Careers"],["contact","Contact"]] },
-    { h: "Learn",     l: [["academy","Academy"],["academy","Glossary"],["faq","Help centre"],["faq","FAQ"]] },
+    { h: "Learn",     l: [["academy","Academy"],["faq","Help centre"],["faq","FAQ"]] },
     { h: "Legal",     l: [
       ["legal-privacy",          "Privacy Policy"],
       ["legal-terms",            "Terms and Conditions"],
@@ -2155,9 +2155,14 @@ function Footer({ onNav }) {
               RakizFx is the international trading brand of Rakiz Capital Ltd. Fair pricing, fast execution and 1,200+ markets on MetaTrader 5.
             </p>
             <div className="foot-contact">
-              <a href="mailto:support@rakizfx.com" className="foot-contact-row">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                support@rakizfx.com
+              <a href="mailto:support@rakizfx.com" className="foot-contact-row" aria-label="Email support">
+                <span className="foot-contact-ic" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2.5"/>
+                    <path d="m22 7-8.97 5.7a2 2 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </span>
+                <span>support@rakizfx.com</span>
               </a>
             </div>
           </div>
@@ -2213,7 +2218,7 @@ function Footer({ onNav }) {
 
 
 // ─── from premium.jsx ─────────────────────────────────────────────────
-// RakizFx — Premium broker sections
+// RakizFx, Premium broker sections
 // Stat counters, asset showcase, awards strip, account comparison, education teaser, full-bleed CTA
 
 
@@ -2399,7 +2404,7 @@ function AssetShowcase() {
   return (
     <section className="asset-showcase cfd-section">
       <div className="container cfd-split">
-        {/* LEFT — vertically scrolling card column */}
+        {/* LEFT, vertically scrolling card column */}
         <div className="cfd-marquee" aria-label="Markets">
           <ul className="cfd-marquee-track" role="list">
             {loop.map((m, i) => (
@@ -2431,7 +2436,7 @@ function AssetShowcase() {
           </ul>
         </div>
 
-        {/* RIGHT — static heading + description */}
+        {/* RIGHT, static heading + description */}
         <div className="cfd-copy">
           <h2 className="sec-title">{trans("asset.title")} <em>{trans("asset.title_em")}</em></h2>
           <p className="sec-sub">{trans("asset.sub")}</p>
@@ -2529,7 +2534,7 @@ function AccountCompare() {
               <a
                 href="#register"
                 className={`btn ${a.feat ? "btn-primary" : "btn-ghost"} acct-simple-cta`}
-                onClick={(e) => { e.preventDefault(); /* CRM disabled — click intentionally no-ops */ }}
+                onClick={(e) => { e.preventDefault(); /* CRM disabled, click intentionally no-ops */ }}
               >
                 {t("cta.open_account")}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
@@ -2550,7 +2555,7 @@ function EducationTeaser() {
     {
       level: "Beginner",
       title: "Forex foundations",
-      body: "Master the basics — quotes, lots, leverage and your first demo trade.",
+      body: "Master the basics, quotes, lots, leverage and your first demo trade.",
       lessons: 8,
       icon: <><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5a8 8 0 0 0 12 0v-5"/></>,
     },
@@ -2646,7 +2651,7 @@ function PlatformShowcase() {
     <section className="platform-showcase">
       <div className="container">
         <div className="section-head platform-head">
-          <h2 className="sec-title">{t("mt5.title")} — <em>{t("mt5.title_em")}</em></h2>
+          <h2 className="sec-title">{t("mt5.title")}, <em>{t("mt5.title_em")}</em></h2>
           <p className="sec-sub">{t("mt5.sub")}</p>
         </div>
 
@@ -2697,7 +2702,7 @@ function PlatformMockup() {
     <div className="pm-shell">
       <div className="pm-bar">
         <span className="pm-dot pm-r"/><span className="pm-dot pm-y"/><span className="pm-dot pm-g"/>
-        <span className="pm-title">MetaTrader 5 — RakizFx</span>
+        <span className="pm-title">MetaTrader 5, RakizFx</span>
       </div>
       <div className="pm-body">
         <aside className="pm-side">
@@ -2739,7 +2744,7 @@ function PlatformMockup() {
 
 
 // ─── from markets.jsx ─────────────────────────────────────────────────
-// RakizFx — Markets page (FxPro-style live overview, no charts)
+// RakizFx, Markets page (FxPro-style live overview, no charts)
 
 
 const MARKETS_DATA = {
@@ -2875,7 +2880,7 @@ function WhyTraders() {
     { t: "No commissions",             p: "Zero commission on Standard, Pro and Elite accounts on every trade.", i: "M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3" },
     { t: "Negative balance protection",p: "You can never lose more than your deposit. Built in for every account.", i: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
     { t: "Deep market liquidity",      p: "25+ liquidity providers and deep order-book depth on every instrument.", i: "M2 22V12a10 10 0 0 1 20 0v10M2 17h20M2 12h20" },
-    { t: "MetaTrader 5",               p: "The world's most advanced trading platform — desktop, web and mobile.", i: "M3 3h18v18H3zM3 9h18M9 21V9" },
+    { t: "MetaTrader 5",               p: "The world's most advanced trading platform, desktop, web and mobile.", i: "M3 3h18v18H3zM3 9h18M9 21V9" },
   ];
   return (
     <section className="why-traders">
@@ -2914,8 +2919,8 @@ function MarketsAccountTypes() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <span className="eyebrow">Account types</span>
-          <h2 className="sec-title">Three accounts — one mission</h2>
-          <p className="sec-sub" style={{ margin: "0 auto" }}>Pick the tier that matches your strategy. Upgrade anytime — no paperwork.</p>
+          <h2 className="sec-title">Three accounts, one mission</h2>
+          <p className="sec-sub" style={{ margin: "0 auto" }}>Pick the tier that matches your strategy. Upgrade anytime, no paperwork.</p>
         </div>
         <div className="accts">
           {accts.map((a, i) => (
@@ -2990,8 +2995,8 @@ function MarketsMT5Section() {
       <div className="container mkt-mt5-grid">
         <div>
           <span className="eyebrow">Trading platform</span>
-          <h2 className="sec-title">MetaTrader 5 — built for traders</h2>
-          <p className="sec-sub">The industry-standard platform — multi-asset, multi-timeframe, with advanced order types, expert advisors and full algorithmic support. Available on every device.</p>
+          <h2 className="sec-title">MetaTrader 5, built for traders</h2>
+          <p className="sec-sub">The industry-standard platform, multi-asset, multi-timeframe, with advanced order types, expert advisors and full algorithmic support. Available on every device.</p>
           <ul className="mt5-points">
             <li><span className="mt5-tick">⚡</span><div><b>One-click execution</b><span>Fast fills with no requotes</span></div></li>
             <li><span className="mt5-tick">📊</span><div><b>38 indicators · 21 timeframes</b><span>Plus depth of market</span></div></li>
@@ -3024,8 +3029,8 @@ function MarketsAppDownload() {
         </div>
         <div className="mkt-app-copy">
           <span className="eyebrow">Mobile app</span>
-          <h2 className="sec-title">RakizFx Companion — your account on the go</h2>
-          <p className="sec-sub">Track live prices, watchlists, balances and request deposits or withdrawals from your phone. Trading execution stays on MetaTrader 5 — secure, focused and fast.</p>
+          <h2 className="sec-title">RakizFx Companion, your account on the go</h2>
+          <p className="sec-sub">Track live prices, watchlists, balances and request deposits or withdrawals from your phone. Trading execution stays on MetaTrader 5, secure, focused and fast.</p>
           <div className="app-badges">
             <a href="#" className="app-badge">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5a4 4 0 0 1 2-3.4 4.2 4.2 0 0 0-3.3-1.8c-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.7a4.4 4.4 0 0 0-3.7 2.3c-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2-1.1 2.8-2.2.6-.8 1-1.7 1.3-2.6a3.9 3.9 0 0 1-2.6-3.6zM14.3 5.4a3.7 3.7 0 0 0 .9-2.7 3.9 3.9 0 0 0-2.5 1.3 3.6 3.6 0 0 0-.9 2.6 3.2 3.2 0 0 0 2.5-1.2z"/></svg>
@@ -3106,7 +3111,7 @@ function MarketsPageNew() {
         <div className="container">
           <span className="eyebrow">Markets</span>
           <h1 className="page-h1">Trade every major market</h1>
-          <p className="page-sub">1,200+ instruments across forex, metals, indices, energies, crypto and shares — from a single MetaTrader 5 account.</p>
+          <p className="page-sub">1,200+ instruments across forex, metals, indices, energies, crypto and shares, from a single MetaTrader 5 account.</p>
         </div>
       </section>
 
@@ -3170,22 +3175,22 @@ type MarketDetail = {
 const MARKET_DETAILS: Record<string, MarketDetail> = {
   forex: {
     name: "Forex",
-    oneLiner: "The largest, most liquid market on earth — trade the world's currencies 24 hours a day.",
+    oneLiner: "The largest, most liquid market on earth, trade the world's currencies 24 hours a day.",
     what: [
-      "Forex — short for foreign exchange — is the global market where one currency is traded for another. Every currency is quoted in pairs (for example EUR/USD: Euros against US Dollars), and the price reflects how much of the second currency one unit of the first will buy. When you trade forex you are simultaneously buying one currency and selling another.",
-      "The forex market is the largest financial market in the world, with daily turnover exceeding US$7 trillion. It runs across three overlapping sessions — Tokyo, London and New York — which together keep the market open continuously from Sunday evening through Friday evening. There is no central exchange: trades are matched electronically across a network of banks, brokers and liquidity providers (an over-the-counter or OTC market).",
+      "Forex, short for foreign exchange, is the global market where one currency is traded for another. Every currency is quoted in pairs (for example EUR/USD: Euros against US Dollars), and the price reflects how much of the second currency one unit of the first will buy. When you trade forex you are simultaneously buying one currency and selling another.",
+      "The forex market is the largest financial market in the world, with daily turnover exceeding US$7 trillion. It runs across three overlapping sessions, Tokyo, London and New York, which together keep the market open continuously from Sunday evening through Friday evening. There is no central exchange: trades are matched electronically across a network of banks, brokers and liquidity providers (an over-the-counter or OTC market).",
       "Major pairs (EUR/USD, GBP/USD, USD/JPY, USD/CHF) make up around 70% of total volume and typically have the tightest spreads. Minor and exotic pairs (e.g. USD/SGD, USD/TRY) are also available but tend to be more volatile and carry wider spreads.",
     ],
     how: [
-      "At RakizFx you trade forex as a contract for difference (CFD), meaning you take a position on the price movement without owning the underlying currency. You can go long (buy) if you expect the base currency to appreciate, or short (sell) if you expect it to fall — both with equal ease.",
+      "At RakizFx you trade forex as a contract for difference (CFD), meaning you take a position on the price movement without owning the underlying currency. You can go long (buy) if you expect the base currency to appreciate, or short (sell) if you expect it to fall, both with equal ease.",
       "Each forex trade is sized in lots: 1 standard lot equals 100,000 units of the base currency. Mini lots (10,000) and micro lots (1,000) are also supported, so position size always fits the account. Leverage of up to 1:500 on majors lets a small margin deposit control a much larger notional position.",
-      "Profit and loss are calculated in pips — the fourth decimal place for most pairs, or the second for JPY pairs. A 1-pip move on a 1-lot EUR/USD position equals approximately $10 of P/L. Positions held overnight are subject to a swap (rollover financing) based on the interest-rate differential between the two currencies.",
+      "Profit and loss are calculated in pips, the fourth decimal place for most pairs, or the second for JPY pairs. A 1-pip move on a 1-lot EUR/USD position equals approximately $10 of P/L. Positions held overnight are subject to a swap (rollover financing) based on the interest-rate differential between the two currencies.",
     ],
     benefits: [
       { t: "Spreads from 0.0 pips",   p: "Raw institutional pricing from 25+ tier-1 liquidity providers. Pro and Elite accounts get the tightest." },
       { t: "1:500 leverage on majors", p: "Maximise capital efficiency. Lower tiers available on exotics to manage volatility risk." },
       { t: "60+ currency pairs",       p: "Trade every major, minor and a curated set of exotic pairs from a single MT5 account." },
-      { t: "24/5 sessions",            p: "Tokyo open Sunday 22:00 GMT, New York close Friday 22:00 GMT — never miss a move." },
+      { t: "24/5 sessions",            p: "Tokyo open Sunday 22:00 GMT, New York close Friday 22:00 GMT, never miss a move." },
     ],
     conditions: [
       ["Asset class",      "Currency CFDs"],
@@ -3208,8 +3213,8 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
       { sym: "EUR/GBP", name: "Euro / Pound",              spread: "0.3", leverage: "1:500", size: "100,000 EUR" },
     ],
     terms: [
-      { t: "Pip",      d: "Smallest standardised price move — 0.0001 for most pairs, 0.01 for JPY pairs." },
-      { t: "Spread",   d: "Difference between bid (sell) and ask (buy) — your direct cost of entering the trade." },
+      { t: "Pip",      d: "Smallest standardised price move, 0.0001 for most pairs, 0.01 for JPY pairs." },
+      { t: "Spread",   d: "Difference between bid (sell) and ask (buy), your direct cost of entering the trade." },
       { t: "Leverage", d: "Borrowed exposure expressed as a ratio. 1:500 means $1 of margin controls $500 of notional." },
       { t: "Swap",     d: "Overnight interest charged or paid based on the rate differential between the two currencies." },
       { t: "Lot",      d: "Standard contract size: 1 lot = 100,000 base-currency units. Mini = 10,000, micro = 1,000." },
@@ -3219,20 +3224,20 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
 
   metals: {
     name: "Metals",
-    oneLiner: "Trade gold, silver, platinum and palladium — the world's oldest safe-haven assets.",
+    oneLiner: "Trade gold, silver, platinum and palladium, the world's oldest safe-haven assets.",
     what: [
       "Precious metals are physical commodities valued for their scarcity, industrial uses and long history as stores of value. The four metals most actively traded as CFDs are gold (XAU), silver (XAG), platinum (XPT) and palladium (XPD), each quoted against the US dollar in dollars per troy ounce.",
-      "Gold has the deepest market and is treated by traders as a hedge against inflation, currency debasement and geopolitical risk — its price tends to rise when real interest rates fall or when investors lose confidence in fiat currencies. Silver moves more dramatically (often 2–3× gold's volatility) and combines monetary and industrial demand.",
-      "Platinum and palladium are predominantly industrial metals — used in catalytic converters, electronics and clean-tech manufacturing — so their prices are influenced more by global manufacturing cycles and supply disruptions (notably South African and Russian production) than by monetary policy.",
+      "Gold has the deepest market and is treated by traders as a hedge against inflation, currency debasement and geopolitical risk, its price tends to rise when real interest rates fall or when investors lose confidence in fiat currencies. Silver moves more dramatically (often 2–3× gold's volatility) and combines monetary and industrial demand.",
+      "Platinum and palladium are predominantly industrial metals, used in catalytic converters, electronics and clean-tech manufacturing, so their prices are influenced more by global manufacturing cycles and supply disruptions (notably South African and Russian production) than by monetary policy.",
     ],
     how: [
       "Metals CFDs at RakizFx let you trade the spot price of each metal without taking physical delivery, storing bullion or paying assay/insurance costs. Open a long or short position with one click, settle in USD, and roll over indefinitely.",
-      "1 standard lot of gold (XAU/USD) is 100 troy ounces — so a $1 move on a 1-lot position equals $100 of P/L. Silver lots are 5,000 troy ounces. Leverage of up to 1:200 lets a small deposit control a meaningful position; micro and mini lots are available on Pro and Elite for fine-grained sizing.",
+      "1 standard lot of gold (XAU/USD) is 100 troy ounces, so a $1 move on a 1-lot position equals $100 of P/L. Silver lots are 5,000 troy ounces. Leverage of up to 1:200 lets a small deposit control a meaningful position; micro and mini lots are available on Pro and Elite for fine-grained sizing.",
       "Metals trade nearly 23 hours a day, 5 days a week, with a short daily break around the US futures close. Spreads tighten during London and New York overlap (12:00–17:00 GMT) when liquidity is deepest.",
     ],
     benefits: [
-      { t: "Spot pricing",         p: "True spot quotes derived from London bullion fixings — no expiry to manage." },
-      { t: "Tight gold spreads",   p: "From 12 pips on XAU/USD during peak liquidity — competitive with ETF alternatives." },
+      { t: "Spot pricing",         p: "True spot quotes derived from London bullion fixings, no expiry to manage." },
+      { t: "Tight gold spreads",   p: "From 12 pips on XAU/USD during peak liquidity, competitive with ETF alternatives." },
       { t: "Up to 1:200 leverage", p: "Efficient capital deployment on a volatile, news-driven asset class." },
       { t: "All 4 metals",         p: "Gold, silver, platinum and palladium from one MT5 account, no custody fees." },
     ],
@@ -3243,7 +3248,7 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
       ["Max leverage",    "1:200 (gold), 1:100 (silver), 1:50 (platinum/palladium)"],
       ["Contract size",   "Gold: 100 oz · Silver: 5,000 oz"],
       ["Commission",      "Zero on Standard"],
-      ["Swap",            "Applied daily — direction depends on long/short and storage costs"],
+      ["Swap",            "Applied daily, direction depends on long/short and storage costs"],
       ["Hours",           "Sunday 23:00 GMT → Friday 22:00 GMT (daily 22:00–23:00 GMT break)"],
     ],
     instruments: [
@@ -3255,7 +3260,7 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     terms: [
       { t: "Troy ounce", d: "Standard precious-metals weight unit (~31.1g). All metal CFDs are priced per troy oz." },
       { t: "Spot price", d: "Current market price for immediate delivery, as opposed to a future-dated contract." },
-      { t: "Bid/Ask",    d: "Buy and sell quotes — the spread between them is your cost of entry." },
+      { t: "Bid/Ask",    d: "Buy and sell quotes, the spread between them is your cost of entry." },
       { t: "Storage",    d: "Annualised cost reflected in the swap rate when holding long positions overnight." },
       { t: "Fix",        d: "Twice-daily London price benchmark (10:30 / 15:00 GMT for gold) widely used by institutions." },
     ],
@@ -3263,19 +3268,19 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
 
   indices: {
     name: "Indices",
-    oneLiner: "Trade entire economies in a single ticker — long or short, with leverage.",
+    oneLiner: "Trade entire economies in a single ticker, long or short, with leverage.",
     what: [
-      "A stock index measures the performance of a basket of shares — typically the largest or most representative companies in a market. The S&P 500 (US500), for example, tracks the 500 largest US-listed companies; the Nasdaq 100 (NAS100) tracks the 100 largest non-financial Nasdaq stocks. The level of the index is a weighted average of its constituents.",
-      "Index CFDs let you take a view on the overall direction of a market — bullish or bearish — without buying every individual stock. They're widely used to hedge equity portfolios, speculate on macro releases (CPI, payrolls, FOMC) or capture cyclical rotations between regions and sectors.",
-      "RakizFx offers cash CFDs on the major global indices: US500, NAS100, US30, GER40 (DAX), UK100 (FTSE), JP225 (Nikkei), IN50 (Nifty) and HK50 (Hang Seng) — covering North America, Europe and Asia from one account.",
+      "A stock index measures the performance of a basket of shares, typically the largest or most representative companies in a market. The S&P 500 (US500), for example, tracks the 500 largest US-listed companies; the Nasdaq 100 (NAS100) tracks the 100 largest non-financial Nasdaq stocks. The level of the index is a weighted average of its constituents.",
+      "Index CFDs let you take a view on the overall direction of a market, bullish or bearish, without buying every individual stock. They're widely used to hedge equity portfolios, speculate on macro releases (CPI, payrolls, FOMC) or capture cyclical rotations between regions and sectors.",
+      "RakizFx offers cash CFDs on the major global indices: US500, NAS100, US30, GER40 (DAX), UK100 (FTSE), JP225 (Nikkei), IN50 (Nifty) and HK50 (Hang Seng), covering North America, Europe and Asia from one account.",
     ],
     how: [
-      "Each index CFD price tracks the underlying index in real-time, with no expiry — you can hold positions indefinitely. Long if you expect the index to rise, short if you expect it to fall. Going short on an index CFD doesn't require borrowing the underlying stocks — a key advantage over cash equity short-selling.",
+      "Each index CFD price tracks the underlying index in real-time, with no expiry, you can hold positions indefinitely. Long if you expect the index to rise, short if you expect it to fall. Going short on an index CFD doesn't require borrowing the underlying stocks, a key advantage over cash equity short-selling.",
       "Contract sizes vary by index: 1 lot of US500 is 50 index points (so a $1 move = $50 P/L), while 1 lot of NAS100 is 20 points. Leverage of up to 1:200 lets you scale exposure efficiently. Most indices trade 23 hours a day, 5 days a week, with a short daily break for futures rollover.",
-      "When the underlying index components pay dividends, a cash adjustment is credited (to longs) or debited (from shorts) on the ex-dividend day — so your P/L is unaffected by the dividend itself.",
+      "When the underlying index components pay dividends, a cash adjustment is credited (to longs) or debited (from shorts) on the ex-dividend day, so your P/L is unaffected by the dividend itself.",
     ],
     benefits: [
-      { t: "Tight spreads",          p: "From 0.2 points on US500 during peak liquidity — competitive with ETF alternatives." },
+      { t: "Tight spreads",          p: "From 0.2 points on US500 during peak liquidity, competitive with ETF alternatives." },
       { t: "Long or short instantly", p: "No short-borrow restrictions or locate fees. One click to hedge or speculate." },
       { t: "Leverage up to 1:200",    p: "Efficient exposure to broad markets without tying up equity capital." },
       { t: "Dividend adjustments",   p: "Handled automatically and transparently on ex-dividend day." },
@@ -3287,8 +3292,8 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
       ["Max leverage",  "1:200 on majors, 1:100 on emerging"],
       ["Contract size", "US500: 50/lot · NAS100: 20/lot · varies by index"],
       ["Commission",    "Zero"],
-      ["Hours",         "Approximately 23 hours/day, 5 days/week — varies by index"],
-      ["Expiry",        "None — cash CFDs roll continuously"],
+      ["Hours",         "Approximately 23 hours/day, 5 days/week, varies by index"],
+      ["Expiry",        "None, cash CFDs roll continuously"],
     ],
     instruments: [
       { sym: "US500",  name: "S&P 500",          spread: "0.2", leverage: "1:200", size: "50/pt" },
@@ -3302,7 +3307,7 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     ],
     terms: [
       { t: "Index point",  d: "The basic unit by which an index moves. The value of one point depends on the index's contract size." },
-      { t: "Cash CFD",     d: "Rolling contract that tracks the spot index value — no expiry, no contract roll." },
+      { t: "Cash CFD",     d: "Rolling contract that tracks the spot index value, no expiry, no contract roll." },
       { t: "Weighting",    d: "How each constituent contributes to the index. S&P 500 is market-cap weighted; Dow is price-weighted." },
       { t: "Ex-dividend",  d: "Day when a constituent stock pays a dividend; the index opens lower by the weighted amount." },
       { t: "Futures roll", d: "Brief daily window when underlying index futures roll between contract months." },
@@ -3311,21 +3316,21 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
 
   energies: {
     name: "Energies",
-    oneLiner: "Trade crude oil and natural gas — the commodities that power the global economy.",
+    oneLiner: "Trade crude oil and natural gas, the commodities that power the global economy.",
     what: [
       "Energy CFDs cover the most actively traded fossil-fuel commodities: WTI crude (US light sweet), Brent crude (the North Sea benchmark) and natural gas (NGAS, the Henry Hub US benchmark). Crude oil is priced in US dollars per barrel; natural gas in US dollars per MMBtu (million British thermal units).",
-      "Oil prices are driven by a mix of supply factors (OPEC+ output decisions, US shale production, geopolitical disruptions) and demand factors (global GDP, refinery margins, seasonal driving and heating demand). The spread between WTI and Brent — the 'Brent–WTI differential' — reflects regional supply and shipping economics.",
+      "Oil prices are driven by a mix of supply factors (OPEC+ output decisions, US shale production, geopolitical disruptions) and demand factors (global GDP, refinery margins, seasonal driving and heating demand). The spread between WTI and Brent, the 'Brent–WTI differential', reflects regional supply and shipping economics.",
       "Natural gas is more seasonal and weather-driven than oil: winter heating demand in the northern hemisphere and summer cooling demand both move price meaningfully. US storage inventories (published weekly by the EIA) are a closely-watched fundamental.",
     ],
     how: [
-      "Energy CFDs at RakizFx are cash-settled and rolling — you never take physical delivery or have to manage contract expiry. We roll positions seamlessly into the next active futures month, with the price adjustment reflected transparently in the swap.",
-      "Spreads are quoted in dollars per barrel (oil) or dollars per MMBtu (gas). 1 lot of WTI or Brent is 1,000 barrels — so a $0.01 move on a 1-lot position equals $10 P/L. Natural gas lots are 10,000 MMBtu. Leverage up to 1:100 on energy contracts lets you scale exposure efficiently.",
-      "Markets are open nearly 23 hours a day, 5 days a week, with the deepest liquidity during the US session (12:00–21:00 GMT) — when Cushing inventory data, EIA reports and refinery news typically hit.",
+      "Energy CFDs at RakizFx are cash-settled and rolling, you never take physical delivery or have to manage contract expiry. We roll positions seamlessly into the next active futures month, with the price adjustment reflected transparently in the swap.",
+      "Spreads are quoted in dollars per barrel (oil) or dollars per MMBtu (gas). 1 lot of WTI or Brent is 1,000 barrels, so a $0.01 move on a 1-lot position equals $10 P/L. Natural gas lots are 10,000 MMBtu. Leverage up to 1:100 on energy contracts lets you scale exposure efficiently.",
+      "Markets are open nearly 23 hours a day, 5 days a week, with the deepest liquidity during the US session (12:00–21:00 GMT), when Cushing inventory data, EIA reports and refinery news typically hit.",
     ],
     benefits: [
-      { t: "Both crude benchmarks", p: "WTI and Brent in one place — trade the differential or pick the cleaner technical setup." },
-      { t: "Tight spreads",         p: "From $0.018 on WTI — competitive with energy ETFs and without expiry friction." },
-      { t: "No contract rolls",     p: "Cash-settled CFDs handle futures rollover automatically — no manual contract switching." },
+      { t: "Both crude benchmarks", p: "WTI and Brent in one place, trade the differential or pick the cleaner technical setup." },
+      { t: "Tight spreads",         p: "From $0.018 on WTI, competitive with energy ETFs and without expiry friction." },
+      { t: "No contract rolls",     p: "Cash-settled CFDs handle futures rollover automatically, no manual contract switching." },
       { t: "1:100 leverage",        p: "Efficient deployment on a high-volatility, news-driven asset class." },
     ],
     conditions: [
@@ -3345,38 +3350,38 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     ],
     terms: [
       { t: "Barrel",       d: "Standard oil-pricing unit: 42 US gallons. All oil CFDs are quoted in USD per barrel." },
-      { t: "Contango",     d: "Forward-month futures trading above spot — typical in oversupplied markets." },
-      { t: "Backwardation", d: "Forward months trading below spot — bullish signal, common in tight markets." },
-      { t: "EIA report",   d: "Weekly US crude/gas inventory data — released Wednesdays 14:30 GMT, often moves price sharply." },
+      { t: "Contango",     d: "Forward-month futures trading above spot, typical in oversupplied markets." },
+      { t: "Backwardation", d: "Forward months trading below spot, bullish signal, common in tight markets." },
+      { t: "EIA report",   d: "Weekly US crude/gas inventory data, released Wednesdays 14:30 GMT, often moves price sharply." },
       { t: "OPEC+",        d: "Cartel + Russia/allies that coordinates oil-output decisions, meeting roughly monthly." },
     ],
   },
 
   crypto: {
     name: "Crypto",
-    oneLiner: "Trade Bitcoin, Ethereum and major altcoins — 24/7, long or short, no custody hassle.",
+    oneLiner: "Trade Bitcoin, Ethereum and major altcoins, 24/7, long or short, no custody hassle.",
     what: [
       "Cryptocurrencies are digital assets recorded on decentralised blockchains. Bitcoin (BTC), launched in 2009, is the original and most valuable; Ethereum (ETH) is the most actively used platform for smart contracts; Solana (SOL), Ripple (XRP), Cardano (ADA) and others form a long tail of altcoins with varying use-cases and risk profiles.",
-      "Crypto markets trade 24 hours a day, 7 days a week, with no central exchange — prices on RakizFx are aggregated from major spot venues (Binance, Coinbase, Kraken) to give a representative composite. Volatility is high: daily moves of 5–10% in BTC are not uncommon, and altcoins can swing two or three times that.",
-      "Crypto CFDs let you take a view on the price without buying, custodying or transferring the underlying coin. There's no wallet to secure, no hot-wallet hack risk, no on-chain transaction fees — you simply open a long or short position in your MT5 account.",
+      "Crypto markets trade 24 hours a day, 7 days a week, with no central exchange, prices on RakizFx are aggregated from major spot venues (Binance, Coinbase, Kraken) to give a representative composite. Volatility is high: daily moves of 5–10% in BTC are not uncommon, and altcoins can swing two or three times that.",
+      "Crypto CFDs let you take a view on the price without buying, custodying or transferring the underlying coin. There's no wallet to secure, no hot-wallet hack risk, no on-chain transaction fees, you simply open a long or short position in your MT5 account.",
     ],
     how: [
-      "RakizFx quotes major crypto pairs against the US dollar: BTC/USD, ETH/USD, SOL/USD, XRP/USD and a curated set of altcoins. Lot sizes are designed for fractional exposure — 1 lot of BTC/USD is 1 BTC, with micro lots down to 0.01 BTC. Leverage of up to 1:20 on crypto is below most asset classes because of the higher volatility.",
-      "You can go long (buy) or short (sell) with equal ease — short-selling crypto without owning it would otherwise require a borrowing arrangement on a spot exchange. Positions held overnight are subject to a swap reflecting funding rates from perpetual-futures markets.",
-      "Crypto trades 24/7, including weekends — useful when major US/EU-asset markets are closed and crypto often becomes the only liquid expression of risk sentiment.",
+      "RakizFx quotes major crypto pairs against the US dollar: BTC/USD, ETH/USD, SOL/USD, XRP/USD and a curated set of altcoins. Lot sizes are designed for fractional exposure, 1 lot of BTC/USD is 1 BTC, with micro lots down to 0.01 BTC. Leverage of up to 1:20 on crypto is below most asset classes because of the higher volatility.",
+      "You can go long (buy) or short (sell) with equal ease, short-selling crypto without owning it would otherwise require a borrowing arrangement on a spot exchange. Positions held overnight are subject to a swap reflecting funding rates from perpetual-futures markets.",
+      "Crypto trades 24/7, including weekends, useful when major US/EU-asset markets are closed and crypto often becomes the only liquid expression of risk sentiment.",
     ],
     benefits: [
-      { t: "24/7 markets",        p: "Trade weekends and holidays — when other asset classes are shut." },
-      { t: "Long or short",       p: "No custody, no borrow arrangement, no wallet security — just price exposure." },
+      { t: "24/7 markets",        p: "Trade weekends and holidays, when other asset classes are shut." },
+      { t: "Long or short",       p: "No custody, no borrow arrangement, no wallet security, just price exposure." },
       { t: "Major coins covered", p: "BTC, ETH, SOL, XRP and a curated set of altcoins from one MT5 account." },
-      { t: "1:20 leverage",       p: "Calibrated to crypto volatility — higher tiers available on lower-volatility coins." },
+      { t: "1:20 leverage",       p: "Calibrated to crypto volatility, higher tiers available on lower-volatility coins." },
     ],
     conditions: [
       ["Asset class",   "Crypto CFDs"],
       ["Pairs",         "BTC/USD, ETH/USD, SOL/USD, XRP/USD and select altcoins"],
       ["Min spread",    "18 pips on BTC/USD (Elite)"],
       ["Max leverage",  "1:20 on BTC and ETH, 1:10 on altcoins"],
-      ["Contract size", "1 BTC, 1 ETH, etc. — micro lots from 0.01"],
+      ["Contract size", "1 BTC, 1 ETH, etc., micro lots from 0.01"],
       ["Commission",    "Zero"],
       ["Swap",          "Reflects perpetual-futures funding rates"],
       ["Hours",         "24 hours a day, 7 days a week"],
@@ -3389,31 +3394,31 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     ],
     terms: [
       { t: "Blockchain", d: "Distributed ledger that records all transactions of a cryptocurrency, secured by cryptography." },
-      { t: "Volatility", d: "Crypto moves typically 3–5× the magnitude of major FX — sizing should adjust accordingly." },
+      { t: "Volatility", d: "Crypto moves typically 3–5× the magnitude of major FX, sizing should adjust accordingly." },
       { t: "Halving",    d: "Pre-programmed event that cuts Bitcoin's block reward in half every ~4 years, reducing new supply." },
-      { t: "Funding rate", d: "Hourly payment between long and short perpetual-futures holders — reflected in our swap." },
+      { t: "Funding rate", d: "Hourly payment between long and short perpetual-futures holders, reflected in our swap." },
       { t: "Altcoin",    d: "Any cryptocurrency other than Bitcoin. Major altcoins include ETH, SOL, XRP, ADA." },
     ],
   },
 
   shares: {
     name: "Shares",
-    oneLiner: "Trade global stocks as CFDs — long or short, with leverage, dividends handled.",
+    oneLiner: "Trade global stocks as CFDs, long or short, with leverage, dividends handled.",
     what: [
-      "A share (or stock) represents a fractional ownership stake in a publicly-listed company. When you trade a share CFD with RakizFx, you take a position on the stock's price movement without buying the underlying share — no broker account, no dividend tax forms, no share-registry friction.",
+      "A share (or stock) represents a fractional ownership stake in a publicly-listed company. When you trade a share CFD with RakizFx, you take a position on the stock's price movement without buying the underlying share, no broker account, no dividend tax forms, no share-registry friction.",
       "RakizFx covers 100+ of the most actively-traded shares from the US, Europe and Asia, including the FAANG / Magnificent-7 names (AAPL, MSFT, NVDA, GOOG, AMZN, META, TSLA) plus a broad range of large-cap names across financials, healthcare, energy and consumer.",
-      "Share prices move on company-specific news (earnings, product launches, M&A, management changes) and on broader market or sector dynamics. They typically trade only during the underlying exchange's hours — for US shares that's 13:30–20:00 GMT during US daylight time.",
+      "Share prices move on company-specific news (earnings, product launches, M&A, management changes) and on broader market or sector dynamics. They typically trade only during the underlying exchange's hours, for US shares that's 13:30–20:00 GMT during US daylight time.",
     ],
     how: [
-      "Share CFDs at RakizFx are priced from the underlying exchange in real-time. You can go long (buy) if you expect the price to rise, or short (sell) if you expect it to fall — without the share-borrowing arrangements normally required for shorting.",
-      "1 lot equals 100 shares — so a $1 move on a 1-lot position equals $100 of P/L. Fractional lots down to 1 share are available. Leverage up to 1:20 on shares balances exposure with risk on a volatile asset class.",
+      "Share CFDs at RakizFx are priced from the underlying exchange in real-time. You can go long (buy) if you expect the price to rise, or short (sell) if you expect it to fall, without the share-borrowing arrangements normally required for shorting.",
+      "1 lot equals 100 shares, so a $1 move on a 1-lot position equals $100 of P/L. Fractional lots down to 1 share are available. Leverage up to 1:20 on shares balances exposure with risk on a volatile asset class.",
       "Dividends are handled transparently: on ex-dividend day, long positions are credited the net dividend amount and short positions are debited the gross amount. The share price usually opens lower by the dividend amount, so the net P/L position is approximately neutral.",
     ],
     benefits: [
-      { t: "100+ global stocks", p: "US, EU and Asian names — including all FAANG and the Magnificent-7." },
+      { t: "100+ global stocks", p: "US, EU and Asian names, including all FAANG and the Magnificent-7." },
       { t: "Long or short",      p: "Take either side without share-borrow arrangements or locate fees." },
-      { t: "Leverage up to 1:20", p: "Efficient deployment for high-conviction setups — calibrated to share volatility." },
-      { t: "Dividend adjustments", p: "Handled automatically on ex-dividend day — your P/L is unaffected by the payout." },
+      { t: "Leverage up to 1:20", p: "Efficient deployment for high-conviction setups, calibrated to share volatility." },
+      { t: "Dividend adjustments", p: "Handled automatically on ex-dividend day, your P/L is unaffected by the payout." },
     ],
     conditions: [
       ["Asset class",   "Share CFDs"],
@@ -3421,8 +3426,8 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
       ["Min spread",    "From 0.08 on AAPL (Elite)"],
       ["Max leverage",  "1:20 on majors, 1:10 on small caps"],
       ["Contract size", "1 lot = 100 shares · fractional lots from 1 share"],
-      ["Commission",    "Zero — cost is in the spread"],
-      ["Hours",         "Tracks each exchange — typically 09:30–16:00 local time"],
+      ["Commission",    "Zero, cost is in the spread"],
+      ["Hours",         "Tracks each exchange, typically 09:30–16:00 local time"],
       ["Dividends",     "Credited (long) / debited (short) on ex-date"],
     ],
     instruments: [
@@ -3437,10 +3442,10 @@ const MARKET_DETAILS: Record<string, MarketDetail> = {
     ],
     terms: [
       { t: "Ex-dividend day", d: "First trading day on which buyers no longer qualify for the upcoming dividend." },
-      { t: "Earnings",        d: "Quarterly results report — historically the largest single-day price-move catalyst per stock." },
-      { t: "Market cap",      d: "Total value of a company's listed shares — share price × shares outstanding." },
-      { t: "Float",           d: "Number of shares freely tradable in the market — excludes insider/restricted holdings." },
-      { t: "Beta",            d: "Volatility of a stock relative to its parent index — beta = 1 moves in line with the market." },
+      { t: "Earnings",        d: "Quarterly results report, historically the largest single-day price-move catalyst per stock." },
+      { t: "Market cap",      d: "Total value of a company's listed shares, share price × shares outstanding." },
+      { t: "Float",           d: "Number of shares freely tradable in the market, excludes insider/restricted holdings." },
+      { t: "Beta",            d: "Volatility of a stock relative to its parent index, beta = 1 moves in line with the market." },
     ],
   },
 };
@@ -3471,7 +3476,7 @@ function AssetClassDetail({ kind }: { kind: string }) {
         </div>
       </section>
 
-      {/* 1. What is [asset] — two paragraphs */}
+      {/* 1. What is [asset], two paragraphs */}
       <section className="asset-explain">
         <div className="container asset-explain-simple">
           <p>{data.what[0]}</p>
@@ -3524,7 +3529,7 @@ function AssetClassDetail({ kind }: { kind: string }) {
       <section className="asset-cta-section">
         <div className="container asset-cta-block">
           <h2>Ready to trade {lower}?</h2>
-          <p>Open a live RakizFx account in 2 minutes — from $50.</p>
+          <p>Open a live RakizFx account in 2 minutes, from $50.</p>
           <div className="asset-cta-row">
             <a href="#register" className="btn btn-primary btn-lg">
               {t("cta.open_account")}
@@ -3548,7 +3553,7 @@ function PromotionPage() {
         <div className="container">
           <span className="eyebrow">Promotion</span>
           <h1 className="page-h1">Welcome Bonus</h1>
-          <p className="page-sub">A one-time first-deposit boost for new RakizFx clients — extra trading capital, real conditions, no gimmicks.</p>
+          <p className="page-sub">A one-time first-deposit boost for new RakizFx clients, extra trading capital, real conditions, no gimmicks.</p>
         </div>
       </section>
 
@@ -3557,10 +3562,10 @@ function PromotionPage() {
           <div className="welcome-bonus-shell">
             <div className="welcome-bonus-card">
               <span className="welcome-bonus-pill">★ Limited offer</span>
-              <h2 className="welcome-bonus-h2">30% deposit match — up to $300</h2>
+              <h2 className="welcome-bonus-h2">30% deposit match, up to $300</h2>
               <p className="welcome-bonus-p">
                 Open and fund your first RakizFx live account and we&rsquo;ll boost your
-                initial deposit by 30% with bonus trading credit — up to a maximum of $300.
+                initial deposit by 30% with bonus trading credit, up to a maximum of $300.
                 Credit lands instantly and converts to withdrawable balance as you trade.
               </p>
 
@@ -3596,7 +3601,7 @@ function PromotionPage() {
                 <span className="welcome-bonus-num">1</span>
                 <div>
                   <b>Open a live account</b>
-                  <span>Standard, Pro or Elite — all tiers eligible</span>
+                  <span>Standard, Pro or Elite, all tiers eligible</span>
                 </div>
               </li>
               <li>
@@ -3641,7 +3646,7 @@ function AffiliatePage() {
     { t: "Fast & secure payments",            p: "Daily settlements to bank, card or crypto wallet.", i: <><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></> },
     { t: "Dedicated affiliate support",       p: "A relationship manager assigned from day one.", i: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></> },
     { t: "Real-time tracking dashboard",      p: "Live conversions, click-through and lifetime value per channel.", i: <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></> },
-    { t: "Global reach",                      p: "Convert audiences in 60+ countries — promote across markets.", i: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></> },
+    { t: "Global reach",                      p: "Convert audiences in 60+ countries, promote across markets.", i: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></> },
     { t: "Premium creative kit",              p: "Co-branded banners, landing pages and pre-built funnels.", i: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></> },
   ];
   return (
@@ -3650,14 +3655,14 @@ function AffiliatePage() {
         <div className="container">
           <span className="eyebrow">Affiliate program</span>
           <h1 className="page-h1">Earn for every trader you bring</h1>
-          <p className="page-sub">Performance-based payouts, real-time tracking and the marketing kit to convert. Choose CPA or revenue share — switch anytime.</p>
+          <p className="page-sub">Performance-based payouts, real-time tracking and the marketing kit to convert. Choose CPA or revenue share, switch anytime.</p>
         </div>
       </section>
       <section style={{ paddingTop: 0 }}>
         <div className="container">
           <div className="affiliate-grid">
             <div className="card affiliate-card">
-              <h3>CPA — pay per acquisition</h3>
+              <h3>CPA, pay per acquisition</h3>
               <p>One-time payout per funded trader, up to <b>$1,200</b> per qualified referral. Tiered by trader deposit size.</p>
               <ul>
                 <li>$300 per $500-funded account</li>
@@ -3752,12 +3757,12 @@ function CareersPage() {
     message.trim().length > 5;
 
   // Open the user's mail client with everything pre-filled to
-  // support@rakizfx.com — message guaranteed to reach the inbox.
+  // support@rakizfx.com, message guaranteed to reach the inbox.
   // Works identically on localhost and production, no backend.
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSubmit) return;
-    const subject = encodeURIComponent(`Careers enquiry — ${name.trim()}`);
+    const subject = encodeURIComponent(`Careers enquiry, ${name.trim()}`);
     const body = encodeURIComponent(
       `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}\n\n—\nSent from rakizfx.com/#careers`
     );
@@ -3863,7 +3868,7 @@ function HelpCenterPage() {
     { h: "Getting started", links: ["Open a live account", "Verify your identity (KYC)", "Choose the right account type", "Switch from another broker"] },
     { h: "Funding",          links: ["Bank wire instructions", "Card deposits & withdrawal limits", "Crypto deposits", "Why was my deposit delayed?"] },
     { h: "Trading",          links: ["Place your first trade", "Order types explained", "Margin, leverage and stop-out", "What is swap / rollover?"] },
-    { h: "Platforms",        links: ["Install MetaTrader 5", "Connect MT5 to your account", "Mobile app — get started", "Run Expert Advisors (EAs)"] },
+    { h: "Platforms",        links: ["Install MetaTrader 5", "Connect MT5 to your account", "Mobile app, get started", "Run Expert Advisors (EAs)"] },
     { h: "Account",          links: ["Change your password", "Enable 2FA", "Update bank details", "Close my account"] },
     { h: "Bonuses",          links: ["Claim the welcome bonus", "Bonus volume requirements", "Referral program rules", "Cashback eligibility"] },
   ];
@@ -3873,7 +3878,7 @@ function HelpCenterPage() {
         <div className="container">
           <span className="eyebrow">Help center</span>
           <h1 className="page-h1">Get the answers you need, fast</h1>
-          <p className="page-sub">Browse by topic or open live chat — average reply time under 90 seconds.</p>
+          <p className="page-sub">Browse by topic or open live chat, average reply time under 90 seconds.</p>
         </div>
       </section>
       <section style={{ paddingTop: 0 }}>
@@ -3896,7 +3901,7 @@ function HelpCenterPage() {
 
 
 // ─── from pages.jsx ───────────────────────────────────────────────────
-// RakizFx — Broker information pages (real terminology, no AI filler)
+// RakizFx, Broker information pages (real terminology, no AI filler)
 
 
 // ─────────────────────────────────────────────────────────────
@@ -4023,15 +4028,15 @@ function TradingConditionsPage() {
             </div>
             <div className="card">
               <h3>Negative balance protection</h3>
-              <p>Retail client accounts are protected against negative equity. In a gap event, your balance is automatically reset to zero — you can never owe more than you deposit.</p>
+              <p>Retail client accounts are protected against negative equity. In a gap event, your balance is automatically reset to zero, you can never owe more than you deposit.</p>
             </div>
             <div className="card">
               <h3>Margin call & stop-out</h3>
-              <p>Margin call at 100% margin level. Stop-out begins at 50% — open positions are closed largest-loss-first to bring margin level back above stop-out.</p>
+              <p>Margin call at 100% margin level. Stop-out begins at 50%, open positions are closed largest-loss-first to bring margin level back above stop-out.</p>
             </div>
             <div className="card">
               <h3>Swap & rollover</h3>
-              <p>Swap rates are applied at 23:59 server time (EET) and triple-swap on Wednesday rollover. Swap-free (Islamic) option available on all account types — request from your Client Area.</p>
+              <p>Swap rates are applied at 23:59 server time (EET) and triple-swap on Wednesday rollover. Swap-free (Islamic) option available on all account types, request from your Client Area.</p>
             </div>
           </div>
         </div>
@@ -4055,7 +4060,7 @@ function FundingPage() {
       <PageHeader
         eyebrow="Deposits & withdrawals"
         title="Move money in minutes, not days."
-        sub="RakizFx covers all deposit fees. Withdrawals are processed back to the original funding source under our anti-money-laundering policy. Same-name accounts only — no third-party transfers accepted."
+        sub="RakizFx covers all deposit fees. Withdrawals are processed back to the original funding source under our anti-money-laundering policy. Same-name accounts only, no third-party transfers accepted."
       />
       <section style={{ paddingTop: 0 }}>
         <div className="container">
@@ -4074,7 +4079,7 @@ function FundingPage() {
             ))}
           </div>
           <p style={{ fontSize: 12.5, color: "var(--fg-mute)", marginTop: 22, lineHeight: 1.6 }}>
-            *Bank wire withdrawals over $250 are free. Below this, the receiving bank may apply correspondent fees outside RakizFx's control. Crypto withdrawals settle on-chain — network fees are deducted from the withdrawal amount.
+            *Bank wire withdrawals over $250 are free. Below this, the receiving bank may apply correspondent fees outside RakizFx's control. Crypto withdrawals settle on-chain, network fees are deducted from the withdrawal amount.
           </p>
         </div>
       </section>
@@ -4158,7 +4163,7 @@ function ToolsPage({ tool = "all" }: { tool?: "all" | "pip" | "calendar" }) {
         }
         sub={
           tool === "pip" ? "Estimate pip value, required margin and notional value for any pair, lot size and leverage." :
-          tool === "calendar" ? "Real-time macro events affecting forex, indices, commodities and crypto — the same data feeds we use internally." :
+          tool === "calendar" ? "Real-time macro events affecting forex, indices, commodities and crypto, the same data feeds we use internally." :
           "Free pip-value and margin calculator plus a real-time economic calendar."
         }
       />
@@ -4245,23 +4250,11 @@ function EducationPage() {
       lessons: ["Installing MT5", "Workspace tour", "Watchlist & Market Watch", "Charting basics", "Order types in depth", "Custom indicators", "Templates & profiles", "Expert Advisors (EAs)", "Strategy Tester", "MQL5 marketplace"],
     },
   ];
-  const glossary = [
-    ["Pip", "The smallest standardised price move in a quote — typically 0.0001 for most majors, 0.01 for JPY pairs."],
-    ["Spread", "Difference between bid (sell) and ask (buy). Quoted in pips. Tighter spreads = lower trading cost."],
-    ["Leverage", "Borrowed exposure expressed as a ratio. 1:500 means $1 of margin controls $500 of notional value."],
-    ["Margin", "Capital reserved to maintain an open position. Required margin = notional ÷ leverage."],
-    ["Margin call", "Notification that account equity has fallen to a level requiring more funds or position reduction."],
-    ["Stop-out", "Automatic closure of open positions when margin level falls below the broker's threshold (50% at RakizFx)."],
-    ["Slippage", "Difference between expected and executed price, common in fast markets and at session opens."],
-    ["Swap / rollover", "Interest charged or paid for holding a leveraged position overnight, derived from the interest-rate differential of the two currencies."],
-    ["ECN", "Electronic Communication Network — direct market access execution with no dealing-desk intervention."],
-    ["Lot", "Standard contract size. 1 standard lot in forex = 100,000 base-currency units. Mini lot = 10,000, micro lot = 1,000."],
-  ];
   return (
     <>
       <PageHeader
         eyebrow="Academy"
-        title="Learn to trade — without the fluff."
+        title="Learn to trade, without the fluff."
         sub="Self-paced video and reading tracks built by trading desk veterans. Free for all RakizFx clients."
       />
       <section style={{ paddingTop: 0 }}>
@@ -4280,19 +4273,6 @@ function EducationPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-      <section style={{ background: "var(--bg-2)", borderTop: "1px solid var(--line)" }}>
-        <div className="container">
-          <h2 className="sec-title">Trading glossary</h2>
-          <p className="sec-sub" style={{ marginBottom: 24 }}>Plain-English definitions of the terms you'll see on charts, in your statements and across the platform.</p>
-          <dl className="glossary">
-            {glossary.map(([t, d]) => (
-              <div key={t} className="glo-row">
-                <dt>{t}</dt><dd>{d}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </section>
     </>
@@ -4318,7 +4298,7 @@ function PartnersPage() {
     { t: "Fast & secure payments",            p: "Daily settlements to bank, card or crypto wallet.", i: <><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></> },
     { t: "Dedicated partner support",         p: "A relationship manager assigned from day one.", i: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></> },
     { t: "Direct market access",              p: "Multi-LP liquidity, sub-30ms order routing, transparent fills.", i: <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></> },
-    { t: "Global growth opportunities",       p: "Active clients in 60+ countries — promote across markets.", i: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></> },
+    { t: "Global growth opportunities",       p: "Active clients in 60+ countries, promote across markets.", i: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></> },
     { t: "Professional trading infrastructure",p: "MetaTrader 5, Client Area, full back-office stack.", i: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></> },
   ];
 
@@ -4328,7 +4308,7 @@ function PartnersPage() {
         <div className="container">
           <span className="eyebrow">Partners</span>
           <h1 className="page-h1">Become a Partner</h1>
-          <p className="page-sub">Two ways to grow with us — Introducing Broker or Affiliate. Industry-leading payouts, daily settlements, dedicated support.</p>
+          <p className="page-sub">Two ways to grow with us, Introducing Broker or Affiliate. Industry-leading payouts, daily settlements, dedicated support.</p>
         </div>
       </section>
 
@@ -4387,7 +4367,7 @@ function PartnersPage() {
               { t: "Trade & Win",       p: "Monthly partner leaderboard with cash bonuses for top performers.",          i: <><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></> },
               { t: "Loyalty Rewards",   p: "Higher payout tiers unlock as your referred volume grows.",                  i: <><path d="M12 2 8.5 8.5 1 9.3l5.5 5.3L5 22l7-3.7 7 3.7-1.5-7.4L23 9.3l-7.5-.8z"/></> },
               { t: "Cashback Program",  p: "Receive cashback on every funded trader, paid weekly.",                       i: <><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></> },
-              { t: "Seasonal Campaigns",p: "Limited-time partner offers — boosted CPAs and bonus rev-share weeks.",       i: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></> },
+              { t: "Seasonal Campaigns",p: "Limited-time partner offers, boosted CPAs and bonus rev-share weeks.",       i: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></> },
             ].map((m, i) => (
               <div key={i} className="promo-main-card" style={{ "--why-delay": `${i * 0.06}s` }}>
                 <span className="promo-main-ic">
@@ -4499,10 +4479,10 @@ function AboutPage() {
                 Rakiz Capital was founded in 2021 by a team of ex-bank FX dealers and quant developers who were tired of the trade-off retail traders were forced into: institutional execution or beginner-friendly tools, never both.
               </p>
               <p style={{ color: "var(--fg-dim)", fontSize: 16, lineHeight: 1.7 }}>
-                We rebuilt the broker stack from scratch — straight-through processing to tier-1 liquidity providers, an Equinix-colocated matching engine and a Client Area you can actually navigate without a manual. Today, RakizFx processes over $2.4 billion in monthly client volume across 1,200+ instruments.
+                We rebuilt the broker stack from scratch, straight-through processing to tier-1 liquidity providers, an Equinix-colocated matching engine and a Client Area you can actually navigate without a manual. Today, RakizFx processes over $2.4 billion in monthly client volume across 1,200+ instruments.
               </p>
               <p style={{ color: "var(--fg-dim)", fontSize: 16, lineHeight: 1.7 }}>
-                We don't run a B-book against our clients. We don't trade against your orders. Our P&L is the spread and commission — nothing else. When you win, we win.
+                We don't run a B-book against our clients. We don't trade against your orders. Our P&L is the spread and commission, nothing else. When you win, we win.
               </p>
             </div>
             <div>
@@ -4567,7 +4547,7 @@ function FAQPage() {
       cat: "Funding",
       items: [
         ["How long do withdrawals take?", "Card: 1–3 business days. Bank wire: 1–3 business days. Crypto: usually within 1 hour after blockchain confirmation."],
-        ["Are there any deposit fees?", "RakizFx covers all standard deposit fees. Some payment processors may charge their own fees outside our control — these are clearly displayed before you confirm."],
+        ["Are there any deposit fees?", "RakizFx covers all standard deposit fees. Some payment processors may charge their own fees outside our control, these are clearly displayed before you confirm."],
         ["Can I withdraw to a different account?", "No. Under anti-money-laundering rules, withdrawals must return to the same payment method and account name used for deposit, up to the deposited amount."],
         ["What happens if my deposit fails?", "Failed deposits are typically reversed by the payment provider within 5–7 business days. If you don't see a refund, contact support with the transaction reference."],
       ],
@@ -4575,10 +4555,10 @@ function FAQPage() {
     {
       cat: "Platform & technical",
       items: [
-        ["Which platforms do you support?", "MetaTrader 5 on Windows, macOS, iOS, Android and Web. One account works across every device — log in anywhere, your positions and history stay in sync."],
-        ["Can I run Expert Advisors (EAs)?", "Yes. All EAs, custom indicators and scripts are permitted on every account tier. Run them from any MetaTrader 5 instance — desktop, laptop or your own server."],
+        ["Which platforms do you support?", "MetaTrader 5 on Windows, macOS, iOS, Android and Web. One account works across every device, log in anywhere, your positions and history stay in sync."],
+        ["Can I run Expert Advisors (EAs)?", "Yes. All EAs, custom indicators and scripts are permitted on every account tier. Run them from any MetaTrader 5 instance, desktop, laptop or your own server."],
         ["What is your server time?", "EET (Eastern European Time, GMT+2/GMT+3 with DST). Daily candles close at 23:59 server time."],
-        ["I'm having connection issues. What now?", "Try switching MT5 server (look for the lowest ping in File → Login). If problems persist, contact support — chat replies in seconds."],
+        ["I'm having connection issues. What now?", "Try switching MT5 server (look for the lowest ping in File → Login). If problems persist, contact support, chat replies in seconds."],
       ],
     },
   ];
@@ -4588,7 +4568,7 @@ function FAQPage() {
       <PageHeader
         eyebrow="Help centre"
         title="Frequently asked questions."
-        sub="Can't find what you're looking for? Open the chat in the bottom-right corner or email support@rakizfx.com — our team replies in under 90 seconds."
+        sub="Can't find what you're looking for? Open the chat in the bottom-right corner or email support@rakizfx.com, our team replies in under 90 seconds."
       />
       <section style={{ paddingTop: 0 }}>
         <div className="container faq-wrap">
@@ -4659,7 +4639,7 @@ function ContactPage() {
               <div className="card contact-promo">
                 <span className="crm-chip">Existing client?</span>
                 <h3>Open a ticket from your Client Area</h3>
-                <p>Authenticated tickets are prioritised — typical first response under 30 minutes during market hours.</p>
+                <p>Authenticated tickets are prioritised, typical first response under 30 minutes during market hours.</p>
                 <a href="https://crm.rakizfx.com/login" target="_blank" rel="noopener" className="btn btn-primary">
                   Sign in to Client Area
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
@@ -4691,7 +4671,7 @@ function ContactPage() {
 
 
 // ─── from register.jsx ────────────────────────────────────────────────
-// RakizFx — Registration → CRM handoff (UI only, no backend form)
+// RakizFx, Registration → CRM handoff (UI only, no backend form)
 
 function RegisterPage({ onNav }) {
   return (
@@ -4736,7 +4716,7 @@ function RegisterPage({ onNav }) {
           <div className="crm-trust">
             <span>NBP protection</span>
             <span>Same-day withdrawals</span>
-            <span>24/5 human support</span>
+            <span>24/7 support</span>
           </div>
         </aside>
       </div>
@@ -4746,7 +4726,7 @@ function RegisterPage({ onNav }) {
 
 
 // ─── from login.jsx ───────────────────────────────────────────────────
-// RakizFx — Login → CRM handoff (UI only, no backend form)
+// RakizFx, Login → CRM handoff (UI only, no backend form)
 
 function LoginPage({ onNav }) {
   return (
@@ -4771,7 +4751,7 @@ function LoginPage({ onNav }) {
               Continue to Client Area
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
             </a>
-            <a href="#register" className="btn btn-ghost btn-lg" onClick={(e)=>{e.preventDefault();onNav("register");}}>I'm new — open an account</a>
+            <a href="#register" className="btn btn-ghost btn-lg" onClick={(e)=>{e.preventDefault();onNav("register");}}>I'm new, open an account</a>
           </div>
 
           <p className="crm-risk">
@@ -4789,7 +4769,7 @@ function LoginPage({ onNav }) {
           <div className="crm-trust">
             <span>256-bit SSL</span>
             <span>2FA &amp; biometric</span>
-            <span>24/5 human support</span>
+            <span>24/7 support</span>
           </div>
         </aside>
       </div>
@@ -4799,7 +4779,7 @@ function LoginPage({ onNav }) {
 
 
 // ─── from chatbot.jsx ─────────────────────────────────────────────────
-// RakizFx — AI Chat Assistant
+// RakizFx, AI Chat Assistant
 // Uses window.claude.complete for real responses, scoped with broker context.
 
 
@@ -4825,7 +4805,7 @@ Style guide:
 function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "bot", text: "Hi! I'm Rakiz Assistant. Ask me about accounts, deposits, spreads, leverage or KYC — I'll help in seconds." },
+    { role: "bot", text: "Hi! I'm Rakiz Assistant. Ask me about accounts, deposits, spreads, leverage or KYC, I'll help in seconds." },
   ]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -5044,8 +5024,8 @@ function useRevealEffect() {
   });
 }
 
-// Replicates acct-hover.js — sets --mx/--my CSS vars on .acct cards.
-// Pointer tracker — sets --mx / --my CSS vars on any element matching the
+// Replicates acct-hover.js, sets --mx/--my CSS vars on .acct cards.
+// Pointer tracker, sets --mx / --my CSS vars on any element matching the
 // spotlight selector list. Powers cursor-following spotlights and the
 // magnetic-button feel (drives transform via CSS, not JS layout writes).
 const SPOTLIGHT_SELECTOR =
@@ -5095,7 +5075,7 @@ export default function App() {
   useRevealEffect();
   useAcctHover();
 
-  // Frontend-only mode: all auth/CRM links are visual only — clicks are
+  // Frontend-only mode: all auth/CRM links are visual only, clicks are
   // intercepted so nothing navigates to a backend that doesn't exist yet.
   // Internal hash navigation continues to work for the marketing pages.
   useEffect(() => {
@@ -5203,7 +5183,7 @@ export default function App() {
           <PageHeader
             eyebrow="Accounts"
             title="Compare our 3 account types"
-            sub="Standard, Pro and Elite — all running on MetaTrader 5 with the same 1,200+ instruments. Pick the tier that matches your size and style."
+            sub="Standard, Pro and Elite, all running on MetaTrader 5 with the same 1,200+ instruments. Pick the tier that matches your size and style."
           />
           <AccountsCompare />
           <Steps />
@@ -5270,7 +5250,7 @@ function CoreFeaturesRow() {
     },
     {
       tag: "Support",
-      title: "24/7 human support",
+      title: "24/7 support",
       icon: <><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>,
     },
     {
@@ -5449,7 +5429,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
   const t = useT();
   const goRegister = (e: React.MouseEvent) => {
     e.preventDefault();
-    // CRM disabled — click intentionally no-ops
+    // CRM disabled, click intentionally no-ops
   };
   const goTier = (id: AccountTier) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -5472,7 +5452,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       name: "Standard",
       tag: "Direct-to-market execution",
       accent: "#1ad17a",
-      description: "An easy start with fast, transparent execution routed straight to liquidity providers — built for traders opening their first live account.",
+      description: "An easy start with fast, transparent execution routed straight to liquidity providers, built for traders opening their first live account.",
       minDeposit: "$50",
       stats: [
         { k: "Minimum deposit",   v: "$50" },
@@ -5505,7 +5485,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
         ]},
       ],
       perks: [
-        "Zero commission on every trade — you only pay the spread",
+        "Zero commission on every trade, you only pay the spread",
         "Instant deposits via card, bank wire or crypto",
         "Same-day withdrawals back to your funding source",
         "Adjustable swap-free option for eligible accounts",
@@ -5517,7 +5497,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       tag: "For active traders",
       badge: "POPULAR",
       accent: "#1ad17a",
-      description: "Tighter spreads, higher leverage and priority execution for traders running multiple positions a day — built around the way active traders actually trade.",
+      description: "Tighter spreads, higher leverage and priority execution for traders running multiple positions a day, built around the way active traders actually trade.",
       minDeposit: "$200",
       stats: [
         { k: "Minimum deposit",   v: "$200" },
@@ -5553,7 +5533,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
         "Tight spreads from 0.3 pips on major forex pairs",
         "Leverage up to 1:500 across forex and metals",
         "Priority order routing and faster fills",
-        "Priority withdrawal queue — same day, every day",
+        "Priority withdrawal queue, same day, every day",
         "Pro webinars and weekly market analysis included",
       ],
     },
@@ -5618,7 +5598,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
 
   return (
     <>
-      {/* Hero — airy, typography-led, no heavy card */}
+      {/* Hero, airy, typography-led, no heavy card */}
       <section className="acct-v2-hero">
         <div className="container">
           {current.badge && (
@@ -5699,7 +5679,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
         </div>
       </section>
 
-      {/* Specs — 3 grouped 2-column lists, calm and minimal */}
+      {/* Specs, 3 grouped 2-column lists, calm and minimal */}
       <section className="acct-v2-specs">
         <div className="container">
           <motion.h2
@@ -5737,7 +5717,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
         </div>
       </section>
 
-      {/* Included — quiet 2-column list with subtle ticks */}
+      {/* Included, quiet 2-column list with subtle ticks */}
       <section className="acct-v2-included">
         <div className="container">
           <motion.h2
@@ -5770,7 +5750,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
         </div>
       </section>
 
-      {/* Strip CTA — single quiet line, no big card */}
+      {/* Strip CTA, single quiet line, no big card */}
       <section className="acct-v2-strip">
         <div className="container">
           <motion.div
@@ -5837,7 +5817,7 @@ function LegalPage({ slug }: { slug: LegalSlug }) {
 
       <section className="legal-shell">
         <div className="container legal-grid">
-          {/* Sidebar — all 6 legal docs */}
+          {/* Sidebar, all 6 legal docs */}
           <aside className="legal-nav">
             <h4>Documents</h4>
             <ul>

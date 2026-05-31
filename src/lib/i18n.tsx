@@ -44,7 +44,7 @@ const STRINGS: Record<LangCode, Dict> = {
     'search.hint_close':'close',
 
     'bonus.label':      'Limited',
-    'bonus.text':       'Welcome bonus —',
+    'bonus.text':       'Welcome bonus,',
     'bonus.amount':     'claim your first-deposit boost',
     'bonus.suffix':     '· ends in',
     'bonus.claim':      'Claim Now',
@@ -54,11 +54,11 @@ const STRINGS: Record<LangCode, Dict> = {
 
     'why.title':        'Why traders choose',
     'why.title_em':     'RakizFx',
-    'why.sub':          'Institutional execution, human support, and conditions that scale with your strategy.',
+    'why.sub':          'Direct market access, 24/7 support and conditions that scale with your strategy.',
 
     'mt5.title':        'MetaTrader 5',
     'mt5.title_em':     'everywhere you trade',
-    'mt5.sub':          'Desktop, web and mobile — your account stays in sync. One-click execution, 38 built-in indicators, depth of market, expert advisors and the MQL5 marketplace.',
+    'mt5.sub':          'Desktop, web and mobile, your account stays in sync. One-click execution, 38 built-in indicators, depth of market, expert advisors and the MQL5 marketplace.',
     'mt5.p1_t':         'Lightning execution',
     'mt5.p1_b':         '28ms average fill across all markets',
     'mt5.p2_t':         'Advanced charting',
@@ -72,7 +72,7 @@ const STRINGS: Record<LangCode, Dict> = {
 
     'asset.title':      'Trade every',
     'asset.title_em':   'major asset class',
-    'asset.sub':        '1,200+ instruments across every market — from a single MetaTrader 5 account.',
+    'asset.sub':        '1,200+ instruments across every market, from a single MetaTrader 5 account.',
     'mobile.title':     'Your account, in your',
     'mobile.title_em':  'pocket',
     'fullcta.title':    'Markets don’t wait',
@@ -112,21 +112,21 @@ const STRINGS: Record<LangCode, Dict> = {
     'search.hint_close':'बंद करें',
 
     'bonus.label':      'सीमित समय',
-    'bonus.text':       'वेलकम बोनस —',
+    'bonus.text':       'वेलकम बोनस,',
     'bonus.amount':     'अपना पहला डिपॉज़िट बूस्ट क्लेम करें',
     'bonus.suffix':     '· समाप्ति में',
     'bonus.claim':      'अभी क्लेम करें',
 
     'accts.choose':     'अपना खाता चुनें',
-    'accts.sub':        'तीन टियर, समान एक्ज़ीक्यूशन — वही चुनें जो आपकी रणनीति से मेल खाए',
+    'accts.sub':        'तीन टियर, समान एक्ज़ीक्यूशन, वही चुनें जो आपकी रणनीति से मेल खाए',
 
     'why.title':        'ट्रेडर्स क्यों चुनते हैं',
     'why.title_em':     'RakizFx',
-    'why.sub':          'इंस्टीट्यूशनल एक्ज़ीक्यूशन, मानवीय सपोर्ट और ऐसी कंडीशन जो आपकी रणनीति के साथ बढ़ें।',
+    'why.sub':          'सीधी मार्केट एक्सेस, 24/7 सपोर्ट और ऐसी कंडीशन जो आपकी रणनीति के साथ बढ़ें।',
 
     'mt5.title':        'MetaTrader 5',
     'mt5.title_em':     'हर जगह जहाँ आप ट्रेड करें',
-    'mt5.sub':          'डेस्कटॉप, वेब और मोबाइल — आपका खाता सिंक्रनाइज़ रहता है। वन-क्लिक एक्ज़ीक्यूशन, 38 बिल्ट-इन इंडिकेटर, डेप्थ ऑफ़ मार्केट, एक्सपर्ट एडवाइज़र्स और MQL5 मार्केटप्लेस।',
+    'mt5.sub':          'डेस्कटॉप, वेब और मोबाइल, आपका खाता सिंक्रनाइज़ रहता है। वन-क्लिक एक्ज़ीक्यूशन, 38 बिल्ट-इन इंडिकेटर, डेप्थ ऑफ़ मार्केट, एक्सपर्ट एडवाइज़र्स और MQL5 मार्केटप्लेस।',
     'mt5.p1_t':         'लाइटनिंग एक्ज़ीक्यूशन',
     'mt5.p1_b':         'सभी मार्केट्स में औसतन 28ms फ़िल',
     'mt5.p2_t':         'एडवांस्ड चार्टिंग',
@@ -186,15 +186,15 @@ const STRINGS: Record<LangCode, Dict> = {
     'bonus.claim':      'احصل عليها الآن',
 
     'accts.choose':     'اختر حسابك',
-    'accts.sub':        'ثلاث فئات، تنفيذ موحَّد — اختر ما يناسب استراتيجيتك',
+    'accts.sub':        'ثلاث فئات، تنفيذ موحَّد, اختر ما يناسب استراتيجيتك',
 
     'why.title':        'لماذا يختار المتداولون',
     'why.title_em':     'RakizFx',
-    'why.sub':          'تنفيذ بمستوى المؤسسات، دعم بشري، وظروف تنمو مع استراتيجيتك.',
+    'why.sub':          'وصول مباشر للأسواق، دعم على مدار الساعة، وظروف تنمو مع استراتيجيتك.',
 
     'mt5.title':        'MetaTrader 5',
     'mt5.title_em':     'في كل مكان تتداول فيه',
-    'mt5.sub':          'سطح المكتب، الويب والجوال — حسابك متزامن دائماً. تنفيذ بضغطة واحدة، 38 مؤشراً مدمجاً، عمق السوق، خبراء التداول (EAs) ومتجر MQL5.',
+    'mt5.sub':          'سطح المكتب، الويب والجوال, حسابك متزامن دائماً. تنفيذ بضغطة واحدة، 38 مؤشراً مدمجاً، عمق السوق، خبراء التداول (EAs) ومتجر MQL5.',
     'mt5.p1_t':         'تنفيذ فائق السرعة',
     'mt5.p1_b':         'متوسط 28 مللي ثانية في جميع الأسواق',
     'mt5.p2_t':         'تحليل فني متقدم',
@@ -208,7 +208,7 @@ const STRINGS: Record<LangCode, Dict> = {
 
     'asset.title':      'تداول كل',
     'asset.title_em':   'فئات الأصول الرئيسية',
-    'asset.sub':        'أكثر من 1,200 أداة في كل سوق — من حساب MetaTrader 5 واحد.',
+    'asset.sub':        'أكثر من 1,200 أداة في كل سوق, من حساب MetaTrader 5 واحد.',
     'mobile.title':     'حسابك في',
     'mobile.title_em':  'جيبك',
     'fullcta.title':    'الأسواق لا تنتظر',

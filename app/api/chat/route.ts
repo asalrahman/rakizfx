@@ -75,10 +75,10 @@ function localFallback(q: string): string {
     return 'Withdrawals are processed same-day via bank wire, card or crypto, routed back to the original funding source. Full KYC must be complete before your first withdrawal.';
   }
   if (q.includes('leverage')) {
-    return 'Maximum leverage is 1:400 on Standard, 1:500 on Pro and custom on Elite. Higher leverage magnifies both gains and losses — Trading CFDs carries risk and may not be suitable for all investors.';
+    return 'Maximum leverage is 1:400 on Standard, 1:500 on Pro and custom on Elite. Higher leverage magnifies both gains and losses, Trading CFDs carries risk and may not be suitable for all investors.';
   }
   if (q.includes('regulat')) {
     return 'RakizFx is the trade name of Rakiz Capital Ltd, licensed and regulated under FSA Licence 23847. Client funds are held in segregated accounts with negative balance protection.';
   }
-  return "I'm Rakiz Assistant. For full live answers, our team is on WhatsApp or at support@rakizfx.com — replies within minutes.";
+  return "I'm Rakiz Assistant. For full live answers, our team is on WhatsApp or at support@rakizfx.com, replies within minutes.";
 }
