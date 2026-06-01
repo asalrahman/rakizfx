@@ -1479,6 +1479,44 @@ function HeroVideo() {
   );
 }
 
+// Full-width brand banner carrying the "Grow without limits" slogan + CTA.
+function SloganBand() {
+  const t = useT();
+  const slogan = t("hero.slogan"); // e.g. "Grow without limits"
+  const goRegister = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = "#register";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <section className="slogan-band" aria-label={slogan}>
+      <div className="container">
+        <motion.div
+          className="slogan-band-inner"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="slogan-band-copy">
+            <h2 className="slogan-band-h">{slogan}</h2>
+            <p className="slogan-band-sub">
+              Sharp pricing, instant execution and the headroom to trade at any size. RakizFx is built to scale with your ambition.
+            </p>
+          </div>
+          <a href="#register" onClick={goRegister} className="slogan-band-cta">
+            Trade now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function HeroSingle() {
   const t = useT();
   return (
@@ -1494,7 +1532,6 @@ function HeroSingle() {
 
       <div className="container hero-single-grid">
         <div className="hero-copy">
-          <span className="hero-slogan">{t("hero.slogan")}</span>
           <h1 className="hero-h1 hero-h1-industry hero-h1-oneline">
             {t("hero.title")} <em>{t("hero.title_em")}</em>
           </h1>
@@ -2515,6 +2552,8 @@ function AccountCompare() {
   };
   return (
     <section className="acct-compare-section">
+      <span className="acct-glow acct-glow-1" aria-hidden="true" />
+      <span className="acct-glow acct-glow-2" aria-hidden="true" />
       <div className="container">
         <div className="section-head">
           <h2 className="sec-title">{t("accts.choose")}</h2>
@@ -5162,6 +5201,7 @@ export default function App() {
           <TickerStrip />
           <CoreFeaturesRow />
           <AssetShowcase />
+          <SloganBand />
           <div className="reveal"><Why /></div>
           <AccountCompare />
           <PlatformShowcase />
@@ -5340,22 +5380,20 @@ function AccountsCompare() {
   );
 
   const rows: Array<{ k: string; standard: string | boolean; pro: string | boolean; elite: string | boolean }> = [
-    { k: "Minimum deposit",         standard: "$50",            pro: "$200",            elite: "$2,000" },
-    { k: "Base currency",           standard: "USD",            pro: "USD",             elite: "USD" },
-    { k: "Typical EUR/USD spread",  standard: "From 0.8 pips",  pro: "From 0.3 pips",   elite: "From 0.0 pips" },
-    { k: "Commission",              standard: "Zero",           pro: "Zero",            elite: "Zero" },
-    { k: "Maximum leverage",        standard: "1:400",          pro: "1:500",           elite: "Custom" },
-    { k: "Execution model",         standard: "Market (STP)",   pro: "Market (STP/ECN)",elite: "Direct ECN" },
-    { k: "Maximum positions",       standard: "200",            pro: "Unlimited",       elite: "Unlimited" },
-    { k: "Funding speed",           standard: "Instant",        pro: "Instant",         elite: "Dedicated" },
-    { k: "Withdrawals",             standard: "Same-day",       pro: "Priority queue",  elite: "Highest priority" },
-    { k: "Expert Advisors",         standard: true,             pro: true,              elite: true },
-    { k: "Hedging",                 standard: true,             pro: true,              elite: true },
-    { k: "Scalping",                standard: true,             pro: true,              elite: true },
-    { k: "Swap-free option",        standard: true,             pro: true,              elite: true },
-    { k: "Priority support",        standard: false,            pro: true,              elite: true },
-    { k: "Dedicated manager",       standard: false,            pro: false,             elite: true },
-    { k: "VIP events",              standard: false,            pro: false,             elite: true },
+    { k: "Minimum deposit",        standard: "$50",                pro: "$200",              elite: "$2,000" },
+    { k: "Spreads from",           standard: "0.8 pips",           pro: "0.0 pips",          elite: "Ultra-tight" },
+    { k: "Commission",             standard: "$0 / lot",           pro: "$0 / lot",          elite: "$0 / lot" },
+    { k: "Leverage",               standard: "Up to 1:400",        pro: "Up to 1:400",       elite: "Up to 1:1000" },
+    { k: "Stop out level",         standard: "20%",                pro: "20%",               elite: "20%" },
+    { k: "Execution type",         standard: "Market Execution",   pro: "Market Execution",  elite: "Market Execution" },
+    { k: "Base currency",          standard: "USD",                pro: "USD",               elite: "USD" },
+    { k: "Platform",               standard: "MT5",                pro: "MT5",               elite: "MT5" },
+    { k: "Expert Advisors (EAs)",  standard: true,                 pro: true,                elite: true },
+    { k: "One-click trading",      standard: true,                 pro: true,                elite: true },
+    { k: "Micro lot (0.01)",       standard: true,                 pro: true,                elite: true },
+    { k: "Swap-free option",       standard: true,                 pro: true,                elite: true },
+    { k: "24/7 technical support", standard: true,                 pro: true,                elite: true },
+    { k: "Relationship manager",   standard: false,                pro: false,               elite: true },
   ];
 
   const cell = (v: string | boolean) => (typeof v === "boolean" ? (v ? tick : dash) : v);
@@ -5452,44 +5490,38 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       name: "Standard",
       tag: "Direct-to-market execution",
       accent: "#1ad17a",
-      description: "An easy start with fast, transparent execution routed straight to liquidity providers, built for traders opening their first live account.",
+      description: "An easy start with fast, transparent market execution, built for traders opening their first live account.",
       minDeposit: "$50",
       stats: [
-        { k: "Minimum deposit",   v: "$50" },
-        { k: "Typical spread",    v: "Standard" },
-        { k: "Maximum leverage",  v: "1:400" },
-        { k: "Commission",        v: "Zero" },
+        { k: "Spreads from",     v: "0.8 pips" },
+        { k: "Minimum deposit",  v: "$50" },
+        { k: "Leverage",         v: "1:400" },
+        { k: "Commission",       v: "$0 / lot" },
       ],
       groups: [
         { h: "Trading conditions", items: [
-          { k: "Execution model",     v: "Market execution (STP)" },
-          { k: "Typical EUR/USD spread", v: "From 0.8 pips" },
-          { k: "Maximum leverage",    v: "1:400" },
-          { k: "Commission",          v: "Zero per lot" },
-          { k: "Swap-free option",    v: "Available on request" },
-          { k: "Hedging",             v: "Permitted" },
-          { k: "Expert Advisors",     v: "Permitted" },
+          { k: "Spreads From",      v: "0.8 pips" },
+          { k: "Commission",        v: "$0 per lot" },
+          { k: "Leverage",          v: "Up to 1:400" },
+          { k: "Stop Out Level",    v: "20%" },
+          { k: "Minimum Deposit",   v: "$50" },
+          { k: "Execution Type",    v: "Market Execution" },
         ]},
-        { h: "Account & funding", items: [
-          { k: "Minimum deposit",     v: "$50" },
-          { k: "Base currencies",     v: "USD" },
-          { k: "Maximum positions",   v: "200 open positions" },
-          { k: "Funding speed",       v: "Instant via card / crypto" },
-          { k: "Withdrawals",         v: "Same-day processing" },
-        ]},
-        { h: "Platform & support", items: [
-          { k: "Platform",            v: "MetaTrader 5" },
-          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
-          { k: "Support",             v: "24/7 technical chat" },
-          { k: "Education",           v: "Free Academy access" },
+        { h: "Platform & features", items: [
+          { k: "Platform",                v: "MT5" },
+          { k: "Expert Advisors (EAs)",   v: "Supported" },
+          { k: "One-Click Trading",       v: "Enabled" },
+          { k: "Micro Lot (0.01)",        v: "Enabled" },
+          { k: "Swap-Free Option",        v: "Available" },
+          { k: "24/7 Technical Support",  v: "Included" },
         ]},
       ],
       perks: [
-        "Zero commission on every trade, you only pay the spread",
-        "Instant deposits via card, bank wire or crypto",
-        "Same-day withdrawals back to your funding source",
-        "Adjustable swap-free option for eligible accounts",
-        "Trade 1,200+ instruments from a single account",
+        "Spreads from 0.8 pips with $0 commission per lot",
+        "Leverage up to 1:400 across forex and metals",
+        "Trade from 0.01 micro lots, ideal for sizing in",
+        "Expert Advisors and one-click trading enabled",
+        "Swap-free option available on eligible accounts",
       ],
     },
     pro: {
@@ -5497,44 +5529,38 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       tag: "For active traders",
       badge: "POPULAR",
       accent: "#1ad17a",
-      description: "Tighter spreads, higher leverage and priority execution for traders running multiple positions a day, built around the way active traders actually trade.",
+      description: "Tighter spreads from 0.0 pips for traders running multiple positions a day, built around the way active traders actually trade.",
       minDeposit: "$200",
       stats: [
-        { k: "Minimum deposit",   v: "$200" },
-        { k: "Typical spread",    v: "Low" },
-        { k: "Maximum leverage",  v: "1:500" },
-        { k: "Commission",        v: "Zero" },
+        { k: "Spreads from",     v: "0.0 pips" },
+        { k: "Minimum deposit",  v: "$200" },
+        { k: "Leverage",         v: "1:400" },
+        { k: "Commission",       v: "$0 / lot" },
       ],
       groups: [
         { h: "Trading conditions", items: [
-          { k: "Execution model",     v: "Market execution (STP/ECN)" },
-          { k: "Typical EUR/USD spread", v: "From 0.3 pips" },
-          { k: "Maximum leverage",    v: "1:500" },
-          { k: "Commission",          v: "Zero per lot" },
-          { k: "Swap-free option",    v: "Available on request" },
-          { k: "Hedging",             v: "Permitted" },
-          { k: "Expert Advisors",     v: "Permitted (incl. scalping)" },
+          { k: "Spreads From",      v: "0.0 pips" },
+          { k: "Commission",        v: "$0 per lot" },
+          { k: "Leverage",          v: "Up to 1:400" },
+          { k: "Stop Out Level",    v: "20%" },
+          { k: "Minimum Deposit",   v: "$200" },
+          { k: "Execution Type",    v: "Market Execution" },
         ]},
-        { h: "Account & funding", items: [
-          { k: "Minimum deposit",     v: "$200" },
-          { k: "Base currencies",     v: "USD" },
-          { k: "Maximum positions",   v: "Unlimited" },
-          { k: "Funding speed",       v: "Instant via card / crypto" },
-          { k: "Withdrawals",         v: "Same-day priority queue" },
-        ]},
-        { h: "Platform & support", items: [
-          { k: "Platform",            v: "MetaTrader 5" },
-          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
-          { k: "Support",             v: "24×7 priority support" },
-          { k: "Education",           v: "Pro webinars + research" },
+        { h: "Platform & features", items: [
+          { k: "Platform",                v: "MT5" },
+          { k: "Expert Advisors (EAs)",   v: "Supported" },
+          { k: "One-Click Trading",       v: "Enabled" },
+          { k: "Micro Lot (0.01)",        v: "Enabled" },
+          { k: "Swap-Free Option",        v: "Available" },
+          { k: "24/7 Technical Support",  v: "Included" },
         ]},
       ],
       perks: [
-        "Tight spreads from 0.3 pips on major forex pairs",
-        "Leverage up to 1:500 across forex and metals",
-        "Priority order routing and faster fills",
-        "Priority withdrawal queue, same day, every day",
-        "Pro webinars and weekly market analysis included",
+        "Spreads from 0.0 pips with $0 commission per lot",
+        "Leverage up to 1:400 across forex and metals",
+        "Market execution with priority order routing",
+        "Expert Advisors, scalping and one-click trading",
+        "Swap-free option available on eligible accounts",
       ],
     },
     elite: {
@@ -5542,44 +5568,38 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
       tag: "VIP & high-volume",
       badge: "VIP",
       accent: "#1ad17a",
-      description: "Ultra-tight institutional spreads, custom leverage and a dedicated relationship manager for high-volume and high-net-worth traders.",
+      description: "Ultra-tight spreads, higher leverage and a dedicated relationship manager for high-volume and high-net-worth traders.",
       minDeposit: "$2,000",
       stats: [
-        { k: "Minimum deposit",   v: "$2,000" },
-        { k: "Typical spread",    v: "Ultra-low" },
-        { k: "Maximum leverage",  v: "Custom" },
-        { k: "Commission",        v: "Zero" },
+        { k: "Spreads from",     v: "Ultra-tight" },
+        { k: "Minimum deposit",  v: "$2,000" },
+        { k: "Leverage",         v: "1:1000" },
+        { k: "Commission",       v: "$0 / lot" },
       ],
       groups: [
         { h: "Trading conditions", items: [
-          { k: "Execution model",     v: "Direct ECN / institutional" },
-          { k: "Typical EUR/USD spread", v: "From 0.0 pips" },
-          { k: "Maximum leverage",    v: "Custom (subject to risk policy)" },
-          { k: "Commission",          v: "Zero per lot" },
-          { k: "Swap-free option",    v: "Available on request" },
-          { k: "Hedging",             v: "Permitted" },
-          { k: "Expert Advisors",     v: "Permitted (no scalping limits)" },
+          { k: "Spreads From",      v: "Ultra-tight (from 0.0 pips)" },
+          { k: "Commission",        v: "$0 per lot" },
+          { k: "Leverage",          v: "Up to 1:1000" },
+          { k: "Stop Out Level",    v: "20%" },
+          { k: "Minimum Deposit",   v: "$2,000" },
+          { k: "Execution Type",    v: "Market Execution" },
         ]},
-        { h: "Account & funding", items: [
-          { k: "Minimum deposit",     v: "$2,000" },
-          { k: "Base currencies",     v: "USD" },
-          { k: "Maximum positions",   v: "Unlimited" },
-          { k: "Funding speed",       v: "Dedicated banking channels" },
-          { k: "Withdrawals",         v: "Highest withdrawal priority" },
-        ]},
-        { h: "Platform & support", items: [
-          { k: "Platform",            v: "MetaTrader 5 Advanced" },
-          { k: "Devices",             v: "Desktop · Web · iOS · Android" },
-          { k: "Support",             v: "Dedicated 24×7 desk + RM" },
-          { k: "Education",           v: "1-on-1 strategy sessions" },
+        { h: "Platform & features", items: [
+          { k: "Platform",                v: "MT5" },
+          { k: "Expert Advisors (EAs)",   v: "Supported" },
+          { k: "One-Click Trading",       v: "Enabled" },
+          { k: "Micro Lot (0.01)",        v: "Enabled" },
+          { k: "Swap-Free Option",        v: "Available" },
+          { k: "24/7 Technical Support",  v: "Included + relationship manager" },
         ]},
       ],
       perks: [
-        "Ultra-tight spreads from 0.0 pips on major pairs",
-        "Custom leverage tailored to your strategy and risk",
+        "Ultra-tight spreads with $0 commission per lot",
+        "Leverage up to 1:1000, the highest tier available",
         "Dedicated relationship manager and priority desk",
-        "Invitations to exclusive RakizFx VIP events",
-        "Highest-priority withdrawals processed within the hour",
+        "24/7 technical support with named account contact",
+        "Expert Advisors, scalping and one-click trading",
       ],
     },
   };
@@ -5597,7 +5617,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
   const headline = current.stats;
 
   return (
-    <>
+    <div className={`acct-v2 acct-v2--${tier}`}>
       {/* Hero, airy, typography-led, no heavy card */}
       <section className="acct-v2-hero">
         <div className="container">
@@ -5773,7 +5793,7 @@ function AccountDetailPage({ tier }: { tier: AccountTier }) {
           </motion.div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

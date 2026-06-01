@@ -412,17 +412,18 @@ h1, .display, .hero-h1, .page-h1 { letter-spacing: -0.032em; }
 
 section {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(46px) scale(0.992);
   transition:
-    opacity .85s var(--ease-out-soft),
-    transform .85s var(--ease-out-soft);
+    opacity .9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 section.is-visible,
 section.hero-single,
 section.hero,
 section.hero-slider {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 /* ─── Hero — staggered entrance ───────────────────────────────────────────── */
@@ -1787,18 +1788,35 @@ html[lang="hi"] .page-h1 {
   to { opacity: 1; }
 }
 
-/* ─── Section padding standardisation ─────────────────────────────────────── */
-section {
-  padding-block: clamp(56px, 7vw, 104px);
+/* ─── Section padding standardisation ─────────────────────────────────────────
+   One canonical premium rhythm for every section across the whole site.
+   Tweak --section-y in one place to rescale the entire page rhythm. */
+:root {
+  --section-y: clamp(60px, 7.5vw, 116px);   /* top + bottom padding per section */
+  --section-head-gap: clamp(36px, 4.5vw, 56px); /* header block → content */
 }
-.acct-compare-section {
-  padding-block: clamp(64px, 8vw, 120px);
+section { padding-block: var(--section-y); }
+
+/* Harmonise the class-based section overrides to the same rhythm so the
+   vertical spacing reads evenly from top to bottom of the page. */
+.acct-compare-section,
+.edu-teaser-section,
+.why-section,
+.stats-section,
+.markets-page-section,
+.asset-showcase,
+.platform-showcase {
+  padding-block: var(--section-y) !important;
 }
 .platform-showcase,
 .asset-showcase,
 .acct-compare-section {
   background: var(--bg, #fff);
 }
+
+/* Consistent breathing room under a section's title/sub before its content */
+.sec-title + .sec-sub { margin-block: 6px 0; }
+.sec-sub { margin-block-end: 0; }
 
 /* ─── Final responsive belt-and-braces — small mobile ─────────────────────── */
 @media (max-width: 480px) {
@@ -2833,6 +2851,12 @@ h1, h2, h3, h4, h5, h6,
 /* Hero heading is on the dark video — keep it white */
 .hero-single .hero-h1 { color: #fff !important; }
 .hero-single .hero-h1 em { color: var(--accent, #1ad17a) !important; }
+/* Slogan banner sits on a green brand card — keep its heading white */
+.slogan-band .slogan-band-h,
+.slogan-band .slogan-band-h em {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
 /* Elite premium account card (dark surface) — keep its text white */
 .acct-simple-grid--basic .acct-simple.premium .acct-simple-name { color: #fff !important; }
 /* Welcome bonus card (dark surface) — keep white */
@@ -3167,6 +3191,63 @@ h1, h2, h3, h4, h5, h6,
 /* ─── AccountCompare — tighten spacing ────────────────────────────────────── */
 .acct-compare-section { padding-block: clamp(64px, 7vw, 104px); }
 .acct-simple-grid--basic { margin-top: 0; }
+
+/* ─── AccountCompare — elegant animated background ────────────────────────────
+   Soft gradient base + faint dot grid + two slowly-drifting brand glows,
+   all behind the cards (z-index layering keeps content crisp on top). */
+.acct-compare-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 50% -5%, rgba(26, 209, 122, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f5f8f6 100%) !important;
+  isolation: isolate;
+}
+/* Faint dot-grid texture, radially masked so it fades out toward the edges */
+.acct-compare-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1.4px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(78% 72% at 50% 38%, #000 0%, transparent 80%);
+  mask-image: radial-gradient(78% 72% at 50% 38%, #000 0%, transparent 80%);
+  pointer-events: none;
+}
+/* Two soft drifting glow orbs for a living, premium feel */
+.acct-glow {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+}
+.acct-glow-1 {
+  left: -10%;
+  bottom: -30%;
+  width: 48%;
+  height: 80%;
+  background: radial-gradient(closest-side, rgba(26, 209, 122, 0.16), transparent 70%);
+  animation: acct-float-1 16s ease-in-out infinite;
+}
+.acct-glow-2 {
+  right: -8%;
+  top: -26%;
+  width: 42%;
+  height: 72%;
+  background: radial-gradient(closest-side, rgba(46, 134, 255, 0.10), transparent 70%);
+  animation: acct-float-2 20s ease-in-out infinite;
+}
+@keyframes acct-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(40px, -28px) scale(1.08); }
+}
+@keyframes acct-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-34px, 30px) scale(1.06); }
+}
+.acct-compare-section > .container { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL: pill buttons + accent keyword styling for headings
@@ -5724,6 +5805,107 @@ section.is-visible .core-feature-card:nth-child(6) { animation-delay: 0.55s; }
 .side-lang-pill:focus-visible {
   outline: 2px solid rgba(26, 209, 122, 0.55);
   outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   SLOGAN BANNER — full-width brand card, heading left + CTA right
+   ════════════════════════════════════════════════════════════════════════ */
+.slogan-band {
+  background: #ffffff;
+  padding: clamp(32px, 5vw, 64px) 0;
+}
+.slogan-band-fx { display: none; }
+.slogan-band-inner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  border-radius: 24px;
+  padding: clamp(36px, 5vw, 64px);
+  background: linear-gradient(135deg, #1ad17a 0%, #0fa760 100%);
+  box-shadow: 0 30px 60px -32px rgba(15, 167, 96, 0.55);
+}
+/* Soft white glow top-right for depth */
+.slogan-band-inner::before {
+  content: "";
+  position: absolute;
+  inset: -60% -10% auto auto;
+  width: 55%;
+  height: 220%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+.slogan-band-copy { position: relative; z-index: 1; max-width: 60ch; }
+.slogan-band-h {
+  margin: 0 0 12px;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+.slogan-band-h em { font-style: normal; color: #ffffff; }
+.slogan-band-sub {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 54ch;
+}
+.slogan-band-cta {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #0b6e3a;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 10px 26px -12px rgba(0, 0, 0, 0.25);
+  transition: transform .22s ease, box-shadow .22s ease, background .2s ease;
+}
+.slogan-band-cta svg { transition: transform .25s ease; }
+.slogan-band-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -14px rgba(0, 0, 0, 0.3);
+}
+.slogan-band-cta:hover svg { transform: translateX(3px); }
+
+/* Responsive — stack on tablet/mobile, full-width button */
+@media (max-width: 760px) {
+  .slogan-band-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .slogan-band-cta { width: 100%; justify-content: center; }
+}
+[dir="rtl"] .slogan-band-cta:hover svg { transform: translateX(-3px); }
+@media (max-width: 560px) {
+  .slogan-band { padding: 44px 0; }
+}
+
+/* Account detail pages — responsive alignment only (uniform green accent,
+   no per-tier colour theming). */
+@media (max-width: 720px) {
+  .acct-v2 .acct-v2-strip-inner { text-align: center; }
+  .acct-v2 .acct-v2-strip-inner > div { width: 100%; }
+}
+@media (max-width: 1024px) and (min-width: 821px) {
+  .acct-cmp2-name { font-size: 19px; }
+  .acct-cmp2-table tbody th,
+  .acct-cmp2-table tbody td { padding-inline: 12px; font-size: 13.5px; }
 }
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */
